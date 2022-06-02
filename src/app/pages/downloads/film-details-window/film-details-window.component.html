@@ -1,0 +1,32 @@
+<mat-toolbar class="toolbar">
+    <div class="title">
+        {{ data.title }}
+    </div>
+
+    <span class="spacer"></span>
+
+    <button
+        mat-stroked-button
+        tabindex="3"
+        [color]="'warn'"
+        (keyup.enter)="onDeleteButtonClick()"
+        (click)="onDeleteButtonClick()">
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <button
+        mat-stroked-button
+        tabindex="3"
+        (keyup.enter)="onCloseButtonClick()"
+        (click)="onCloseButtonClick()">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<video
+    class="player"
+    controls
+    autoplay>
+    <source [src]="filmUrl" type="video/mp4" />
+    Браузер не підтримує відображення mp4 відеороликів
+</video>

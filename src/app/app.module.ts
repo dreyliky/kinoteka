@@ -1,18 +1,27 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderModule } from '@components';
+import { SharedModule } from '@shared';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        SharedModule,
+        HeaderModule
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppModule { }
+export class AppModule {}

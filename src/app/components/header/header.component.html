@@ -1,0 +1,19 @@
+<mat-toolbar class="toolbar">
+    Кінотека
+
+    <span class="spacer"></span>
+
+    <button
+        mat-raised-button
+        [routerLink]="'/films'"
+        [routerLinkActive]="'mat-accent'">
+        Фільми
+    </button>
+
+    <button
+        mat-raised-button
+        [routerLink]="'/downloads'"
+        [routerLinkActive]="'mat-accent'">
+        Завантаження
+    </button>
+</mat-toolbar>

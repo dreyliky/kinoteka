@@ -1,0 +1,45 @@
+<mat-toolbar class="toolbar">
+    <div class="title">
+        {{ data.title }}
+    </div>
+
+    <span class="spacer"></span>
+
+    <button
+        *ngIf="isDownloadButtonVisible"
+        mat-stroked-button
+        tabindex="3"
+        [color]="downloadButtonColor"
+        [disabled]="isDownloadButtonDisabled"
+        (click)="onDownloadButtonClick()">
+        <ng-container [ngSwitch]="filmDownloadState">
+            <mat-icon
+                *ngSwitchCase="filmDownloadStateEnum.Undownloaded">
+                download
+            </mat-icon>
+
+            <mat-spinner
+                *ngSwitchCase="filmDownloadStateEnum.Downloading"
+                [diameter]="32">
+            </mat-spinner>
+
+            <mat-icon
+                *ngSwitchCase="filmDownloadStateEnum.Downloaded">
+                check
+            </mat-icon>
+        </ng-container>
+    </button>
+
+    <button
+        mat-stroked-button
+        tabindex="3"
+        (keyup.enter)="onCloseButtonClick()"
+        (click)="onCloseButtonClick()">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<iframe
+    class="player"
+    [src]="data.iframeSrc | safe:'resourceUrl'">
+</iframe>
