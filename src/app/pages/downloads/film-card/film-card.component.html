@@ -2,8 +2,7 @@
     tabindex="0"
     class="card"
     matRipple
-    [matTooltip]="data.title"
-    [matTooltipPosition]="'above'"
+    [title]="data.title"
     (keyup.enter)="selected.emit()"
     (click)="selected.emit()">
     <h2 class="title">{{ data.title }}</h2>
