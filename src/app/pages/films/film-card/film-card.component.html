@@ -1,6 +1,9 @@
 <mat-card
     tabindex="0"
     class="card"
+    matRipple
+    [matTooltip]="data.title"
+    [matTooltipPosition]="'above'"
     (keyup.enter)="selected.emit()"
     (click)="selected.emit()">
     <h2 class="title">{{ data.title }}</h2>

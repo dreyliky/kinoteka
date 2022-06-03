@@ -1,13 +1,16 @@
 <mat-card
     tabindex="0"
     class="card"
+    matRipple
+    [matTooltip]="data.title"
+    [matTooltipPosition]="'above'"
     (keyup.enter)="selected.emit()"
     (click)="selected.emit()">
     <h2 class="title">{{ data.title }}</h2>
 
     <img
         class="preview"
-        [src]="previewUrl" />
+        [srcset]="previewUrl" />
     
     <div class="info">
         <div class="item-row">

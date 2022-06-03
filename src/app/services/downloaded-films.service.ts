@@ -17,6 +17,6 @@ export class DownloadedFilmsService {
     }
 
     public delete(kinopoiskId: string): Observable<unknown> {
-        return this.httpClient.delete(`${environment.backendHost}/films/${kinopoiskId}/downloaded`);
+        return this.httpClient.delete(`${environment.backendHost}/films/downloaded/${kinopoiskId}`);
     }
 }

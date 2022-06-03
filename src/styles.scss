@@ -13,12 +13,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #303030;
-}
-
-mat-card, button {
-    &:focus {
-        outline: solid 4px white;
-    }
+    user-select: none;
 }
 
 input {

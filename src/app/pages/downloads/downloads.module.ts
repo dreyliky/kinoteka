@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
+import { DownloadedSectionModule } from './downloaded-section';
+import { DownloadingSectionModule } from './downloading-section';
 import { DownloadsComponent } from './downloads.component';
 import { DownloadsRouting } from './downloads.routing';
-import { FilmCardComponent } from './film-card';
-import { FilmDetailsWindowComponent } from './film-details-window';
 
 @NgModule({
     declarations: [
-        FilmDetailsWindowComponent,
-        DownloadsComponent,
-        FilmCardComponent
+        DownloadsComponent
     ],
     imports: [
         DownloadsRouting,
-        SharedModule
+        SharedModule,
+        DownloadedSectionModule,
+        DownloadingSectionModule
     ]
 })
 export class DownloadsModule {}

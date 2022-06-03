@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Film } from '@interfaces';
 import { DownloadedFilmsService } from '@services';
 import { filter } from 'rxjs/operators';
-import { FilmDetailsWindowComponent } from './film-details-window';
+import { FilmDetailsWindowComponent } from './downloaded-section/film-details-window';
 
 @Component({
     selector: 'app-downloads',

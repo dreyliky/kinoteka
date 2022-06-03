@@ -1,0 +1,24 @@
+<button
+    *ngIf="isDownloadButtonVisible"
+    mat-stroked-button
+    tabindex="3"
+    [color]="downloadButtonColor"
+    [disabled]="isDownloadButtonDisabled"
+    (click)="onDownloadButtonClick()">
+    <ng-container [ngSwitch]="filmDownloadState">
+        <mat-icon
+            *ngSwitchCase="filmDownloadStateEnum.Undownloaded">
+            download
+        </mat-icon>
+
+        <app-film-download-progress
+            *ngSwitchCase="filmDownloadStateEnum.Downloading"
+            [film]="film">
+        </app-film-download-progress>
+
+        <mat-icon
+            *ngSwitchCase="filmDownloadStateEnum.Downloaded">
+            check
+        </mat-icon>
+    </ng-container>
+</button>

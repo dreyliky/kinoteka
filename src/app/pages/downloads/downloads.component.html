@@ -1,22 +1,6 @@
-<ng-container
-    *ngIf="films; else loaderTemplate">
-    <div class="container">
-        <div class="row">
-            <div
-                *ngFor="let film of films"
-                class="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
-                <app-film-card
-                    class="film-card"
-                    [data]="film"
-                    (selected)="onFilmClick(film)">
-                </app-film-card>
-            </div>
-        </div>
-    </div>
-</ng-container>
+<app-downloading-section>
+</app-downloading-section>
 
-<ng-template #loaderTemplate>
-    <div class="loader">
-        <mat-spinner></mat-spinner>
-    </div>
-</ng-template>
+<app-downloaded-section>
+</app-downloaded-section>
+

@@ -1,0 +1,48 @@
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin: 25px;
+    color: var(--bs-light);
+}
+
+.container {
+    box-sizing: border-box;
+}
+
+.film-card {
+    width: 100%;
+    margin: 5px;
+
+    &:hover {
+        opacity: .95;
+        cursor: pointer;
+    }
+}
+
+.loader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emty-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+        width: 256px;
+        margin-bottom: 15px;
+    }
+
+    .description {
+        color: var(--bs-light);
+        font-size: 16px;
+    }
+}

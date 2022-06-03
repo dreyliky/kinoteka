@@ -16,6 +16,6 @@ export class FilmCardComponent {
     public selected = new EventEmitter();
 
     public get previewUrl(): string {
-        return `${environment.backendHost}/films/${this.data.kinopoiskId}/preview`;
+        return `${environment.backendHost}/films/downloaded/${this.data.kinopoiskId}/preview`;
     }
 }
