@@ -13,7 +13,10 @@
     <button
         mat-raised-button
         [routerLink]="'/downloads'"
-        [routerLinkActive]="'mat-accent'">
+        [routerLinkActive]="'mat-accent'"
+        [matBadge]="(filmsCount$ | async)"
+        [matBadgeColor]="'warn'"
+        [matBadgeHidden]="(isDownloadingFilmsCountBadgeHidden$ | async)">
         <mat-icon>download</mat-icon>
     </button>
 </mat-toolbar>
