@@ -1,0 +1,29 @@
+<mat-selection-list
+    [multiple]="false">
+    <mat-list-option
+        [routerLink]="'/films'"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <mat-icon>live_tv</mat-icon>
+            Фільми
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
+        [routerLink]="'/downloads'"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <mat-icon>download</mat-icon>
+
+            Завантаження
+
+            <div
+                *ngIf="(isDownloadingFilmsCountBadgeVisible$ | async)"
+                class="downloading-count">
+                {{ (filmsCount$ | async) }}
+            </div>
+        </div>
+    </mat-list-option>
+</mat-selection-list>

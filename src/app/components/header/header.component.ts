@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ContentZoneService } from '@services';
 import { DownloadingFilmsCountSocketService } from '@services/downloading-films-count-socket.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -10,10 +11,20 @@ import { map } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
+    @Output()
+    public menuButtonClick = new EventEmitter<Event>();
+
     public filmsCount$!: Observable<number>;
     public isDownloadingFilmsCountBadgeHidden$!: Observable<boolean>;
 
+    public isArrowUpIconVisible$ = this.contentZoneService.scroll$
+        .pipe(
+            debounceTime(100),
+            map(({ target }) => ((target as HTMLElement).scrollTop > 100))
+        );
+
     constructor(
+        private readonly contentZoneService: ContentZoneService,
         private readonly downloadingFilmsCountSocketService: DownloadingFilmsCountSocketService
     ) {}
 
@@ -21,6 +32,10 @@ export class HeaderComponent implements OnInit {
         this.filmsCount$ = this.downloadingFilmsCountSocketService.data$;
 
         this.initDownloadingFilmsCountBadgeVisibleObservable();
+    }
+
+    public onAppNameClick(): void {
+        this.contentZoneService.scrollTop();
     }
 
     private initDownloadingFilmsCountBadgeVisibleObservable(): void {

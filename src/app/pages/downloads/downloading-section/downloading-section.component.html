@@ -1,11 +1,18 @@
 <ng-container *ngIf="films?.length">
-    <h1 class="title">Завантажуються</h1>
+    <p class="title">
+        <span
+            [matBadge]="films?.length"
+            [matBadgeOverlap]="false"
+            [matBadgeHidden]="!films?.length">
+            Завантажуються
+        </span>
+    </p>
 
     <div class="container">
         <div class="row">
             <div
                 *ngFor="let film of films"
-                class="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2">
+                class="col-xs-12 col-sm-6 col-lg-4 col-xxl-3">
                 <app-downloading-film-card
                     [film]="film">
                 </app-downloading-film-card>

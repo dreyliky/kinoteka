@@ -1,0 +1,27 @@
+:host {
+    display: block;
+    width: 240px;
+}
+
+.item-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .downloading-count {
+        min-width: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1px;
+        border-radius: 50%;
+        background-color: var(--bs-danger);
+        margin-left: auto;
+    }
+
+    mat-icon {
+        margin-left: 5px;
+        margin-right: 20px;
+    }
+}

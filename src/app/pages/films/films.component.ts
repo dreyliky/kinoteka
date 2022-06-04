@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Film, FilmsResponse } from '@interfaces';
-import { FilmsFiltersService, FilmsService } from '@services';
+import { ContentZoneService, FilmsFiltersService, FilmsService } from '@services';
 import { merge, Observable, Subject } from 'rxjs';
 import { skip, takeUntil } from 'rxjs/operators';
 import { FilmDetailsWindowComponent } from './film-details-window';
@@ -26,6 +26,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
     private readonly viewDestroyed$ = new Subject<boolean>();
 
     constructor(
+        private readonly contentZoneService: ContentZoneService,
         private readonly dialogService: MatDialog,
         private readonly filmsService: FilmsService,
         private readonly filmsFiltersService: FilmsFiltersService
@@ -34,7 +35,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.filmsResponse$ = this.filmsService.filmsResponse$;
 
-        this.updateFilms();
+        this.updateFilmsIfAbsent();
     }
 
     public ngOnDestroy(): void {
@@ -59,6 +60,11 @@ export class FilmsComponent implements OnInit, OnDestroy {
     public updateFilms(): void {
         this.filmsService.updateAllByFilters()
             .pipe(takeUntil(this.viewDestroyedOrFiltersChanged$))
+            .subscribe(() => this.contentZoneService.scrollTop());
+    }
+
+    private updateFilmsIfAbsent(): void {
+        this.filmsService.updateAllByFiltersIfAbsent()
             .subscribe();
     }
 }

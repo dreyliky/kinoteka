@@ -19,6 +19,14 @@ export class FilmsService {
         private readonly filtersState: FilmsFiltersState
     ) {}
 
+    public updateAllByFiltersIfAbsent(): Observable<FilmsResponse | null> {
+        if (!this.filmsResponseState.data) {
+            return this.updateAllByFilters();
+        }
+
+        return this.filmsResponse$;
+    }
+
     public updateAllByFilters(): Observable<FilmsResponse> {
         this.filmsResponseState.set(null);
 

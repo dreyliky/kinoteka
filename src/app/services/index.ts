@@ -1,3 +1,4 @@
+export * from './content-zone.service';
 export * from './downloaded-films.service';
 export * from './downloading-films-socket.service';
 export * from './downloading-films.service';

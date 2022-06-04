@@ -62,6 +62,7 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
 
     private initFilmsDownloadingResultObserver(): void {
         merge(
+            this.downloadingFilmsSocketService.onFilmDownloadStart$,
             this.downloadingFilmsSocketService.onFilmDownloadCancel$,
             this.downloadingFilmsSocketService.onFilmDownloadEnd$
         )

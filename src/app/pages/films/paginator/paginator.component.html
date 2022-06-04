@@ -3,6 +3,6 @@
     [length]="filmsResponse.total"
     [pageIndex]="(filmsResponse.current_page - 1)"
     [pageSize]="filters.limit"
-    [pageSizeOptions]="[25, 50, 75, 100, 125, 150]"
+    [pageSizeOptions]="[20, 25, 30, 35, 40, 45, 50]"
     (page)="onPaginatorPageEvent($event)">
 </mat-paginator>
