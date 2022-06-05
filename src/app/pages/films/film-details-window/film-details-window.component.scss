@@ -19,7 +19,8 @@
     flex: 1 1 auto;
 }
 
-button {
+.download-button, .close-button {
+    height: 35px;
     margin-left: 10px;
 }
 

@@ -1,0 +1,34 @@
+<button
+    *ngIf="!data"
+    class="date-picker-button"
+    mat-mini-fab
+    [matTooltip]="'Обрати рік'"
+    (click)="datePicker.open()">
+    <app-icon class="date-icon">today</app-icon>
+</button>
+
+<mat-chip-list *ngIf="!!data">
+    <mat-chip>
+        {{ data }}
+
+        <button
+            matChipRemove
+            (click)="onClearYearButtonClick()">
+            <app-icon>close</app-icon>
+        </button>
+    </mat-chip>
+</mat-chip-list>
+
+<input
+    class="datepicker-input"
+    matInput
+    [matDatepicker]="datePicker"
+    [min]="minDate"
+    [max]="maxDate" />
+
+<mat-datepicker
+    #datePicker
+    [startView]="'multi-year'"
+    [panelClass]="'year-picker-calendar-panel'"
+    (yearSelected)="onYearSelected($event)">
+</mat-datepicker>

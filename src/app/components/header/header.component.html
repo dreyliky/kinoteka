@@ -3,18 +3,16 @@
         mat-icon-button
         class="menu-button"
         (click)="menuButtonClick.emit($event)">
-        <mat-icon>menu</mat-icon>
+        <app-icon>menu</app-icon>
     </button>
 
     <a
-        class="app-name"
-        (click)="onAppNameClick()">
-        Кінотека
-
-        <mat-icon
-            *ngIf="(isArrowUpIconVisible$ | async)"
-            class="arrow-icon">
-            arrow_upward
-        </mat-icon>
+        *ngIf="(isAppNameVisible$ | async)"
+        class="app-name">
+        Медіатека
     </a>
+
+    <ng-template
+        [cdkPortalOutlet]="(portalComponent$ | async)">
+    </ng-template>
 </mat-toolbar>

@@ -1,21 +1,55 @@
 <mat-selection-list
     [multiple]="false">
     <mat-list-option
-        [routerLink]="'/films'"
+        [routerLink]="appRouteEnum.Films"
         [routerLinkActive]="'mat-list-single-selected-option'"
         (click)="optionClick.emit($event)">
         <div class="item-content">
-            <mat-icon>live_tv</mat-icon>
+            <app-icon>movie</app-icon>
+
             Фільми
         </div>
     </mat-list-option>
 
     <mat-list-option
-        [routerLink]="'/downloads'"
+        [routerLink]="appRouteEnum.TvSeries"
         [routerLinkActive]="'mat-list-single-selected-option'"
         (click)="optionClick.emit($event)">
         <div class="item-content">
-            <mat-icon>download</mat-icon>
+            <app-icon>movie_filter</app-icon>
+
+            Серіали
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
+        [routerLink]="appRouteEnum.Video"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <app-icon>smart_display</app-icon>
+
+            Відео
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
+        [routerLink]="appRouteEnum.Music"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <app-icon>music_note</app-icon>
+
+            Музика
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
+        [routerLink]="appRouteEnum.Downloads"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <app-icon>file_download</app-icon>
 
             Завантаження
 
@@ -24,6 +58,17 @@
                 class="downloading-count">
                 {{ (filmsCount$ | async) }}
             </div>
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
+        [routerLink]="appRouteEnum.Settings"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <app-icon>settings</app-icon>
+
+            Налаштування
         </div>
     </mat-list-option>
 </mat-selection-list>

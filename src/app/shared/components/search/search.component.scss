@@ -1,0 +1,34 @@
+:host {
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+
+.search {
+    width: 100%;
+    height: 100%;
+    border: solid 1px #595959;
+    border-radius: 3px 0px 0px 3px;
+    padding: 13px 8px;
+    background-color: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    z-index: 3;
+
+    &:focus {
+        outline: solid 1px var(--bs-green);
+    }
+}
+
+.search-button {
+    width: 64px;
+    height: 40px;
+    border-radius: 0px 3px 3px 0px;
+    background-color: #595959;
+    border: solid 1px #595959;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.search-icon {
+    color: #fff;
+}

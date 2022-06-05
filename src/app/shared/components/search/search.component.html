@@ -1,0 +1,12 @@
+<input
+    #searchInput
+    class="search"
+    [placeholder]="placeholder"
+    [value]="value"
+    (change)="onSearchInputChange()" />
+
+<button
+    class="search-button"
+    (click)="onSearchButtonClick()">
+    <app-icon class="search-icon">search</app-icon>
+</button>

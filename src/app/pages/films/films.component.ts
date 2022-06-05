@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HeaderService } from '@components';
 import { Film, FilmsResponse } from '@interfaces';
 import { ContentZoneService, FilmsFiltersService, FilmsService } from '@services';
 import { merge, Observable, Subject } from 'rxjs';
 import { skip, takeUntil } from 'rxjs/operators';
 import { FilmDetailsWindowComponent } from './film-details-window';
+import { HeaderPortalContentComponent } from './header-portal-content';
 
 @Component({
     selector: 'app-films',
@@ -27,6 +29,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
     constructor(
         private readonly contentZoneService: ContentZoneService,
+        private readonly headerService: HeaderService,
         private readonly dialogService: MatDialog,
         private readonly filmsService: FilmsService,
         private readonly filmsFiltersService: FilmsFiltersService
@@ -35,10 +38,13 @@ export class FilmsComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.filmsResponse$ = this.filmsService.filmsResponse$;
 
+        this.headerService.setPortalComponent(HeaderPortalContentComponent);
         this.updateFilmsIfAbsent();
+        this.initFilmsFiltersObserver();
     }
 
     public ngOnDestroy(): void {
+        this.headerService.clearPortalComponent();
         this.viewDestroyed$.next(true);
         this.viewDestroyed$.complete();
     }
@@ -57,7 +63,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    public updateFilms(): void {
+    private updateFilms(): void {
         this.filmsService.updateAllByFilters()
             .pipe(takeUntil(this.viewDestroyedOrFiltersChanged$))
             .subscribe(() => this.contentZoneService.scrollTop());
@@ -66,5 +72,14 @@ export class FilmsComponent implements OnInit, OnDestroy {
     private updateFilmsIfAbsent(): void {
         this.filmsService.updateAllByFiltersIfAbsent()
             .subscribe();
+    }
+
+    private initFilmsFiltersObserver(): void {
+        this.filmsFiltersService.data$
+            .pipe(
+                skip(1),
+                takeUntil(this.viewDestroyed$)
+            )
+            .subscribe(() => this.updateFilms());
     }
 }

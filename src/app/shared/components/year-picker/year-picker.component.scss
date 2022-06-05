@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.date-picker-button {
+    background-color: rgba(0, 0, 0, .3);
+    box-shadow: none;
+}
+
+.date-icon {
+    color: #fff;
+}
+
+.datepicker-input {
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+
+::ng-deep .year-picker-calendar-panel {
+    .mat-calendar-period-button {
+        display: none;
+    }
+}

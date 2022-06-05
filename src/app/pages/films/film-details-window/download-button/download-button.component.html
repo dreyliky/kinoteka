@@ -6,19 +6,19 @@
     [disabled]="isDownloadButtonDisabled"
     (click)="onDownloadButtonClick()">
     <ng-container [ngSwitch]="filmDownloadState">
-        <mat-icon
+        <app-icon
             *ngSwitchCase="filmDownloadStateEnum.Undownloaded">
-            download
-        </mat-icon>
+            file_download
+        </app-icon>
 
         <app-film-download-progress
             *ngSwitchCase="filmDownloadStateEnum.Downloading"
             [film]="film">
         </app-film-download-progress>
 
-        <mat-icon
+        <app-icon
             *ngSwitchCase="filmDownloadStateEnum.Downloaded">
             check
-        </mat-icon>
+        </app-icon>
     </ng-container>
 </button>

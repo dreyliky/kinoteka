@@ -1,0 +1,7 @@
+<button
+    *ngIf="(isArrowUpIconVisible$ | async)"
+    mat-fab
+    [color]="'primary'"
+    (click)="onClick()">
+    <app-icon>arrow_upward</app-icon>
+</button>

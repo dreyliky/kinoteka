@@ -1,7 +1,3 @@
-<app-filters
-    (changes)="updateFilms()">
-</app-filters>
-
 <ng-container
     *ngIf="(filmsResponse$ | async) as response; else loaderTemplate">
     <div class="container">
@@ -19,8 +15,7 @@
     </div>
 
     <app-paginator
-        [filmsResponse]="response"
-        (changes)="updateFilms()">
+        [filmsResponse]="response">
     </app-paginator>
 </ng-container>
 

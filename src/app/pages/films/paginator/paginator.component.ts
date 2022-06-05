@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { FilmsFilters, FilmsResponse } from '@interfaces';
 import { FilmsFiltersService } from '@services';
@@ -13,9 +13,6 @@ import { Observable } from 'rxjs';
 export class PaginatorComponent implements OnInit {
     @Input()
     public filmsResponse!: FilmsResponse;
-
-    @Output()
-    public changes = new EventEmitter<PageEvent>();
 
     public filters$!: Observable<FilmsFilters>;
 
@@ -32,6 +29,5 @@ export class PaginatorComponent implements OnInit {
             limit: event.pageSize.toString(),
             page: (event.pageIndex + 1).toString(),
         });
-        this.changes.emit(event);
     }
 }

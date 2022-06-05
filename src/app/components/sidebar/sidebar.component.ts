@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { AppRouteEnum } from '@enums/app-route.enum';
 import { DownloadingFilmsCountSocketService } from '@services/downloading-films-count-socket.service';
 import { map, Observable } from 'rxjs';
 
@@ -11,6 +12,8 @@ import { map, Observable } from 'rxjs';
 export class SidebarComponent {
     @Output()
     public optionClick = new EventEmitter<Event>();
+
+    public readonly appRouteEnum = AppRouteEnum;
 
     public filmsCount$!: Observable<number>;
     public isDownloadingFilmsCountBadgeVisible$!: Observable<boolean>;
