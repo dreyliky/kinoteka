@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FeaturesModule } from '@features';
 import { SharedModule } from '@shared';
-import { FilmCardModule } from '../film-card';
 import { DownloadingFilmCardComponent } from './downloading-film-card';
 import { DownloadingSectionComponent } from './downloading-section.component';
 import { FilmDownloadCancelBottomSheetComponent } from './film-download-cancel-bottom-sheet';
@@ -13,7 +13,7 @@ import { FilmDownloadCancelBottomSheetComponent } from './film-download-cancel-b
     ],
     imports: [
         SharedModule,
-        FilmCardModule
+        FeaturesModule
     ],
     exports: [
         DownloadingSectionComponent

@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Film } from '@interfaces';
 import { DownloadedFilmsService } from '@services';
 import { delayWhen, filter, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 
 @Component({
@@ -16,7 +15,7 @@ import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 })
 export class FilmDetailsWindowComponent {
     public get filmUrl(): string {
-        return `${environment.backendHost}/films/downloaded/${this.data.kinopoiskId}`;
+        return `/films/downloaded/${this.data.kinopoiskId}`;
     }
 
     constructor(

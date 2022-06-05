@@ -25,6 +25,8 @@
     "paths": {
         "@core": ["./src/app/core"],
         "@core/*": ["./src/app/core/*"],
+        "@features": ["./src/app/features"],
+        "@features/*": ["./src/app/features/*"],
         "@components": ["./src/app/components"],
         "@components/*": ["./src/app/components/*"],
         "@enums": ["./src/app/enums"],

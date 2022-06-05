@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { FilmCardComponent } from './film-card.component';
+import { FilmCardComponent } from './components';
 
 @NgModule({
     declarations: [
@@ -13,4 +13,4 @@ import { FilmCardComponent } from './film-card.component';
         FilmCardComponent
     ]
 })
-export class FilmCardModule {}
+export class FilmModule {}

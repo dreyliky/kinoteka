@@ -1,0 +1,2 @@
+export * from './film.module';
+

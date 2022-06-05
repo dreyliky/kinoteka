@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { FilmDownloadStateEnum } from '@enums';
-import { Film } from '@interfaces';
-import { FilmDownloadStateService, FilmsService } from '@services';
+import { Film, FilmMediaFileMetadata } from '@interfaces';
+import { FilmDownloadStateService, FilmMediaFilesService, FilmsService } from '@services';
+import { Observable, share } from 'rxjs';
 
 @Component({
     selector: 'app-download-button',
@@ -15,6 +16,8 @@ export class DownloadButtonComponent {
     
     public readonly filmDownloadStateEnum = FilmDownloadStateEnum;
     public filmDownloadState: FilmDownloadStateEnum | null = null;
+
+    public mediaFiles$!: Observable<FilmMediaFileMetadata[]>;
 
     public get isDownloadButtonVisible(): boolean {
         return (this.filmDownloadState !== null);
@@ -31,10 +34,12 @@ export class DownloadButtonComponent {
     constructor(
         private readonly filmsService: FilmsService,
         private readonly filmDownloadStatusService: FilmDownloadStateService,
+        private readonly filmMediaFilesService: FilmMediaFilesService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
+        this.initMediaFilesObservable();
         this.initFilmDownloadState();
     }
 
@@ -52,5 +57,10 @@ export class DownloadButtonComponent {
 
                 this.changeDetector.detectChanges();
             });
+    }
+
+    private initMediaFilesObservable(): void {
+        this.mediaFiles$ = this.filmMediaFilesService.getAll(this.film.kinopoiskId)
+            .pipe(share());
     }
 }

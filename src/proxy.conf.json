@@ -1,0 +1,11 @@
+{
+    "/socket.io/*": {
+        "target": "ws://localhost:3001/socket.io/",
+        "secure": false,
+        "ws": true
+    },
+    "/": {
+        "target": "http://localhost:3000",
+        "secure": false
+    }
+}

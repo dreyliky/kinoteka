@@ -4,12 +4,12 @@
         <div class="row">
             <div
                 *ngFor="let film of response.data"
-                class="col-xs-12 col-sm-6 col-lg-4 col-xxl-3">
-                <app-film-card
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <film-card
                     class="film-card"
                     [data]="film"
-                    (selected)="onFilmClick(film)">
-                </app-film-card>
+                    (click)="onFilmClick(film)">
+                </film-card>
             </div>
         </div>
     </div>
@@ -17,6 +17,8 @@
     <app-paginator
         [filmsResponse]="response">
     </app-paginator>
+
+    <app-footer></app-footer>
 </ng-container>
 
 <ng-template #loaderTemplate>

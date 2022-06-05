@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FilmsResponse } from '@interfaces';
 import { Observable, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { FilmsFiltersState, FilmsResponseState } from '../states';
 
 @Injectable({
@@ -31,7 +30,7 @@ export class FilmsService {
         this.filmsResponseState.set(null);
 
         return this.httpClient.get<FilmsResponse>(
-            `${environment.backendHost}/films`,
+            `/films`,
             { params: this.filtersState.data as any }
         )
             .pipe(
@@ -40,6 +39,6 @@ export class FilmsService {
     }
 
     public download(kinopoiskId: string): Observable<unknown> {
-        return this.httpClient.post(`${environment.backendHost}/films/${kinopoiskId}/download`, {});
+        return this.httpClient.post(`/films/${kinopoiskId}/download`, {});
     }
 }

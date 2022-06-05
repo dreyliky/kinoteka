@@ -10,6 +10,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -33,6 +34,7 @@ import { SafePipe } from './pipes';
         CommonModule,
         RouterModule,
         MatRippleModule,
+        MatMenuModule,
         MatSidenavModule,
         MatButtonModule,
         MatBadgeModule,
