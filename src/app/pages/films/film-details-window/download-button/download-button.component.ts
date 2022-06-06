@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMediaFileMetadata, FilmMediaFilesService, FilmsService } from '@features/film';
-import { Observable, share } from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMediaFileMetadata, FilmsService } from '@features/film';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-download-button',
@@ -8,14 +8,12 @@ import { Observable, share } from 'rxjs';
     styleUrls: ['./download-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DownloadButtonComponent {
+export class DownloadButtonComponent implements OnDestroy {
     @Input()
     public film!: Film;
     
     public readonly filmDownloadStateEnum = FilmDownloadStateEnum;
     public filmDownloadState: FilmDownloadStateEnum | null = null;
-
-    public mediaFiles$!: Observable<FilmMediaFileMetadata[]>;
 
     public get isDownloadButtonVisible(): boolean {
         return (this.filmDownloadState !== null);
@@ -29,36 +27,42 @@ export class DownloadButtonComponent {
         return (this.filmDownloadState === FilmDownloadStateEnum.Undownloaded) ? 'accent' : '';
     }
 
+    private readonly viewDestroyed$ = new Subject<boolean>();
+
     constructor(
         private readonly filmsService: FilmsService,
         private readonly filmDownloadStatusService: FilmDownloadStateService,
-        private readonly filmMediaFilesService: FilmMediaFilesService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
-        this.initMediaFilesObservable();
         this.initFilmDownloadState();
     }
 
-    public onDownloadButtonClick(): void {
+    public ngOnDestroy(): void {
+        this.viewDestroyed$.next(true);
+        this.viewDestroyed$.complete();
+    }
+
+    public onDownloadButtonClick(media: FilmMediaFileMetadata): void {
         this.filmDownloadState = FilmDownloadStateEnum.Downloading;
 
-        this.filmsService.download(this.film.kinopoiskId)
+        this.filmsService.download(this.film.kinopoiskId, media.translationId)
+            .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
+    }
+
+    public onDownloadEnd(): void {
+        this.initFilmDownloadState();
     }
 
     private initFilmDownloadState(): void {
         this.filmDownloadStatusService.check(this.film.kinopoiskId)
+            .pipe(takeUntil(this.viewDestroyed$))
             .subscribe((state) => {
                 this.filmDownloadState = state;
 
                 this.changeDetector.detectChanges();
             });
-    }
-
-    private initMediaFilesObservable(): void {
-        this.mediaFiles$ = this.filmMediaFilesService.getAll(this.film.kinopoiskId)
-            .pipe(share());
     }
 }

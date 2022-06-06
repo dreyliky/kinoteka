@@ -38,7 +38,7 @@ export class FilmsService {
             );
     }
 
-    public download(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.post(`/films/${kinopoiskId}/download`, {});
+    public download(kinopoiskId: string, mediaId: number): Observable<unknown> {
+        return this.apiService.post(`/films/${kinopoiskId}/download/${mediaId}`, {});
     }
 }

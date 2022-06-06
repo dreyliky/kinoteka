@@ -15,11 +15,11 @@
             <div
                 *ngFor="let film of films"
                 class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                <film-card
+                <downloaded-film-card
                     class="film-card"
                     [data]="film"
                     (click)="onFilmClick(film)">
-                </film-card>
+                </downloaded-film-card>
             </div>
         </div>
     </div>

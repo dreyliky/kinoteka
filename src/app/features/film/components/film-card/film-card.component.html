@@ -7,12 +7,30 @@
         <h2 class="item-row">{{ data.title }}</h2>
         
         <div class="info">
-            <div class="item-row">
-                {{ data.translation }}
+            <div
+                *ngIf="!data.media.length"
+                class="item-row invalid">
+                <app-icon class="icon">error_outline</app-icon>
+                Немає медіа файлів
+            </div>
+
+            <div
+                *ngIf="!!data.media.length"
+                class="item-row">
+                <app-icon class="icon">translate</app-icon>
+                {{ data.media.length | translationsCount }}
+            </div>
+
+            <div
+                *ngIf="!!data.media.length"
+                class="item-row">
+                <app-icon class="icon">schedule</app-icon>
+                {{ data.media[0].duration | mediaDuration }}
             </div>
 
             <div class="item-row">
-                {{ data.year | date:"longDate" }}
+                <app-icon class="icon">today</app-icon>
+                {{ data.year | date:"dd.MM.yyyy" }}
             </div>
         </div>
     </div>

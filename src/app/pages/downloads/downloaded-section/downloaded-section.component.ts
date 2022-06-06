@@ -1,18 +1,25 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DownloadedFilmsService, DownloadingFilmsSocketService, Film } from '@features/film';
+import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, DownloadingFilmsSocketService } from '@features/film';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-loader.service';
 import { FilmDetailsWindowComponent } from './film-details-window';
 
 @Component({
-  selector: 'app-downloaded-section',
-  templateUrl: './downloaded-section.component.html',
-  styleUrls: ['./downloaded-section.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-downloaded-section',
+    templateUrl: './downloaded-section.component.html',
+    styleUrls: ['./downloaded-section.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: DOWNLOADED_FILM_PREVIEW_LOADER,
+            useClass: DownloadedFilmPreviewLoaderService
+        }
+    ]
 })
 export class DownloadedSectionComponent implements OnInit, OnDestroy {
-    public films: Film[] | null = null;
+    public films: DownloadedFilm[] | null = null;
 
     private readonly viewDestroyed$ = new Subject<boolean>();
 
@@ -33,7 +40,7 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
         this.viewDestroyed$.complete();
     }
 
-    public onFilmClick(data: Film): void {
+    public onFilmClick(data: DownloadedFilm): void {
         this.dialogService.open(FilmDetailsWindowComponent, {
             width: '100%',
             minWidth: '100%',

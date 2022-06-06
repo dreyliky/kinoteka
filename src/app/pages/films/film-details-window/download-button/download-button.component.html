@@ -1,11 +1,21 @@
-<button
-    *ngIf="(filmDownloadState === filmDownloadStateEnum.Undownloaded)"
-    mat-stroked-button
-    tabindex="3"
-    [matMenuTriggerFor]="menu"
-    [color]="downloadButtonColor">
-    <app-icon>file_download</app-icon>
-</button>
+<ng-container
+    *ngIf="(filmDownloadState === filmDownloadStateEnum.Undownloaded)">
+    <button
+        *ngIf="!!film.media.length"
+        mat-stroked-button
+        tabindex="3"
+        [matMenuTriggerFor]="menu"
+        [color]="downloadButtonColor">
+        <app-icon>file_download</app-icon>
+    </button>
+
+    <button
+        *ngIf="!film.media.length"
+        mat-stroked-button
+        [color]="'warn'">
+        <app-icon>file_download</app-icon>
+    </button>
+</ng-container>
 
 <button
     *ngIf="(filmDownloadState !== filmDownloadStateEnum.Undownloaded)"
@@ -14,7 +24,8 @@
     <ng-container [ngSwitch]="filmDownloadState">
         <app-film-download-progress
             *ngSwitchCase="filmDownloadStateEnum.Downloading"
-            [film]="film">
+            [film]="film"
+            (downloadEnd)="onDownloadEnd()">
         </app-film-download-progress>
 
         <app-icon
@@ -27,14 +38,14 @@
 <mat-menu
     #menu="matMenu"
     [xPosition]="'before'">
-    <ng-container *ngIf="(mediaFiles$ | async) as mediaFiles; else loaderTemplate">
-        <button
-            *ngFor="let media of mediaFiles"
-            mat-menu-item
-            (click)="onDownloadButtonClick()">
-            <span>{{ media.translationName }}</span>
-        </button>
-    </ng-container>
+    <button
+        *ngFor="let media of film.media"
+        class="menu-item"
+        mat-menu-item
+        (click)="onDownloadButtonClick(media)">
+        <b>[{{ media.maxQuality }}p]</b>&nbsp;
+        {{ media.translationName }}
+    </button>
     
     <ng-template #loaderTemplate>
         <mat-spinner></mat-spinner>

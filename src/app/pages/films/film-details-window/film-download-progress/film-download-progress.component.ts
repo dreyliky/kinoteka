@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DownloadingFilmsSocketService, Film } from '@features/film';
-import { Observable } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-film-download-progress',
@@ -9,11 +9,16 @@ import { filter, map, startWith } from 'rxjs/operators';
     styleUrls: ['./film-download-progress.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilmDownloadProgressComponent implements OnInit {
+export class FilmDownloadProgressComponent implements OnInit, OnDestroy {
     @Input()
     public film!: Film;
 
+    @Output()
+    public readonly downloadEnd = new EventEmitter();
+
     public progress$!: Observable<number>;
+
+    private viewDestroyed$ = new Subject<boolean>();
 
     constructor(
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService
@@ -21,6 +26,21 @@ export class FilmDownloadProgressComponent implements OnInit {
 
     public ngOnInit(): void {
         this.initProgressObservable();
+        this.initEndEventsObserver();
+    }
+
+    public ngOnDestroy(): void {
+        this.viewDestroyed$.next(true);
+        this.viewDestroyed$.complete();
+    }
+
+    private initEndEventsObserver(): void {
+        merge(
+            this.downloadingFilmsSocketService.onFilmDownloadCancel$,
+            this.downloadingFilmsSocketService.onFilmDownloadEnd$
+        )
+            .pipe(takeUntil(this.viewDestroyed$))
+            .subscribe(() => this.downloadEnd.emit());
     }
 
     private initProgressObservable(): void {
@@ -28,7 +48,8 @@ export class FilmDownloadProgressComponent implements OnInit {
             .pipe(
                 filter(({ kinopoiskId }) => (this.film.kinopoiskId === kinopoiskId)),
                 map(({ downloadProgress }) => downloadProgress),
-                startWith(0)
+                startWith(0),
+                takeUntil(this.viewDestroyed$)
             );
     }
 }

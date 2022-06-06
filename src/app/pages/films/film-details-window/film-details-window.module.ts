@@ -7,8 +7,8 @@ import { FilmDownloadProgressComponent } from './film-download-progress';
 @NgModule({
     declarations: [
         FilmDetailsWindowComponent,
-        DownloadButtonComponent,
-        FilmDownloadProgressComponent
+        FilmDownloadProgressComponent,
+        DownloadButtonComponent
     ],
     imports: [
         SharedModule

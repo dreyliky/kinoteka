@@ -1,0 +1,31 @@
+<mat-card
+    tabindex="0"
+    class="card"
+    matRipple
+    [title]="data.title">
+    <div class="description">
+        <h2 class="item-row">{{ data.title }}</h2>
+        
+        <div class="info">
+            <div class="item-row">
+                <app-icon class="icon">translate</app-icon>
+                {{ data.media.translationName }}
+            </div>
+
+            <div class="item-row">
+                <app-icon class="icon">schedule</app-icon>
+                {{ data.media.duration | mediaDuration }}
+            </div>
+
+            <div class="item-row">
+                <app-icon class="icon">today</app-icon>
+                {{ data.year | date:"dd.MM.yyyy" }}
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="preview"
+        [style.backgroundImage]="(previewBgCss$ | async)">
+    </div>
+</mat-card>

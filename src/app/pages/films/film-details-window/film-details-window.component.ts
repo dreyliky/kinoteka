@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmsService } from '@features/film';
+import { Film, FilmDownloadStateEnum, FilmDownloadStateService } from '@features/film';
 
 @Component({
     selector: 'app-film-details-window',
@@ -26,7 +26,6 @@ export class FilmDetailsWindowComponent implements OnInit {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public readonly data: Film,
-        private readonly filmsService: FilmsService,
         private readonly filmDownloadStatusService: FilmDownloadStateService,
         private readonly dialog: MatDialogRef<Film>,
         private readonly changeDetector: ChangeDetectorRef
@@ -38,13 +37,6 @@ export class FilmDetailsWindowComponent implements OnInit {
 
     public onCloseButtonClick(): void {
         this.dialog.close();
-    }
-
-    public onDownloadButtonClick(): void {
-        this.filmDownloadState = FilmDownloadStateEnum.Downloading;
-
-        this.filmsService.download(this.data.kinopoiskId)
-            .subscribe();
     }
 
     private initFilmDownloadState(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services';
-import { Film } from '@features/film';
 import { Observable } from 'rxjs';
+import { DownloadedFilm } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +11,8 @@ export class DownloadedFilmsService {
         private readonly apiService: ApiService
     ) {}
 
-    public getAll(): Observable<Film[]> {
-        return this.apiService.get<Film[]>(`/films/downloaded`);
+    public getAll(): Observable<DownloadedFilm[]> {
+        return this.apiService.get<DownloadedFilm[]>(`/films/downloaded`);
     }
 
     public delete(kinopoiskId: string): Observable<unknown> {

@@ -1,4 +1,12 @@
 <div class="download-progress">
+    <mat-progress-bar
+        *ngIf="(downloadProgress > 0)"
+        class="progress-bar"
+        [mode]="'determinate'"
+        [color]="'accent'"
+        [value]="downloadProgress">
+    </mat-progress-bar>
+
     <div
         *ngIf="isDownloading"
         class="percents-text">

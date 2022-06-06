@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -19,14 +20,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { IconModule, SearchModule, YearPickerModule } from './components';
-import { SafePipe } from './pipes';
+import { MediaDurationPipe, SafePipe, TranslationsCountPipe } from './pipes';
 
 @NgModule({
     declarations: [
-        SafePipe
+        SafePipe,
+        MediaDurationPipe,
+        TranslationsCountPipe
     ],
     exports: [
         SafePipe,
+        MediaDurationPipe,
+        TranslationsCountPipe,
         SearchModule,
         IconModule,
         YearPickerModule,
@@ -39,6 +44,7 @@ import { SafePipe } from './pipes';
         MatButtonModule,
         MatBadgeModule,
         MatListModule,
+        MatProgressBarModule,
         MatBottomSheetModule,
         MatTooltipModule,
         MatSnackBarModule,

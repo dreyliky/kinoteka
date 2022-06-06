@@ -9,23 +9,32 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         position: absolute;
         border-radius: 3px;
         top: 0;
         left: 0;
         font-size: 24px;
         font-weight: bold;
-        background-color: rgba(0, 0, 0, .75);
+        background-color: rgba(0, 0, 0, .8);
         z-index: 1;
+
+        .progress-bar {
+            height: 6px;
+            border-radius: 0px 0px 3px 3px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
 
         .cancel-button {
             margin-top: 15px;
+            margin-bottom: 10px;
         }
     }
 
     .percents-text {
-        color: var(--bs-green);
+        color: var(--bs-teal);
     }
 
     .in-queue-text {

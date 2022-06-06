@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DownloadedFilmsService, Film } from '@features/film';
+import { DownloadedFilm, DownloadedFilmsService, Film } from '@features/film';
 import { delayWhen, filter, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 
 @Component({
@@ -14,11 +15,12 @@ import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 })
 export class FilmDetailsWindowComponent {
     public get filmUrl(): string {
-        return `/films/downloaded/${this.data.kinopoiskId}`;
+        // FIXME: Make via service
+        return `${environment.backendHost}/films/downloaded/${this.data.kinopoiskId}`;
     }
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public readonly data: Film,
+        @Inject(MAT_DIALOG_DATA) public readonly data: DownloadedFilm,
         private readonly snackBar: MatSnackBar,
         private readonly bottomSheet: MatBottomSheet,
         private readonly downloadedFilmsService: DownloadedFilmsService,
