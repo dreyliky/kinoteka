@@ -73,13 +73,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "proxyConfig": "src/proxy.conf.json"
-          },
           "configurations": {
             "production": {
-              "browserTarget": "kinoteka:build:production",
-                "proxyConfig": "src/proxy.conf.prod.json"
+              "browserTarget": "kinoteka:build:production"
             },
             "development": {
               "browserTarget": "kinoteka:build:development"

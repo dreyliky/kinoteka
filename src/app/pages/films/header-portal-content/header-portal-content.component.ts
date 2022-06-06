@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FilmsFilters } from '@interfaces';
-import { FilmsFiltersService } from '@services';
+import { FilmsFilters, FilmsFiltersService } from '@features/film';
 import { Observable } from 'rxjs';
 
 @Component({

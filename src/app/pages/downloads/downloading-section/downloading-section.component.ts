@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FilmQueue } from '@interfaces';
-import { DownloadingFilmsService, DownloadingFilmsSocketService } from '@services';
+import { DownloadingFilmsService, DownloadingFilmsSocketService, FilmQueue } from '@features/film';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

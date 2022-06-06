@@ -3,8 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderModule, ScrollTopButtonModule, SidebarModule } from '@components';
-import { MaterialIconsService } from '@core';
+import { LayoutsModule } from '@layouts';
 import { SharedModule } from '@shared';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -19,25 +18,16 @@ import { AppRoutingModule } from './app.routing';
         BrowserAnimationsModule,
         HttpClientModule,
         SharedModule,
-        SidebarModule,
-        HeaderModule,
-        ScrollTopButtonModule
+        LayoutsModule
     ],
     providers: [
         {
             provide: LocationStrategy,
             useClass: HashLocationStrategy
-        },
-        MaterialIconsService
+        }
     ],
     bootstrap: [
         AppComponent
     ]
 })
-export class AppModule {
-    constructor(
-        private readonly materialIconsService: MaterialIconsService
-    ) {
-        this.materialIconsService.registerAll();
-    }
-}
+export class AppModule {}

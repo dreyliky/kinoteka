@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Film } from '@interfaces';
-import { DownloadingFilmsSocketService } from '@services';
+import { DownloadingFilmsSocketService, Film } from '@features/film';
 import { Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 

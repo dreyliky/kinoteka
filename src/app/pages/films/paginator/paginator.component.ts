@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { FilmsFilters, FilmsResponse } from '@interfaces';
-import { FilmsFiltersService } from '@services';
+import { FilmsFilters, FilmsFiltersService, FilmsResponse } from '@features/film';
 import { Observable } from 'rxjs';
 
 @Component({

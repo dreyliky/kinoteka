@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Film } from '@interfaces';
-import { DownloadedFilmsService } from '@services';
+import { DownloadedFilmsService, Film } from '@features/film';
 import { filter } from 'rxjs/operators';
-import { FilmDetailsWindowComponent } from './downloaded-section/film-details-window';
+import { FilmDetailsWindowComponent } from './downloaded-section';
 
 @Component({
     selector: 'app-downloads',

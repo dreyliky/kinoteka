@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { FilmQueue } from '@interfaces';
-import { DownloadingFilmsService } from '@services';
-import { DownloadingFilmsSocketService } from '@services/downloading-films-socket.service';
+import { DownloadingFilmsService, DownloadingFilmsSocketService, FilmQueue } from '@features/film';
 import { Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { FilmDownloadCancelBottomSheetComponent } from '../film-download-cancel-bottom-sheet';

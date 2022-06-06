@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FooterModule } from '@components';
 import { FeaturesModule } from '@features';
 import { SharedModule } from '@shared';
 import { FilmDetailsWindowModule } from './film-details-window';
@@ -17,7 +16,6 @@ import { PaginatorComponent } from './paginator';
     imports: [
         SharedModule,
         FeaturesModule,
-        FooterModule,
         FilmsRouting,
         FilmDetailsWindowModule
     ]

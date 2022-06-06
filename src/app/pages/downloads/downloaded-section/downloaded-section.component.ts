@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Film } from '@interfaces';
-import { DownloadedFilmsService, DownloadingFilmsSocketService } from '@services';
+import { DownloadedFilmsService, DownloadingFilmsSocketService, Film } from '@features/film';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FilmDetailsWindowComponent } from './film-details-window';

@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FilmDownloadStateEnum } from '@enums';
-import { Film } from '@interfaces';
-import { FilmDownloadStateService, FilmsService } from '@services';
+import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmsService } from '@features/film';
 
 @Component({
     selector: 'app-film-details-window',

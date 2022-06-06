@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HeaderService } from '@components';
-import { Film, FilmsResponse } from '@interfaces';
-import { ContentZoneService, FilmsFiltersService, FilmsService } from '@services';
+import { ContentZoneService } from '@core/services';
+import { Film, FilmsFiltersService, FilmsResponse, FilmsService } from '@features/film';
+import { HeaderService } from '@layouts/components';
 import { merge, Observable, Subject } from 'rxjs';
 import { skip, takeUntil } from 'rxjs/operators';
 import { FilmDetailsWindowComponent } from './film-details-window';

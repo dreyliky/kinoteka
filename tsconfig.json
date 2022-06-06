@@ -27,16 +27,10 @@
         "@core/*": ["./src/app/core/*"],
         "@features": ["./src/app/features"],
         "@features/*": ["./src/app/features/*"],
-        "@components": ["./src/app/components"],
-        "@components/*": ["./src/app/components/*"],
-        "@enums": ["./src/app/enums"],
-        "@enums/*": ["./src/app/enums/*"],
+        "@layouts": ["./src/app/layouts"],
+        "@layouts/*": ["./src/app/layouts/*"],
         "@shared": ["./src/app/shared"],
-        "@shared/*": ["./src/app/shared/*"],
-        "@interfaces": ["./src/app/interfaces"],
-        "@interfaces/*": ["./src/app/interfaces/*"],
-        "@services": ["./src/app/services"],
-        "@services/*": ["./src/app/services/*"],
+        "@shared/*": ["./src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { FilmDownloadStateEnum } from '@enums';
-import { Film, FilmMediaFileMetadata } from '@interfaces';
-import { FilmDownloadStateService, FilmMediaFilesService, FilmsService } from '@services';
+import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMediaFileMetadata, FilmMediaFilesService, FilmsService } from '@features/film';
 import { Observable, share } from 'rxjs';
 
 @Component({

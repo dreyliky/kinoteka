@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Film } from '@interfaces';
-import { DownloadedFilmsService } from '@services';
+import { DownloadedFilmsService, Film } from '@features/film';
 import { delayWhen, filter, tap } from 'rxjs/operators';
 import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 
