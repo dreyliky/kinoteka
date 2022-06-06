@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  backendWsHost: 'ws://localhost:3001'
+    production: false,
+    backendHost: 'http://localhost:3000',
+    backendWsHost: 'ws://localhost:3001'
 };
 
 /*
