@@ -45,23 +45,6 @@
     </mat-list-option>
 
     <mat-list-option
-        [routerLink]="appRouteEnum.Downloads"
-        [routerLinkActive]="'mat-list-single-selected-option'"
-        (click)="optionClick.emit($event)">
-        <div class="item-content">
-            <app-icon>file_download</app-icon>
-
-            Завантаження
-
-            <div
-                *ngIf="(isDownloadingFilmsCountBadgeVisible$ | async)"
-                class="downloading-count">
-                {{ (filmsCount$ | async) }}
-            </div>
-        </div>
-    </mat-list-option>
-
-    <mat-list-option
         [routerLink]="appRouteEnum.Settings"
         [routerLinkActive]="'mat-list-single-selected-option'"
         (click)="optionClick.emit($event)">

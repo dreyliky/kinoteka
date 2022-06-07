@@ -1,0 +1,26 @@
+<ng-container
+    *ngIf="(filmsResponse$ | async) as response; else loaderTemplate">
+    <div class="container">
+        <div class="row">
+            <div
+                *ngFor="let film of response.data"
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <film-card
+                    class="film-card"
+                    [data]="film"
+                    (click)="onFilmClick(film)">
+                </film-card>
+            </div>
+        </div>
+    </div>
+
+    <app-paginator
+        [filmsResponse]="response">
+    </app-paginator>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <div class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

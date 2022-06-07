@@ -10,8 +10,8 @@ import { DownloadsRouting } from './downloads.routing';
         DownloadsComponent
     ],
     imports: [
-        DownloadsRouting,
         SharedModule,
+        DownloadsRouting,
         DownloadedSectionModule,
         DownloadingSectionModule
     ]

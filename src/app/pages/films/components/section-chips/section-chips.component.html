@@ -1,0 +1,25 @@
+<mat-chip-list class="chips">
+    <mat-chip
+        [routerLink]="filmsRoutingEnum.Online"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">smart_display</app-icon>
+        Online
+    </mat-chip>
+
+    <mat-chip
+        [matBadge]="(filmsCount$ | async)"
+        [matBadgeHidden]="(isDownloadingFilmsCountBadgeHidden$ | async)"
+        [matBadgeColor]="'warn'"
+        [routerLink]="filmsRoutingEnum.Downloads"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">file_download</app-icon>
+        Завантажені
+    </mat-chip>
+
+    <mat-chip
+        [routerLink]="filmsRoutingEnum.Favorites"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">star</app-icon>
+        Обрані
+    </mat-chip>
+</mat-chip-list>

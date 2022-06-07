@@ -25,10 +25,6 @@ const routes: Routes = [
                 loadChildren: () => import('./pages/music').then((m) => m.MusicModule)
             },
             {
-                path: AppRouteEnum.Downloads,
-                loadChildren: () => import('./pages/downloads').then((m) => m.DownloadsModule)
-            },
-            {
                 path: AppRouteEnum.Settings,
                 loadChildren: () => import('./pages/settings').then((m) => m.SettingsModule)
             },

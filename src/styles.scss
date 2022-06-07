@@ -68,3 +68,10 @@ input {
         background-color:hsl(0,0%,67%);
     }
 }
+
+.text-truncate {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
