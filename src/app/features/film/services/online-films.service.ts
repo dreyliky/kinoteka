@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services';
 import { FilmsResponse } from '@features/film';
 import { Observable, tap } from 'rxjs';
-import { FilmsFiltersState, FilmsResponseState } from '../states';
+import { OnlineFilmsFiltersState, OnlineFilmsResponseState } from '../states';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FilmsService {
+export class OnlineFilmsService {
     public get filmsResponse$(): Observable<FilmsResponse | null> {
         return this.filmsResponseState.data$;
     }
 
     constructor(
         private readonly apiService: ApiService,
-        private readonly filmsResponseState: FilmsResponseState,
-        private readonly filtersState: FilmsFiltersState
+        private readonly filmsResponseState: OnlineFilmsResponseState,
+        private readonly filtersState: OnlineFilmsFiltersState
     ) {}
 
     public updateAllByFiltersIfAbsent(): Observable<FilmsResponse | null> {

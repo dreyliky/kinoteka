@@ -1,1 +1,30 @@
-<h1>Функціонал в розробці...</h1>
+<ng-container
+    *ngIf="(films$ | async) as films; else loaderTemplate">
+    <p class="title">
+        <span
+            [matBadge]="films?.length"
+            [matBadgeOverlap]="false"
+            [matBadgeHidden]="!films?.length">
+            Обрані
+        </span>
+    </p>
+
+    <div class="container">
+        <div class="row">
+            <div
+                *ngFor="let film of films"
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <film-card
+                    class="film-card"
+                    [data]="film">
+                </film-card>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <div class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

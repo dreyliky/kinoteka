@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FilmsFilters, OnlineFilmsFiltersService } from '@features/film';
+import { DownloadedFilmsFiltersService, FilmsFilters } from '@features/film';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ export class HeaderPortalContentComponent implements OnInit {
     public filters$!: Observable<FilmsFilters>;
 
     constructor(
-        private readonly filmsFiltersService: OnlineFilmsFiltersService
+        private readonly filmsFiltersService: DownloadedFilmsFiltersService
     ) {}
 
     public ngOnInit(): void {

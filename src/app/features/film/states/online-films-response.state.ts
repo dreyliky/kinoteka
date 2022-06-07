@@ -5,4 +5,4 @@ import { FilmsResponse } from '@features/film';
 @Injectable({
     providedIn: 'root'
 })
-export class FilmsResponseState extends BaseState<FilmsResponse | null> {}
+export class OnlineFilmsResponseState extends BaseState<FilmsResponse | null> {}

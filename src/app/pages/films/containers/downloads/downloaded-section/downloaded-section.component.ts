@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, DownloadingFilmsSocketService } from '@features/film';
-import { merge, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, DownloadingFilmsSocketService, FilteredDownloadedFilmsService } from '@features/film';
+import { merge, Observable, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-loader.service';
 import { FilmDetailsWindowComponent } from './film-details-window';
 
@@ -19,7 +19,7 @@ import { FilmDetailsWindowComponent } from './film-details-window';
     ]
 })
 export class DownloadedSectionComponent implements OnInit, OnDestroy {
-    public films: DownloadedFilm[] | null = null;
+    public films$!: Observable<DownloadedFilm[]>;
 
     private readonly viewDestroyed$ = new Subject<boolean>();
 
@@ -27,11 +27,13 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
         private readonly dialogService: MatDialog,
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService,
         private readonly downloadedFilmsService: DownloadedFilmsService,
-        private readonly changeDetector: ChangeDetectorRef
+        private readonly filteredDownloadedFilmsService: FilteredDownloadedFilmsService
     ) {}
 
     public ngOnInit(): void {
-        this.updateFilms();
+        this.films$ = this.filteredDownloadedFilmsService.data$;
+
+        this.updateFilmsIfAbsent();
         this.initFilmsDownloadingResultObserver();
     }
 
@@ -51,19 +53,16 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
             data
         })
             .afterClosed()
-            .pipe(filter(Boolean))
-            .subscribe(() => this.updateFilms());
+            .pipe(
+                filter(Boolean),
+                switchMap(() => this.downloadedFilmsService.updateAll())
+            )
+            .subscribe();
     }
 
-    private updateFilms(): void {
-        this.films = null;
-
-        this.downloadedFilmsService.getAll()
-            .subscribe((films) => {
-                this.films = films;
-
-                this.changeDetector.detectChanges();
-            })
+    private updateFilmsIfAbsent(): void {
+        this.downloadedFilmsService.updateAllIfAbsent()
+            .subscribe();
     }
 
     private initFilmsDownloadingResultObserver(): void {
@@ -72,7 +71,10 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
             this.downloadingFilmsSocketService.onFilmDownloadCancel$,
             this.downloadingFilmsSocketService.onFilmDownloadEnd$
         )
-            .pipe(takeUntil(this.viewDestroyed$))
-            .subscribe(() => this.updateFilms());
+            .pipe(
+                switchMap(() => this.downloadedFilmsService.updateAll()),
+                takeUntil(this.viewDestroyed$)
+            )
+            .subscribe();
     }
 }

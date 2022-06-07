@@ -1,16 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FavoriteFilmsService, Film } from '@features/film';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.component.html',
-  styleUrls: ['./favorites.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-favorites',
+    templateUrl: './favorites.component.html',
+    styleUrls: ['./favorites.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavoritesComponent implements OnInit {
+    public films$!: Observable<Film[]>;
 
-  constructor() { }
+    constructor(
+        private readonly favoriteFilmsService: FavoriteFilmsService
+    ) {}
 
-  ngOnInit(): void {
-  }
-
+    public ngOnInit(): void {
+        this.films$ = this.favoriteFilmsService.getAll();
+    }
 }

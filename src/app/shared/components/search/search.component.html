@@ -3,7 +3,16 @@
     class="search"
     [placeholder]="placeholder"
     [value]="value"
-    (change)="onSearchInputChange()" />
+    (keydown.enter)="onSearchEnterKeyDown()"
+    (input)="onSearchInput()" />
+
+<button
+    *ngIf="value"
+    class="clear-button"
+    mat-icon-button
+    (click)="onClearButtonClick()">
+    <app-icon>close</app-icon>
+</button>
 
 <button
     class="search-button"

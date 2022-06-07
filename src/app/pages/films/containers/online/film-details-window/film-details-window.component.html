@@ -5,6 +5,11 @@
 
     <span class="spacer"></span>
 
+    <app-favorite-button
+        class="favorite-button"
+        [film]="data">
+    </app-favorite-button>
+
     <app-download-button
         class="download-button"
         [film]="data">
@@ -13,8 +18,6 @@
     <button
         class="close-button"
         mat-stroked-button
-        tabindex="3"
-        (keyup.enter)="onCloseButtonClick()"
         (click)="onCloseButtonClick()">
         <app-icon>close</app-icon>
     </button>

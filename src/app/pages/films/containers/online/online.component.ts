@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ContentZoneService } from '@core/services';
-import { Film, FilmsFiltersService, FilmsResponse, FilmsService } from '@features/film';
+import { Film, FilmsResponse, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
 import { HeaderService } from '@layouts';
 import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
 import { FilmDetailsWindowComponent } from './film-details-window';
@@ -30,8 +30,8 @@ export class OnlineComponent implements OnInit {
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
         private readonly dialogService: MatDialog,
-        private readonly filmsService: FilmsService,
-        private readonly filmsFiltersService: FilmsFiltersService
+        private readonly filmsService: OnlineFilmsService,
+        private readonly filmsFiltersService: OnlineFilmsFiltersService
     ) {}
 
     public ngOnInit(): void {

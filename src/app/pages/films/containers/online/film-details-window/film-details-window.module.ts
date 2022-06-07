@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
 import { DownloadButtonComponent } from './download-button';
+import { FavoriteButtonComponent } from './favorite-button';
 import { FilmDetailsWindowComponent } from './film-details-window.component';
 import { FilmDownloadProgressComponent } from './film-download-progress';
 
@@ -8,7 +9,8 @@ import { FilmDownloadProgressComponent } from './film-download-progress';
     declarations: [
         FilmDetailsWindowComponent,
         FilmDownloadProgressComponent,
-        DownloadButtonComponent
+        DownloadButtonComponent,
+        FavoriteButtonComponent
     ],
     imports: [
         SharedModule

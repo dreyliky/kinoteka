@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMediaFileMetadata, FilmsService } from '@features/film';
+import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMediaFileMetadata, OnlineFilmsService } from '@features/film';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -30,7 +30,7 @@ export class DownloadButtonComponent implements OnDestroy {
     private readonly viewDestroyed$ = new Subject<boolean>();
 
     constructor(
-        private readonly filmsService: FilmsService,
+        private readonly filmsService: OnlineFilmsService,
         private readonly filmDownloadStatusService: FilmDownloadStateService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}

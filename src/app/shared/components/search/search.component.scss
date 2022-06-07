@@ -2,6 +2,7 @@
     width: 100%;
     height: 40px;
     display: flex;
+    position: relative;
 }
 
 .search {
@@ -17,6 +18,14 @@
     &:focus {
         outline: solid 1px var(--bs-green);
     }
+}
+
+.clear-button {
+    color: var(--bs-gray-400);
+    position: absolute;
+    top: 0;
+    right: 53px;
+    z-index: 4;
 }
 
 .search-button {

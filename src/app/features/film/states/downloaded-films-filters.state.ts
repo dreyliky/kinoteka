@@ -5,7 +5,7 @@ import { FilmsFilters } from '@features/film';
 @Injectable({
     providedIn: 'root'
 })
-export class FilmsFiltersState extends BaseState<FilmsFilters> {
+export class DownloadedFilmsFiltersState extends BaseState<FilmsFilters> {
     constructor() {
         super({
             query: '',

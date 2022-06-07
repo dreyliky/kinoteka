@@ -1,16 +1,23 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { HeaderService } from '@layouts';
+import { HeaderPortalContentComponent } from './header-portal-content';
 
 @Component({
-  selector: 'app-downloads',
-  templateUrl: './downloads.component.html',
-  styleUrls: ['./downloads.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-downloads',
+    templateUrl: './downloads.component.html',
+    styleUrls: ['./downloads.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DownloadsComponent implements OnInit {
+export class DownloadsComponent implements OnInit, OnDestroy {
+    constructor(
+        private readonly headerService: HeaderService
+    ) {}
 
-  constructor() { }
+    public ngOnInit(): void {
+        this.headerService.setPortalComponent(HeaderPortalContentComponent);
+    }
 
-  ngOnInit(): void {
-  }
-
+    public ngOnDestroy(): void {
+        this.headerService.clearPortalComponent();
+    }
 }

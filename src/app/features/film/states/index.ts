@@ -1,3 +1,5 @@
-export * from './films-filters.state';
-export * from './films-response.state';
+export * from './downloaded-films-filters.state';
+export * from './downloaded-films.state';
+export * from './online-films-filters.state';
+export * from './online-films-response.state';
 

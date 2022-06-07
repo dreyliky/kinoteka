@@ -1,28 +1,30 @@
-<p class="title">
-    <span
-        [matBadge]="films?.length"
-        [matBadgeOverlap]="false"
-        [matBadgeHidden]="!films?.length">
-        Завантажені
-    </span>
-</p>
-
-<ng-container *ngIf="films; else loaderTemplate">
-    <div
-        *ngIf="films.length; else emptyContentTemplate"
-        class="container">
-        <div class="row">
-            <div
-                *ngFor="let film of films"
-                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                <downloaded-film-card
-                    class="film-card"
-                    [data]="film"
-                    (click)="onFilmClick(film)">
-                </downloaded-film-card>
+<ng-container *ngIf="(films$ | async) as films">
+    <p class="title">
+        <span
+            [matBadge]="films?.length"
+            [matBadgeOverlap]="false"
+            [matBadgeHidden]="!films?.length">
+            Завантажені
+        </span>
+    </p>
+    
+    <ng-container *ngIf="films; else loaderTemplate">
+        <div
+            *ngIf="films.length; else emptyContentTemplate"
+            class="container">
+            <div class="row">
+                <div
+                    *ngFor="let film of films"
+                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                    <downloaded-film-card
+                        class="film-card"
+                        [data]="film"
+                        (click)="onFilmClick(film)">
+                    </downloaded-film-card>
+                </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </ng-container>
 
 <ng-template #loaderTemplate>

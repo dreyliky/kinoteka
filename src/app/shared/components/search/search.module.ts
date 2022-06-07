@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { IconModule } from '../icon/icon.module';
 import { SearchComponent } from './search.component';
 
@@ -9,7 +10,8 @@ import { SearchComponent } from './search.component';
     ],
     imports: [
         CommonModule,
-        IconModule
+        IconModule,
+        MatButtonModule
     ],
     exports: [
         SearchComponent

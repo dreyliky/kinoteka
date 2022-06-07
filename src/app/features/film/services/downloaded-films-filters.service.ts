@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FilmsFilters } from '@features/film';
 import { Observable } from 'rxjs';
-import { FilmsFiltersState } from '../states';
+import { DownloadedFilmsFiltersState } from '../states';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FilmsFiltersService {
+export class DownloadedFilmsFiltersService {
     public get data$(): Observable<FilmsFilters> {
         return (this.state.data$ as Observable<FilmsFilters>);
     }
 
     constructor(
-        private readonly state: FilmsFiltersState
+        private readonly state: DownloadedFilmsFiltersState
     ) {}
 
     public update(data: Partial<FilmsFilters>): void {

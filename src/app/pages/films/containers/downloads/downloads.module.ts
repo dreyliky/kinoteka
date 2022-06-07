@@ -4,10 +4,12 @@ import { DownloadedSectionModule } from './downloaded-section';
 import { DownloadingSectionModule } from './downloading-section';
 import { DownloadsComponent } from './downloads.component';
 import { DownloadsRouting } from './downloads.routing';
+import { HeaderPortalContentComponent } from './header-portal-content';
 
 @NgModule({
     declarations: [
-        DownloadsComponent
+        DownloadsComponent,
+        HeaderPortalContentComponent
     ],
     imports: [
         SharedModule,

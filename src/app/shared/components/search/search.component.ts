@@ -19,11 +19,21 @@ export class SearchComponent {
     @ViewChild('searchInput')
     private readonly searchRef!: ElementRef<HTMLInputElement>;
 
-    public onSearchInputChange(): void {
+    public onSearchEnterKeyDown(): void {
         this.searchChange.emit(this.searchRef.nativeElement.value);
     }
 
     public onSearchButtonClick(): void {
         this.searchChange.emit(this.searchRef.nativeElement.value);
+    }
+
+    public onSearchInput(): void {
+        this.value = this.searchRef.nativeElement.value;
+    }
+
+    public onClearButtonClick(): void {
+        this.value = '';
+
+        this.searchChange.emit(this.value);
     }
 }
