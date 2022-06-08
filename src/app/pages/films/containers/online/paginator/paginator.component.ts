@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { FilmsFilters, FilmsResponse, OnlineFilmsFiltersService } from '@features/film';
+import { Film, OnlineFilmsFiltersService } from '@features/film';
+import { VideoCdnFilters, VideoCdnResponse } from '@features/video-cdn';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,9 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class PaginatorComponent implements OnInit {
     @Input()
-    public filmsResponse!: FilmsResponse;
+    public filmsResponse!: VideoCdnResponse<Film>;
 
-    public filters$!: Observable<FilmsFilters>;
+    public filters$!: Observable<VideoCdnFilters>;
 
     constructor(
         private readonly filtersService: OnlineFilmsFiltersService

@@ -1,12 +1,12 @@
 <ng-container *ngIf="(films$ | async) as films">
-    <p class="title">
+    <app-title>
         <span
             [matBadge]="films?.length"
             [matBadgeOverlap]="false"
             [matBadgeHidden]="!films?.length">
             Завантажені
         </span>
-    </p>
+    </app-title>
     
     <ng-container *ngIf="films; else loaderTemplate">
         <div

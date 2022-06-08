@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ContentZoneService } from '@core/services';
-import { Film, FilmsResponse, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
+import { Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
+import { VideoCdnResponse } from '@features/video-cdn';
 import { HeaderService } from '@layouts';
 import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
 import { FilmDetailsWindowComponent } from './film-details-window';
@@ -14,7 +15,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OnlineComponent implements OnInit {
-    public filmsResponse$!: Observable<FilmsResponse | null>;
+    public filmsResponse$!: Observable<VideoCdnResponse<Film> | null>;
 
     private get viewDestroyedOrFiltersChanged$(): Observable<unknown> {
         return merge(

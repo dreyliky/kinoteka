@@ -10,4 +10,8 @@ import { Film } from '../../interfaces';
 export class FilmCardComponent {
     @Input()
     public data!: Film;
+
+    public get previewCssUrl(): string {
+        return `url(${this.data.previewUrl})`;
+    }
 }

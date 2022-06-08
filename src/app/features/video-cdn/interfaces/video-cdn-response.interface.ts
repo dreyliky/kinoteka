@@ -1,8 +1,6 @@
-import { Film } from './film.interface';
-
-export interface FilmsResponse {
+export interface VideoCdnResponse<T> {
+    readonly data: T[];
     readonly result: boolean;
-    readonly data: Film[];
     readonly current_page: number;
     readonly first_page_url: string;
     readonly from: number;

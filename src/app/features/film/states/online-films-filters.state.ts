@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BaseState } from '@core/states';
-import { FilmsFilters } from '@features/film';
+import { VideoCdnFilters } from '../../video-cdn';
 
 @Injectable({
     providedIn: 'root'
 })
-export class OnlineFilmsFiltersState extends BaseState<FilmsFilters> {
+export class OnlineFilmsFiltersState extends BaseState<VideoCdnFilters> {
     constructor() {
         super({
             query: '',

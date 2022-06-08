@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services';
-import { FilmsResponse } from '@features/film';
 import { Observable, tap } from 'rxjs';
+import { VideoCdnResponse } from '../../video-cdn';
+import { Film } from '../interfaces';
 import { OnlineFilmsFiltersState, OnlineFilmsResponseState } from '../states';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OnlineFilmsService {
-    public get filmsResponse$(): Observable<FilmsResponse | null> {
+    public get filmsResponse$(): Observable<VideoCdnResponse<Film> | null> {
         return this.filmsResponseState.data$;
     }
 
@@ -18,7 +19,7 @@ export class OnlineFilmsService {
         private readonly filtersState: OnlineFilmsFiltersState
     ) {}
 
-    public updateAllByFiltersIfAbsent(): Observable<FilmsResponse | null> {
+    public updateAllByFiltersIfAbsent(): Observable<VideoCdnResponse<Film> | null> {
         if (!this.filmsResponseState.data) {
             return this.updateAllByFilters();
         }
@@ -26,10 +27,10 @@ export class OnlineFilmsService {
         return this.filmsResponse$;
     }
 
-    public updateAllByFilters(): Observable<FilmsResponse> {
+    public updateAllByFilters(): Observable<VideoCdnResponse<Film>> {
         this.filmsResponseState.set(null);
 
-        return this.apiService.get<FilmsResponse>(
+        return this.apiService.get<VideoCdnResponse<Film>>(
             `/films`,
             { params: this.filtersState.data as any }
         )

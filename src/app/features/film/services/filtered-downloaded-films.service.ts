@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { VideoCdnFilters } from '@features/video-cdn';
 import { combineLatest, map, Observable } from 'rxjs';
-import { DownloadedFilm, FilmsFilters } from '../interfaces';
+import { DownloadedFilm } from '../interfaces';
 import { DownloadedFilmsFiltersState, DownloadedFilmsState } from '../states';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class FilteredDownloadedFilmsService {
         private readonly downloadedFilmsState: DownloadedFilmsState
     ) {}
 
-    private filterFilms(filters: FilmsFilters | null, films: DownloadedFilm[] | null): DownloadedFilm[] {
+    private filterFilms(filters: VideoCdnFilters | null, films: DownloadedFilm[] | null): DownloadedFilm[] {
         const searchString = filters?.query.toLowerCase() ?? '';
         const year = filters?.year ?? '';
 

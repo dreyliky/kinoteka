@@ -19,7 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { IconModule, SearchModule, YearPickerModule } from './components';
+import { IconModule, SearchModule, TitleModule, YearPickerModule } from './components';
 import { MediaDurationPipe, SafePipe, TranslationsCountPipe } from './pipes';
 
 @NgModule({
@@ -32,6 +32,7 @@ import { MediaDurationPipe, SafePipe, TranslationsCountPipe } from './pipes';
         SafePipe,
         MediaDurationPipe,
         TranslationsCountPipe,
+        TitleModule,
         SearchModule,
         IconModule,
         YearPickerModule,

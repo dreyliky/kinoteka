@@ -1,0 +1,34 @@
+<div class="download-progress">
+    <mat-progress-bar
+        *ngIf="(downloadProgress > 0)"
+        class="progress-bar"
+        [mode]="'determinate'"
+        [color]="'accent'"
+        [value]="downloadProgress">
+    </mat-progress-bar>
+
+    <div
+        *ngIf="isDownloading"
+        class="percents-text">
+        {{ downloadProgress }}%
+    </div>
+
+    <div
+        *ngIf="!isDownloading"
+        class="in-queue-text">
+        В черзі
+    </div>
+
+    <button
+        mat-button
+        class="cancel-button"
+        [color]="'warn'"
+        (click)="onCancelButtonClick(film)">
+        Відмінити
+    </button>
+</div>
+
+<film-card
+    class="film-card"
+    [data]="film.data">
+</film-card>

@@ -1,0 +1,26 @@
+<ng-container
+    *ngIf="(tvSeriesResponse$ | async) as response; else loaderTemplate">
+    <div class="container">
+        <div class="row">
+            <div
+                *ngFor="let tvSeries of response.data"
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <tv-series-card
+                    class="tv-series-card"
+                    [data]="tvSeries"
+                    (click)="onTvSeriesClick(tvSeries)">
+                </tv-series-card>
+            </div>
+        </div>
+    </div>
+
+    <app-paginator
+        [tvSeriesResponse]="response">
+    </app-paginator>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <div class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

@@ -1,0 +1,52 @@
+<ng-container
+    *ngIf="(filmDownloadState === filmDownloadStateEnum.Undownloaded)">
+    <button
+        *ngIf="!!film.media.length"
+        mat-stroked-button
+        [matMenuTriggerFor]="menu"
+        [color]="downloadButtonColor">
+        <app-icon>file_download</app-icon>
+    </button>
+
+    <button
+        *ngIf="!film.media.length"
+        mat-stroked-button
+        [color]="'warn'">
+        <app-icon>file_download</app-icon>
+    </button>
+</ng-container>
+
+<button
+    *ngIf="(filmDownloadState !== filmDownloadStateEnum.Undownloaded)"
+    mat-stroked-button
+    [disabled]="true">
+    <ng-container [ngSwitch]="filmDownloadState">
+        <app-film-download-progress
+            *ngSwitchCase="filmDownloadStateEnum.Downloading"
+            [film]="film"
+            (downloadEnd)="onDownloadEnd()">
+        </app-film-download-progress>
+
+        <app-icon
+            *ngSwitchCase="filmDownloadStateEnum.Downloaded">
+            check
+        </app-icon>
+    </ng-container>
+</button>
+
+<mat-menu
+    #menu="matMenu"
+    [xPosition]="'before'">
+    <button
+        *ngFor="let media of film.media"
+        class="menu-item"
+        mat-menu-item
+        (click)="onDownloadButtonClick(media)">
+        <b>[{{ media.maxQuality }}p]</b>&nbsp;
+        {{ media.translationName }}
+    </button>
+    
+    <ng-template #loaderTemplate>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+</mat-menu>

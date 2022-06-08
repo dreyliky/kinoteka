@@ -1,0 +1,52 @@
+:host {
+    display: flex;
+    position: relative;
+    margin: 5px;
+
+    .download-progress {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        position: absolute;
+        border-radius: 3px;
+        top: 0;
+        left: 0;
+        font-size: 24px;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, .8);
+        z-index: 1;
+
+        .progress-bar {
+            height: 6px;
+            border-radius: 0px 0px 3px 3px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .cancel-button {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .percents-text {
+        color: var(--bs-teal);
+    }
+
+    .in-queue-text {
+        color: var(--bs-warning);
+    }
+
+    .film-card {
+        width: 100%;
+    
+        &:hover {
+            opacity: .95;
+            cursor: pointer;
+        }
+    }
+}

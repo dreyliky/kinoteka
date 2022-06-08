@@ -1,0 +1,22 @@
+<mat-chip-list class="chips">
+    <mat-chip
+        [routerLink]="tvSeriesRoutingEnum.Online"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">smart_display</app-icon>
+        Online
+    </mat-chip>
+
+    <mat-chip
+        [routerLink]="tvSeriesRoutingEnum.Downloads"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">file_download</app-icon>
+        Завантажені
+    </mat-chip>
+
+    <mat-chip
+        [routerLink]="tvSeriesRoutingEnum.Favorites"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">star</app-icon>
+        Обрані
+    </mat-chip>
+</mat-chip-list>

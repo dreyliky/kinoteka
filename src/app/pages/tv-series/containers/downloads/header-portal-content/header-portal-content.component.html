@@ -1,0 +1,14 @@
+<ng-container *ngIf="(filters$ | async) as filters">
+    <app-search
+        [value]="filters.query"
+        class="search"
+        [placeholder]="'Пошук серіалів'"
+        (searchChange)="onSearchChange($event)">
+    </app-search>
+
+    <app-year-picker
+        [data]="+filters.year"
+        (yearSelected)="onYearSelected($event)"
+        (yearDeselected)="onClearYearDeselected()">
+    </app-year-picker>
+</ng-container>

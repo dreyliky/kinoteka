@@ -1,0 +1,44 @@
+<ng-container *ngIf="(films$ | async) as films">
+    <app-title>
+        <span
+            [matBadge]="films?.length"
+            [matBadgeOverlap]="false"
+            [matBadgeHidden]="!films?.length">
+            Завантажені
+        </span>
+    </app-title>
+
+    <ng-container *ngIf="films; else loaderTemplate">
+        <div
+            *ngIf="films.length; else emptyContentTemplate"
+            class="container">
+            <div class="row">
+                <div
+                    *ngFor="let film of films"
+                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                    <downloaded-film-card
+                        class="film-card"
+                        [data]="film"
+                        (click)="onFilmClick(film)">
+                    </downloaded-film-card>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <div class="loader">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
+
+<ng-template #emptyContentTemplate>
+    <div class="emty-content">
+        <img src="/assets/icons/empty-icon.png" />
+
+        <span class="description">
+            Немає жодного завантаженого фільму
+        </span>
+    </div>
+</ng-template>
