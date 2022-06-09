@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ContentZoneService } from '@core/services';
 import { OnlineTvSeriesFiltersService, OnlineTvSeriesService, TvSeries } from '@features/tv-series';
 import { VideoCdnResponse } from '@features/video-cdn';
-import { HeaderService } from '@layouts';
+import { ContentZoneService, HeaderService } from '@layouts';
 import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
 import { HeaderPortalContentComponent } from './header-portal-content';
 import { TvSeriesDetailsWindowComponent } from './tv-series-details-window';

@@ -9,7 +9,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 @NgModule({
     declarations: [
         DownloadsComponent,
-        HeaderPortalContentComponent
+        HeaderPortalContentComponent,
     ],
     imports: [
         SharedModule,

@@ -17,6 +17,14 @@ export class DownloadedFilmsService {
         private readonly downloadedFilmsState: DownloadedFilmsState
     ) {}
 
+    public get(kinopoiskId: string): Observable<DownloadedFilm> {
+        return this.apiService.get<DownloadedFilm>(`/downloaded-films/${kinopoiskId}`);
+    }
+
+    public getMediaUrl(kinopoiskId: string): string {
+        return `${this.apiService.hostUrl}/downloaded-films/${kinopoiskId}/media`;
+    }
+
     public updateAllIfAbsent(): Observable<DownloadedFilm[] | null> {
         if (!this.downloadedFilmsState.data) {
             return this.updateAll();
@@ -26,13 +34,13 @@ export class DownloadedFilmsService {
     }
 
     public updateAll(): Observable<DownloadedFilm[]> {
-        return this.apiService.get<DownloadedFilm[]>(`/films/downloaded`)
+        return this.apiService.get<DownloadedFilm[]>(`/downloaded-films`)
             .pipe(
                 tap((data) => this.downloadedFilmsState.set(data))
             );
     }
 
     public delete(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.delete(`/films/downloaded/${kinopoiskId}`);
+        return this.apiService.delete(`/downloaded-films/${kinopoiskId}`);
     }
 }

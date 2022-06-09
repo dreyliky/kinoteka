@@ -1,0 +1,51 @@
+<ng-container *ngIf="(film$ | async) as film; else loaderTemplate">
+    <mat-toolbar class="toolbar">
+        <div class="title">
+            {{ film.title }}
+        </div>
+
+        <span class="spacer"></span>
+
+        <app-favorite-button
+            class="action-button"
+            [film]="film">
+        </app-favorite-button>
+
+        <app-download-button
+            class="action-button"
+            [film]="film">
+        </app-download-button>
+
+        <smart-cast-button
+            class="action-button"
+            [data]="film.kinopoiskId"
+            [castType]="castType">
+        </smart-cast-button>
+
+        <button
+            class="action-button"
+            mat-icon-button
+            (click)="onCloseButtonClick()">
+            <app-icon>close</app-icon>
+        </button>
+    </mat-toolbar>
+    
+    <iframe
+        allowfullscreen
+        class="player"
+        [src]="film.iframeSrc | safe:'resourceUrl'">
+    </iframe>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <div class="loader">
+        <mat-spinner></mat-spinner>
+
+        <button
+            mat-button
+            [color]="'warn'"
+            (click)="onCloseButtonClick()">
+            Відмінити
+        </button>
+    </div>
+</ng-template>

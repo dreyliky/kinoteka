@@ -12,7 +12,7 @@ export class DownloadedFilmPreviewLoaderService implements DownloadedFilmPreview
     
     public getPreview(kinopoiskId: string): Observable<string> {
         return this.apiService.get<Blob>(
-            `/films/downloaded/${kinopoiskId}/preview`,
+            `/downloaded-films/${kinopoiskId}/preview`,
             { responseType: ('blob' as any) }
         )
             .pipe(

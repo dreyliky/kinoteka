@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ContentZoneService } from '@core/services';
+import { ContentZoneService } from '@layouts';
 import { debounceTime, map } from 'rxjs';
 
 @Component({

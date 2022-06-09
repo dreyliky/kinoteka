@@ -1,0 +1,10 @@
+:host {
+    display: flex;
+    align-items: center;
+}
+
+button {
+    &.active {
+        color: var(--bs-warning);
+    }
+}

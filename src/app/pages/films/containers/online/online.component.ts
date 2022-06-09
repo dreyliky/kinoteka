@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ContentZoneService } from '@core/services';
+import { Router } from '@angular/router';
+import { AppRouteEnum } from '@core/enums';
 import { Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
 import { VideoCdnResponse } from '@features/video-cdn';
-import { HeaderService } from '@layouts';
+import { ContentZoneService, HeaderService } from '@layouts';
 import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
-import { FilmDetailsWindowComponent } from './film-details-window';
 import { HeaderPortalContentComponent } from './header-portal-content';
 
 @Component({
@@ -28,9 +27,9 @@ export class OnlineComponent implements OnInit {
     private readonly viewDestroyed$ = new Subject<boolean>();
 
     constructor(
+        private readonly router: Router,
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
-        private readonly dialogService: MatDialog,
         private readonly filmsService: OnlineFilmsService,
         private readonly filmsFiltersService: OnlineFilmsFiltersService
     ) {}
@@ -49,18 +48,8 @@ export class OnlineComponent implements OnInit {
         this.viewDestroyed$.complete();
     }
 
-    public onFilmClick(data: Film): void {
-        this.dialogService.open(FilmDetailsWindowComponent, {
-            width: '100%',
-            minWidth: '100%',
-            height: '100%',
-            disableClose: true,
-            panelClass: 'film-details-pane',
-            autoFocus: true,
-            data
-        })
-            .afterClosed()
-            .subscribe();
+    public onFilmClick(film: Film): void {
+        this.router.navigateByUrl(`/${AppRouteEnum.OnlineFilmDetails}/${film.kinopoiskId}`);
     }
 
     private updateFilms(): void {

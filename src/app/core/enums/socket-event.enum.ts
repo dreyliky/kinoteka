@@ -3,5 +3,6 @@ export enum SocketEventEnum {
     FilmDownloadStart = 'f-d-s',
     FilmDownloadEnd = 'f-d-e',
     FilmDownloadCancel = 'f-d-c',
-    DownloadingFilmsCount = 'd-f-c'
+    DownloadingFilmsCount = 'd-f-c',
+    Cast = 'cast'
 }

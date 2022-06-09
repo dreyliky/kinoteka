@@ -5,6 +5,14 @@ import { MainLayoutComponent } from '@layouts';
 
 const routes: Routes = [
     {
+        path: AppRouteEnum.OnlineFilmDetails,
+        loadChildren: () => import('./pages/online-film-details').then((m) => m.OnlineFilmDetailsModule)
+    },
+    {
+        path: AppRouteEnum.DownloadedFilmDetails,
+        loadChildren: () => import('./pages/downloaded-film-details').then((m) => m.DownloadedFilmDetailsModule)
+    },
+    {
         path: '',
         component: MainLayoutComponent,
         children: [

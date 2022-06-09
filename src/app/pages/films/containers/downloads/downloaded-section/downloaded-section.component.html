@@ -1,30 +1,30 @@
-<ng-container *ngIf="(films$ | async) as films">
+<ng-container *ngIf="(filteredFilms$ | async) as filteredFilms; else loaderTemplate">
     <app-title>
         <span
-            [matBadge]="films?.length"
+            [matBadge]="filteredFilms?.length"
             [matBadgeOverlap]="false"
-            [matBadgeHidden]="!films?.length">
+            [matBadgeHidden]="!filteredFilms?.length">
             Завантажені
         </span>
     </app-title>
-    
-    <ng-container *ngIf="films; else loaderTemplate">
-        <div
-            *ngIf="films.length; else emptyContentTemplate"
-            class="container">
-            <div class="row">
-                <div
-                    *ngFor="let film of films"
-                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                    <downloaded-film-card
-                        class="film-card"
-                        [data]="film"
-                        (click)="onFilmClick(film)">
-                    </downloaded-film-card>
-                </div>
+
+    <div
+        *ngIf="filteredFilms.length; else emptyContentTemplate"
+        class="container">
+        <div class="row">
+            <div
+                *ngFor="let film of filteredFilms"
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <downloaded-film-card
+                    class="film-card"
+                    [data]="film"
+                    (click)="onFilmClick(film)">
+                </downloaded-film-card>
             </div>
         </div>
-    </ng-container>
+    </div>
+
+    <app-paginator></app-paginator>
 </ng-container>
 
 <ng-template #loaderTemplate>

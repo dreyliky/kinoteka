@@ -14,7 +14,7 @@ export class FilteredDownloadedFilmsService {
             this.downloadedFilmsState.data$
         ])
             .pipe(
-                map(([filters, films]) => this.filterFilms(filters, films))
+                map(([filters, films]) => this.filterFilms(filters as VideoCdnFilters, films))
             );
     }
 
@@ -23,11 +23,17 @@ export class FilteredDownloadedFilmsService {
         private readonly downloadedFilmsState: DownloadedFilmsState
     ) {}
 
-    private filterFilms(filters: VideoCdnFilters | null, films: DownloadedFilm[] | null): DownloadedFilm[] {
-        const searchString = filters?.query.toLowerCase() ?? '';
-        const year = filters?.year ?? '';
+    private filterFilms(filters: VideoCdnFilters, films: DownloadedFilm[] | null): DownloadedFilm[] {
+        const searchString = filters.query.toLowerCase();
+        const year = filters.year;
+        const page = (+filters.page - 1);
+        const limit = +filters.limit;
+        const sliceFrom = (page * limit);
+        const sliceTo = (sliceFrom + limit);
 
-        return films?.filter((film) => (
+        return films
+            ?.slice(sliceFrom, sliceTo)
+            .filter((film) => (
             this.filterFilmBySearch(searchString, film) &&
             this.filterFilmByYear(year, film)
         )) ?? [];

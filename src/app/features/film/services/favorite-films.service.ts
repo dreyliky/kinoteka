@@ -12,18 +12,18 @@ export class FavoriteFilmsService {
     ) {}
 
     public getAll(): Observable<Film[]> {
-        return this.apiService.get<Film[]>(`/films/favorites`);
+        return this.apiService.get<Film[]>(`/favorites-films`);
     }
 
     public getState(kinopoiskId: string): Observable<boolean> {
-        return this.apiService.get<boolean>(`/films/favorites/${kinopoiskId}/state`);
+        return this.apiService.get<boolean>(`/favorites-films/${kinopoiskId}/state`);
     }
 
     public add(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.post(`/films/favorites/${kinopoiskId}`, {});
+        return this.apiService.post(`/favorites-films/${kinopoiskId}`, {});
     }
 
     public remove(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.delete(`/films/favorites/${kinopoiskId}`);
+        return this.apiService.delete(`/favorites-films/${kinopoiskId}`);
     }
 }

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AppRouteEnum } from '@core/enums';
 import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, DownloadingFilmsSocketService, FilteredDownloadedFilmsService } from '@features/film';
+import { ContentZoneService } from '@layouts';
 import { merge, Observable, Subject } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-loader.service';
-import { FilmDetailsWindowComponent } from './film-details-window';
 
 @Component({
     selector: 'app-downloaded-section',
@@ -19,21 +20,23 @@ import { FilmDetailsWindowComponent } from './film-details-window';
     ]
 })
 export class DownloadedSectionComponent implements OnInit, OnDestroy {
-    public films$!: Observable<DownloadedFilm[]>;
+    public filteredFilms$!: Observable<DownloadedFilm[]>;
 
     private readonly viewDestroyed$ = new Subject<boolean>();
 
     constructor(
-        private readonly dialogService: MatDialog,
+        private readonly router: Router,
+        private readonly contentZoneService: ContentZoneService,
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService,
         private readonly downloadedFilmsService: DownloadedFilmsService,
         private readonly filteredDownloadedFilmsService: FilteredDownloadedFilmsService
     ) {}
 
     public ngOnInit(): void {
-        this.films$ = this.filteredDownloadedFilmsService.data$;
+        this.filteredFilms$ = this.filteredDownloadedFilmsService.data$;
 
         this.updateFilmsIfAbsent();
+        this.initFilmsFiltersObserver();
         this.initFilmsDownloadingResultObserver();
     }
 
@@ -42,27 +45,19 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
         this.viewDestroyed$.complete();
     }
 
-    public onFilmClick(data: DownloadedFilm): void {
-        this.dialogService.open(FilmDetailsWindowComponent, {
-            width: '100%',
-            minWidth: '100%',
-            height: '100%',
-            disableClose: true,
-            panelClass: 'film-details-pane',
-            autoFocus: true,
-            data
-        })
-            .afterClosed()
-            .pipe(
-                filter(Boolean),
-                switchMap(() => this.downloadedFilmsService.updateAll())
-            )
-            .subscribe();
+    public onFilmClick(film: DownloadedFilm): void {
+        this.router.navigateByUrl(`/${AppRouteEnum.DownloadedFilmDetails}/${film.kinopoiskId}`);
     }
 
     private updateFilmsIfAbsent(): void {
         this.downloadedFilmsService.updateAllIfAbsent()
             .subscribe();
+    }
+
+    private initFilmsFiltersObserver(): void {
+        this.filteredDownloadedFilmsService.data$
+            .pipe(takeUntil(this.viewDestroyed$))
+            .subscribe(() => this.contentZoneService.scrollTop());
     }
 
     private initFilmsDownloadingResultObserver(): void {

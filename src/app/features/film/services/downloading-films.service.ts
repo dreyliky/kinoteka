@@ -12,10 +12,10 @@ export class DownloadingFilmsService {
     ) {}
 
     public getAll(): Observable<FilmQueue[]> {
-        return this.apiService.get<FilmQueue[]>(`/films/downloading`);
+        return this.apiService.get<FilmQueue[]>(`/downloading-films`);
     }
 
     public cancel(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.delete(`/films/downloading/${kinopoiskId}`);
+        return this.apiService.delete(`/downloading-films/${kinopoiskId}`);
     }
 }

@@ -27,6 +27,7 @@
     flex-wrap: nowrap;
     padding: 0px 15px;
     box-sizing: border-box;
+    scrollbar-width: none;
 
     &::-webkit-scrollbar {
         display: none;

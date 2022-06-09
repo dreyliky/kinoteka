@@ -19,6 +19,10 @@ export class OnlineFilmsService {
         private readonly filtersState: OnlineFilmsFiltersState
     ) {}
 
+    public get(kinopoiskId: string): Observable<Film> {
+        return this.apiService.get<Film>(`/films/${kinopoiskId}`);
+    }
+
     public updateAllByFiltersIfAbsent(): Observable<VideoCdnResponse<Film> | null> {
         if (!this.filmsResponseState.data) {
             return this.updateAllByFilters();

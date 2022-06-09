@@ -1,0 +1,36 @@
+<button
+    mat-icon-button
+    [matMenuTriggerFor]="menu">
+    <app-icon>cast</app-icon>
+</button>
+
+<mat-menu
+    #menu="matMenu"
+    [xPosition]="'before'">
+    <ng-template matMenuContent>
+        <ng-container *ngIf="(clients$ | async) as clients; else loaderTemplate">
+            <ng-container *ngIf="clients.length; else noAnotherClientsFoundTemplate">
+                <button
+                    *ngFor="let client of clients"
+                    class="menu-item"
+                    mat-menu-item
+                    (click)="onClientButtonClick(client)">
+                    <app-icon class="icon">{{ getIconName(client) }}</app-icon>
+                    <b>{{ client.deviceInfo.os_version }} via {{ client.deviceInfo.browser }}</b><br />
+                </button>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+
+    <ng-template #loaderTemplate>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+
+    <ng-template #noAnotherClientsFoundTemplate>
+        <button
+            mat-menu-item
+            class="menu-item text-danger">
+            Не вдалось знайти інших підключених пристроїв
+        </button>
+    </ng-template>
+</mat-menu>

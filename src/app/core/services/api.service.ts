@@ -19,6 +19,10 @@ interface HttpClientGetOptions {
     providedIn: 'root'
 })
 export class ApiService {
+    public get hostUrl(): string {
+        return environment.backendHost;
+    }
+
     constructor(
         private readonly httpService: HttpClient
     ) {}
@@ -48,6 +52,6 @@ export class ApiService {
     }
 
     private getFullUrl(subUrl: string): string {
-        return `${environment.backendHost}${subUrl}`;
+        return `${this.hostUrl}${subUrl}`;
     }
 }

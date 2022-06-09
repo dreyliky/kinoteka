@@ -1,13 +1,16 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDrawer, MatDrawerContent, MatDrawerMode } from '@angular/material/sidenav';
-import { ContentZoneService } from '@core/services';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ContentZoneService } from './content-zone.service';
 
 @Component({
     selector: 'app-main-layout',
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        ContentZoneService
+    ]
 })
 export class MainLayoutComponent {
     @ViewChild(MatDrawerContent, { read: ElementRef, static: true })

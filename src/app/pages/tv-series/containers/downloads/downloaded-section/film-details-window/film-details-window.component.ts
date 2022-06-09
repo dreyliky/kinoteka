@@ -16,7 +16,7 @@ import { FilmDeleteBottomSheetComponent } from '../film-delete-bottom-sheet';
 export class FilmDetailsWindowComponent {
     public get filmUrl(): string {
         // FIXME: Make via service
-        return `${environment.backendHost}/films/downloaded/${this.data.kinopoiskId}`;
+        return `${environment.backendHost}/downloaded-films/${this.data.kinopoiskId}`;
     }
 
     constructor(
