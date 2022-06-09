@@ -5,12 +5,16 @@ import { MainLayoutComponent } from '@layouts';
 
 const routes: Routes = [
     {
-        path: AppRouteEnum.OnlineFilmDetails,
+        path: AppRouteEnum.WatchOnlineFilm,
         loadChildren: () => import('./pages/online-film-details').then((m) => m.OnlineFilmDetailsModule)
     },
     {
-        path: AppRouteEnum.DownloadedFilmDetails,
+        path: AppRouteEnum.WatchDownloadedFilm,
         loadChildren: () => import('./pages/downloaded-film-details').then((m) => m.DownloadedFilmDetailsModule)
+    },
+    {
+        path: AppRouteEnum.WatchOnlineTvSeries,
+        loadChildren: () => import('./pages/online-tv-series-details').then((m) => m.OnlineTvSeriesDetailsModule)
     },
     {
         path: '',

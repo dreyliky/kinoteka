@@ -1,37 +1,30 @@
-<ng-container *ngIf="(film$ | async) as film; else loaderTemplate">
+<ng-container *ngIf="(tvSeries$ | async) as tvSeries; else loaderTemplate">
     <mat-toolbar class="toolbar">
         <div class="title">
-            {{ film.title }}
+            {{ tvSeries.title }}
         </div>
 
         <span class="spacer"></span>
 
-        <button
-            mat-icon-button
-            [color]="'warn'"
-            (click)="onDeleteButtonClick(film)">
-            <app-icon>delete</app-icon>
-        </button>
-
         <smart-cast-button
-            [data]="film.kinopoiskId"
+            class="action-button"
+            [data]="tvSeries.kinopoiskId"
             [castType]="castType">
         </smart-cast-button>
 
         <button
-            mat-icon-button
+            class="action-button"
+            mat-stroked-button
             (click)="onCloseButtonClick()">
             <app-icon>close</app-icon>
         </button>
     </mat-toolbar>
 
-    <video
+    <iframe
+        allowfullscreen
         class="player"
-        controls
-        autoplay>
-        <source [src]="filmUrl" type="video/mp4" />
-        Браузер не підтримує відображення mp4 відеороликів
-    </video>
+        [src]="tvSeries.iframeSrc | safe:'resourceUrl'">
+    </iframe>
 </ng-container>
 
 <ng-template #loaderTemplate>

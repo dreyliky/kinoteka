@@ -19,6 +19,10 @@ export class OnlineTvSeriesService {
         private readonly filtersState: OnlineTvSeriesFiltersState
     ) {}
 
+    public get(kinopoiskId: string): Observable<TvSeries> {
+        return this.apiService.get<TvSeries>(`/tv-serieses/${kinopoiskId}`);
+    }
+
     public updateAllByFiltersIfAbsent(): Observable<VideoCdnResponse<TvSeries> | null> {
         if (!this.tvSeriesResponseState.data) {
             return this.updateAllByFilters();

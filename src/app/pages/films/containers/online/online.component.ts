@@ -49,7 +49,7 @@ export class OnlineComponent implements OnInit {
     }
 
     public onFilmClick(film: Film): void {
-        this.router.navigateByUrl(`/${AppRouteEnum.OnlineFilmDetails}/${film.kinopoiskId}`);
+        this.router.navigateByUrl(`/${AppRouteEnum.WatchOnlineFilm}/${film.kinopoiskId}`);
     }
 
     private updateFilms(): void {

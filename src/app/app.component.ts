@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
         this.clientCastSocketService.onCast$
             .pipe(
                 filter(({ initiatorDeviceInfo: { os_version, browser } }) => 
-                    confirm(`Пристрій ${os_version} з ${browser} хоче запустити у вас медіа. Дозволити?`)
+                    confirm(`Пристрій ${os_version} [${browser}] хоче запустити у вас медіа. Дозволити?`)
                 )
             )
             .subscribe((castDto) => {

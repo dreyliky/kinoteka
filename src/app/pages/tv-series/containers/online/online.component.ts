@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AppRouteEnum } from '@core/enums';
 import { OnlineTvSeriesFiltersService, OnlineTvSeriesService, TvSeries } from '@features/tv-series';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
 import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
 import { HeaderPortalContentComponent } from './header-portal-content';
-import { TvSeriesDetailsWindowComponent } from './tv-series-details-window';
 
 @Component({
     selector: 'app-online',
@@ -27,9 +27,9 @@ export class OnlineComponent implements OnInit {
     private readonly viewDestroyed$ = new Subject<boolean>();
 
     constructor(
+        private readonly router: Router,
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
-        private readonly dialogService: MatDialog,
         private readonly tvSeriesService: OnlineTvSeriesService,
         private readonly tvSeriesFiltersService: OnlineTvSeriesFiltersService
     ) {}
@@ -49,17 +49,7 @@ export class OnlineComponent implements OnInit {
     }
 
     public onTvSeriesClick(data: TvSeries): void {
-        this.dialogService.open(TvSeriesDetailsWindowComponent, {
-            width: '100%',
-            minWidth: '100%',
-            height: '100%',
-            disableClose: true,
-            panelClass: 'film-details-pane',
-            autoFocus: true,
-            data
-        })
-            .afterClosed()
-            .subscribe();
+        this.router.navigateByUrl(`${AppRouteEnum.WatchOnlineTvSeries}/${data.kinopoiskId}`);
     }
 
     private updateTvSerieses(): void {

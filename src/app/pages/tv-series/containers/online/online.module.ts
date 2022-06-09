@@ -5,7 +5,6 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 import { OnlineComponent } from './online.component';
 import { OnlineRouting } from './online.routing';
 import { PaginatorComponent } from './paginator';
-import { TvSeriesDetailsWindowModule } from './tv-series-details-window';
 
 @NgModule({
     declarations: [
@@ -17,7 +16,6 @@ import { TvSeriesDetailsWindowModule } from './tv-series-details-window';
         SharedModule,
         FeaturesModule,
         OnlineRouting,
-        TvSeriesDetailsWindowModule
     ]
 })
 export class OnlineModule {}

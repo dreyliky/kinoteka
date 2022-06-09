@@ -46,7 +46,7 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
     }
 
     public onFilmClick(film: DownloadedFilm): void {
-        this.router.navigateByUrl(`/${AppRouteEnum.DownloadedFilmDetails}/${film.kinopoiskId}`);
+        this.router.navigateByUrl(`/${AppRouteEnum.WatchDownloadedFilm}/${film.kinopoiskId}`);
     }
 
     private updateFilmsIfAbsent(): void {

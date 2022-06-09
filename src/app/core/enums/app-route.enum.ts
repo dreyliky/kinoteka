@@ -4,6 +4,7 @@ export enum AppRouteEnum {
     Video = 'video',
     Music = 'music',
     Settings = 'settings',
-    OnlineFilmDetails = 'watch-film',
-    DownloadedFilmDetails = 'watch-downloaded-film'
+    WatchOnlineFilm = 'watch-film',
+    WatchDownloadedFilm = 'watch-downloaded-film',
+    WatchOnlineTvSeries = 'watch-tv-series'
 }

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppRouteEnum } from '@core/enums';
+import { AppRouteEnum, CastTypeEnum } from '@core/enums';
 import { DownloadedFilm, DownloadedFilmsService } from '@features/film';
 import { delayWhen, filter, Observable, tap } from 'rxjs';
 import { FilmsRoutingEnum } from '../films/enums';
@@ -18,6 +18,8 @@ import { DownloadedFilmDetailsRouteParamEnum as Param } from './enums';
 export class DownloadedFilmDetailsComponent implements OnInit {
     public filmUrl!: string;
     public film$!: Observable<DownloadedFilm>;
+
+    public readonly castType = CastTypeEnum.DownloadedFilm;
 
     private readonly openedFilmKinopoiskId = this.activatedRoute.snapshot.paramMap
         .get(Param.KinopoiskId) as string;
