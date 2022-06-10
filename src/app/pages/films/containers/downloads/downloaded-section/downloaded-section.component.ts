@@ -21,6 +21,7 @@ import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-lo
 })
 export class DownloadedSectionComponent implements OnInit, OnDestroy {
     public filteredFilms$!: Observable<DownloadedFilm[]>;
+    public allDownloadedFilms$!: Observable<DownloadedFilm[] | null>;
 
     private readonly viewDestroyed$ = new Subject<boolean>();
 
@@ -34,6 +35,7 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.filteredFilms$ = this.filteredDownloadedFilmsService.data$;
+        this.allDownloadedFilms$ = this.downloadedFilmsService.data$;
 
         this.updateFilmsIfAbsent();
         this.initFilmsFiltersObserver();

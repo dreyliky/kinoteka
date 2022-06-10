@@ -21,6 +21,7 @@ export class SearchComponent {
 
     public onSearchEnterKeyDown(): void {
         this.searchChange.emit(this.searchRef.nativeElement.value);
+        this.searchRef.nativeElement.blur();
     }
 
     public onSearchButtonClick(): void {

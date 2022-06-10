@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
 import { MainLayoutComponent } from '@layouts';
 
@@ -56,4 +56,10 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+    constructor(
+        private readonly router: Router
+    ) {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
+}

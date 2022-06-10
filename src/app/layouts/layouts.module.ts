@@ -10,7 +10,7 @@ import { MainLayoutComponent } from './main';
 
 @NgModule({
     declarations: [
-        MainLayoutComponent,
+        MainLayoutComponent
     ],
     imports: [
         SharedModule,

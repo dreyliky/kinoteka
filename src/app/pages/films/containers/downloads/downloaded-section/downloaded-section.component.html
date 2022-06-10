@@ -1,9 +1,9 @@
 <ng-container *ngIf="(filteredFilms$ | async) as filteredFilms; else loaderTemplate">
     <app-title>
         <span
-            [matBadge]="filteredFilms?.length"
+            [matBadge]="(allDownloadedFilms$ | async)?.length"
             [matBadgeOverlap]="false"
-            [matBadgeHidden]="!filteredFilms?.length">
+            [matBadgeHidden]="!(allDownloadedFilms$ | async)?.length">
             Завантажені
         </span>
     </app-title>

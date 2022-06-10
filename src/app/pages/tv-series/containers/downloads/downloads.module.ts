@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
-import { DownloadedSectionModule } from './downloaded-section';
-import { DownloadingSectionModule } from './downloading-section';
 import { DownloadsComponent } from './downloads.component';
 import { DownloadsRouting } from './downloads.routing';
 import { HeaderPortalContentComponent } from './header-portal-content';
@@ -13,9 +11,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
     ],
     imports: [
         SharedModule,
-        DownloadsRouting,
-        DownloadedSectionModule,
-        DownloadingSectionModule
+        DownloadsRouting
     ]
 })
 export class DownloadsModule {}

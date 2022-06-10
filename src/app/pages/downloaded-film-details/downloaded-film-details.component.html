@@ -8,18 +8,21 @@
 
         <button
             mat-icon-button
+            class="action-button"
             [color]="'warn'"
             (click)="onDeleteButtonClick(film)">
             <app-icon>delete</app-icon>
         </button>
 
         <smart-cast-button
+            class="action-button"
             [data]="film.kinopoiskId"
             [castType]="castType">
         </smart-cast-button>
 
         <button
             mat-icon-button
+            class="action-button"
             (click)="onCloseButtonClick()">
             <app-icon>close</app-icon>
         </button>
