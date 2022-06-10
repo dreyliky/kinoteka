@@ -1,17 +1,21 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { DestroyService } from '@core/services';
 import { Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
-import { merge, Observable, skip, Subject, takeUntil } from 'rxjs';
+import { merge, Observable, skip, takeUntil } from 'rxjs';
 import { HeaderPortalContentComponent } from './header-portal-content';
 
 @Component({
     selector: 'app-online',
     templateUrl: './online.component.html',
     styleUrls: ['./online.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DestroyService
+    ]
 })
 export class OnlineComponent implements OnInit {
     public filmsResponse$!: Observable<VideoCdnResponse<Film> | null>;
@@ -24,9 +28,8 @@ export class OnlineComponent implements OnInit {
         )
     }
 
-    private readonly viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly router: Router,
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
@@ -44,8 +47,6 @@ export class OnlineComponent implements OnInit {
 
     public ngOnDestroy(): void {
         this.headerService.clearPortalComponent();
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
     }
 
     public onFilmClick(film: Film): void {
@@ -60,6 +61,7 @@ export class OnlineComponent implements OnInit {
 
     private updateFilmsIfAbsent(): void {
         this.filmsService.updateAllByFiltersIfAbsent()
+            .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
 

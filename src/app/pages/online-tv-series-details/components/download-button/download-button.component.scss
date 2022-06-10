@@ -1,0 +1,16 @@
+:host {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item {
+    height: auto;
+    white-space: pre-wrap;
+    line-height: 22px;
+    padding: 10px 16px !important;
+}
+
+.download-all-episodes-button {
+    display: flex;
+    color: var(--bs-teal);
+}

@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { DestroyService } from '@core/services';
 import { DownloadingFilmsSocketService, Film } from '@features/film';
-import { merge, Observable, Subject } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-film-download-progress',
     templateUrl: './film-download-progress.component.html',
     styleUrls: ['./film-download-progress.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DestroyService
+    ]
 })
-export class FilmDownloadProgressComponent implements OnInit, OnDestroy {
+export class FilmDownloadProgressComponent implements OnInit {
     @Input()
     public film!: Film;
 
@@ -18,20 +22,14 @@ export class FilmDownloadProgressComponent implements OnInit, OnDestroy {
 
     public progress$!: Observable<number>;
 
-    private viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService
     ) {}
 
     public ngOnInit(): void {
         this.initProgressObservable();
         this.initEndEventsObserver();
-    }
-
-    public ngOnDestroy(): void {
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
     }
 
     private initEndEventsObserver(): void {

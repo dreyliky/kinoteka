@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppRouteEnum, CastTypeEnum } from '@core/enums';
+import { DestroyService } from '@core/services';
 import { DownloadedFilm, DownloadedFilmsService } from '@features/film';
-import { delayWhen, filter, Observable, tap } from 'rxjs';
+import { delayWhen, filter, Observable, takeUntil, tap } from 'rxjs';
 import { FilmsRoutingEnum } from '../films/enums';
 import { FilmDeleteBottomSheetComponent } from './components';
 import { DownloadedFilmDetailsRouteParamEnum as Param } from './enums';
@@ -13,7 +14,10 @@ import { DownloadedFilmDetailsRouteParamEnum as Param } from './enums';
     selector: 'app-downloaded-film-details',
     templateUrl: './downloaded-film-details.component.html',
     styleUrls: ['./downloaded-film-details.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DestroyService
+    ]
 })
 export class DownloadedFilmDetailsComponent implements OnInit {
     public filmUrl!: string;
@@ -25,6 +29,7 @@ export class DownloadedFilmDetailsComponent implements OnInit {
         .get(Param.KinopoiskId) as string;
 
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router,
         private readonly snackBar: MatSnackBar,
@@ -48,7 +53,8 @@ export class DownloadedFilmDetailsComponent implements OnInit {
                 filter(Boolean),
                 tap(() => this.openDownloadedFilmsPage()),
                 tap(() => this.snackBar.open('Фільм видалений.', 'Закрити', { duration: 3000 })),
-                delayWhen(() => this.downloadedFilmsService.delete(film.kinopoiskId))
+                delayWhen(() => this.downloadedFilmsService.delete(film.kinopoiskId)),
+                takeUntil(this.viewDestroyed$)
             )
             .subscribe();
     }

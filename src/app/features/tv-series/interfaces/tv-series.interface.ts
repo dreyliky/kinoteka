@@ -1,3 +1,5 @@
+import { TvSeriesEpisode } from './tv-series-episode.interface';
+
 export interface TvSeries {
     readonly title: string;
     readonly kinopoiskId: string;
@@ -7,4 +9,5 @@ export interface TvSeries {
     readonly endDate: string | null;
     readonly previewUrl: string;
     readonly iframeSrc: string;
+    readonly episodes: TvSeriesEpisode[];
 }

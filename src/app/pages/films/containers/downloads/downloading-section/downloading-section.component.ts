@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { DestroyService } from '@core/services';
 import { DownloadingFilmsService, DownloadingFilmsSocketService, FilmQueue } from '@features/film';
-import { merge, Subject } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-downloading-section',
     templateUrl: './downloading-section.component.html',
     styleUrls: ['./downloading-section.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DestroyService
+    ]
 })
-export class DownloadingSectionComponent implements OnInit, OnDestroy {
+export class DownloadingSectionComponent implements OnInit {
     public films: FilmQueue[] | null = null;
 
-    private readonly viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly downloadedFilmsService: DownloadingFilmsService,
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService,
         private readonly changeDetector: ChangeDetectorRef
@@ -25,15 +28,11 @@ export class DownloadingSectionComponent implements OnInit, OnDestroy {
         this.initFilmsDownloadingResultObserver();
     }
 
-    public ngOnDestroy(): void {
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
-    }
-
     private updateFilms(): void {
         this.films = null;
 
         this.downloadedFilmsService.getAll()
+            .pipe(takeUntil(this.viewDestroyed$))
             .subscribe((films) => {
                 this.films = films;
 

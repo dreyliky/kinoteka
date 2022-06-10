@@ -1,0 +1,60 @@
+<button
+    mat-icon-button
+    [matMenuTriggerFor]="seasonesMenu"
+    [color]="'accent'">
+    <app-icon>file_download</app-icon>
+</button>
+
+<mat-menu
+    #seasonesMenu="matMenu"
+    [xPosition]="'before'">
+    <button
+        *ngFor="let season of seasons"
+        class="menu-item"
+        mat-menu-item
+        [matMenuTriggerFor]="episodesMenu">
+        Сезон {{ season }}
+
+        <mat-menu #episodesMenu="matMenu">
+            <button
+                *ngFor="let episode of episodesMap.get(season)"
+                class="menu-item"
+                mat-menu-item
+                [matMenuTriggerFor]="mediaMenu">
+                <b>#{{ episode.num }}</b> {{ episode.title }}<br />
+                {{ episode.releaseDate | date:"dd.MM.yyyy" }}
+
+                <mat-menu #mediaMenu="matMenu">
+                    <button
+                        *ngFor="let media of episode.media"
+                        class="menu-item"
+                        mat-menu-item>
+                        <b>[{{ media.maxQuality }}p]</b> {{ media.translationName }}
+                    </button>
+                </mat-menu>
+            </button>
+
+            <button
+                class="menu-item download-all-episodes-button"
+                mat-menu-item
+                [matMenuTriggerFor]="mediaOfAllEpisodesMenu">
+                <app-icon
+                    class="icon"
+                    [color]="'accent'">
+                    file_download
+                </app-icon>
+
+                Завантажити одразу всі
+
+                <mat-menu #mediaOfAllEpisodesMenu="matMenu">
+                    <button
+                        *ngFor="let media of (season | allEpisodesBaseMedia:episodesMap)"
+                        class="menu-item"
+                        mat-menu-item>
+                        <b>[{{ media.maxQuality }}p]</b> {{ media.translationName }}
+                    </button>
+                </mat-menu>
+            </button>
+        </mat-menu>
+    </button>
+</mat-menu>

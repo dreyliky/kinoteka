@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { DestroyService } from '@core/services';
 import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, DownloadingFilmsSocketService, FilteredDownloadedFilmsService } from '@features/film';
 import { ContentZoneService } from '@layouts';
-import { merge, Observable, Subject } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-loader.service';
 
@@ -16,21 +17,21 @@ import { DownloadedFilmPreviewLoaderService } from './downloaded-film-preview-lo
         {
             provide: DOWNLOADED_FILM_PREVIEW_LOADER,
             useClass: DownloadedFilmPreviewLoaderService
-        }
+        },
+        DestroyService
     ]
 })
-export class DownloadedSectionComponent implements OnInit, OnDestroy {
+export class DownloadedSectionComponent implements OnInit {
     public filteredFilms$!: Observable<DownloadedFilm[]>;
     public allDownloadedFilms$!: Observable<DownloadedFilm[] | null>;
 
-    private readonly viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly router: Router,
         private readonly contentZoneService: ContentZoneService,
         private readonly downloadingFilmsSocketService: DownloadingFilmsSocketService,
         private readonly downloadedFilmsService: DownloadedFilmsService,
-        private readonly filteredDownloadedFilmsService: FilteredDownloadedFilmsService
+        private readonly filteredDownloadedFilmsService: FilteredDownloadedFilmsService,
     ) {}
 
     public ngOnInit(): void {
@@ -42,17 +43,13 @@ export class DownloadedSectionComponent implements OnInit, OnDestroy {
         this.initFilmsDownloadingResultObserver();
     }
 
-    public ngOnDestroy(): void {
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
-    }
-
     public onFilmClick(film: DownloadedFilm): void {
         this.router.navigateByUrl(`/${AppRouteEnum.WatchDownloadedFilm}/${film.kinopoiskId}`);
     }
 
     private updateFilmsIfAbsent(): void {
         this.downloadedFilmsService.updateAllIfAbsent()
+            .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
 

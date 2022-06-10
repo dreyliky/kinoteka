@@ -1,14 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
+import { DestroyService } from '@core/services';
 import { Film, FilmDownloadStateEnum, FilmDownloadStateService, FilmMedia, OnlineFilmsService } from '@features/film';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-download-button',
     templateUrl: './download-button.component.html',
     styleUrls: ['./download-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DestroyService
+    ]
 })
-export class DownloadButtonComponent implements OnDestroy {
+export class DownloadButtonComponent {
     @Input()
     public film!: Film;
     
@@ -27,9 +31,8 @@ export class DownloadButtonComponent implements OnDestroy {
         return (this.filmDownloadState === FilmDownloadStateEnum.Undownloaded) ? 'accent' : '';
     }
 
-    private readonly viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly filmsService: OnlineFilmsService,
         private readonly filmDownloadStatusService: FilmDownloadStateService,
         private readonly changeDetector: ChangeDetectorRef
@@ -37,11 +40,6 @@ export class DownloadButtonComponent implements OnDestroy {
 
     public ngOnInit(): void {
         this.initFilmDownloadState();
-    }
-
-    public ngOnDestroy(): void {
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
     }
 
     public onDownloadButtonClick(media: FilmMedia): void {

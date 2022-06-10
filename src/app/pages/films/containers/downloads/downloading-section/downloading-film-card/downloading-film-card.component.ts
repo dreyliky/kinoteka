@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { DestroyService } from '@core/services';
 import { DownloadingFilmsService, DownloadingFilmsSocketService, FilmQueue } from '@features/film';
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { FilmDownloadCancelBottomSheetComponent } from '../film-download-cancel-bottom-sheet';
 
@@ -11,7 +12,7 @@ import { FilmDownloadCancelBottomSheetComponent } from '../film-download-cancel-
     styleUrls: ['./downloading-film-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DownloadingFilmCardComponent implements OnInit, OnDestroy {
+export class DownloadingFilmCardComponent implements OnInit {
     @Input()
     public film!: FilmQueue;
 
@@ -21,9 +22,8 @@ export class DownloadingFilmCardComponent implements OnInit, OnDestroy {
 
     public downloadProgress: number = 0;
 
-    private readonly viewDestroyed$ = new Subject<boolean>();
-
     constructor(
+        @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly bottomSheet: MatBottomSheet,
         private readonly downloadedFilmsService: DownloadingFilmsService,
         private readonly downloadingFilmsProgressSocketService: DownloadingFilmsSocketService,
@@ -36,17 +36,13 @@ export class DownloadingFilmCardComponent implements OnInit, OnDestroy {
         this.initFilmProgressObserver();
     }
 
-    public ngOnDestroy(): void {
-        this.viewDestroyed$.next(true);
-        this.viewDestroyed$.complete();
-    }
-
     public onCancelButtonClick(film: FilmQueue): void {
         this.bottomSheet.open(FilmDownloadCancelBottomSheetComponent)
             .afterDismissed()
             .pipe(
                 filter(Boolean),
-                switchMap(() => this.downloadedFilmsService.cancel(film.data.kinopoiskId))
+                switchMap(() => this.downloadedFilmsService.cancel(film.data.kinopoiskId)),
+                takeUntil(this.viewDestroyed$)
             )
             .subscribe();
     }
@@ -54,8 +50,8 @@ export class DownloadingFilmCardComponent implements OnInit, OnDestroy {
     private initFilmProgressObserver(): void {
         this.downloadingFilmsProgressSocketService.progress$
             .pipe(
-                takeUntil(this.viewDestroyed$),
-                filter(({ kinopoiskId }) => (this.film.data.kinopoiskId === kinopoiskId))
+                filter(({ kinopoiskId }) => (this.film.data.kinopoiskId === kinopoiskId)),
+                takeUntil(this.viewDestroyed$)
             )
             .subscribe(({ downloadProgress }) => {
                 this.downloadProgress = downloadProgress;
