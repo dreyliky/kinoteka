@@ -6,3 +6,23 @@
     background-position: center;
     margin-bottom: 10px;
 }
+
+.details {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+
+    .quality, .duration {
+        width: 50%;
+        display: flex;
+        align-items: center;
+
+        .icon {
+            margin-right: 5px;
+        }
+    }
+
+    .duration {
+        justify-content: flex-end;
+    }
+}

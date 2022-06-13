@@ -17,6 +17,18 @@
             [style.backgroundImage]="(previewBgCss$ | async)">
         </div>
 
-        <b>{{ data.quality }}</b>
+        <div class="details">
+            <div class="quality">
+                <app-icon class="icon">schedule</app-icon>
+
+                {{ data.quality }}
+            </div>
+
+            <div class="duration">
+                <app-icon class="icon">schedule</app-icon>
+
+                {{ data.duration | mediaDuration }}
+            </div>
+        </div>
     </mat-card-content>
 </mat-card>
