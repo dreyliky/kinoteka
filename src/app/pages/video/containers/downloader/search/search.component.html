@@ -1,0 +1,38 @@
+<ng-container *ngLet="(searchString$ | async) as searchString">
+    <mat-form-field
+        class="form-field"
+        [appearance]="'fill'">
+        <mat-label>Посилання на Youtube відео</mat-label>
+
+        <input
+            #input
+            matInput
+            type="text"
+            [value]="searchString"
+            (input)="onInput()">
+
+        <button
+            *ngIf="searchString"
+            matSuffix
+            mat-icon-button
+            (click)="onClearButtonClick()">
+            <app-icon>close</app-icon>
+        </button>
+    </mat-form-field>
+
+    <button
+        *ngLet="(isLoading$ | async) as isLoading"
+        mat-fab
+        class="download-button"
+        [disabled]="!searchString || isLoading"
+        [color]="'primary'"
+        (click)="onDownloadButtonClick()">
+        <app-icon *ngIf="!isLoading">search</app-icon>
+
+        <mat-spinner
+            *ngIf="isLoading"
+            [diameter]="25"
+            [color]="'accent'">
+        </mat-spinner>
+    </button>
+</ng-container>

@@ -1,0 +1,43 @@
+<div class="download-progress">
+    <mat-progress-bar
+        *ngIf="(downloadProgress > 0)"
+        class="progress-bar"
+        [mode]="'determinate'"
+        [color]="'accent'"
+        [value]="downloadProgress">
+    </mat-progress-bar>
+
+    <div
+        *ngIf="isDownloading"
+        class="percents-text">
+        {{ downloadProgress }}%
+    </div>
+
+    <div
+        *ngIf="!isDownloading"
+        class="in-queue-text">
+        В черзі
+    </div>
+
+    <button
+        mat-button
+        class="cancel-button"
+        [color]="'warn'"
+        (click)="onCancelButtonClick(mediaQueue)">
+        Відмінити
+    </button>
+</div>
+
+<ng-container [ngSwitch]="mediaQueue.type">
+    <film-card
+        *ngSwitchCase="mediaTypeEnum.Film"
+        class="media-card"
+        [data]="media">
+    </film-card>
+
+    <video-card
+        *ngSwitchCase="mediaTypeEnum.Video"
+        class="media-card"
+        [data]="media">
+    </video-card>
+</ng-container>

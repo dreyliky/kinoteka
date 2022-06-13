@@ -5,6 +5,7 @@ import { DestroyService } from '@core/services';
 import { OnlineTvSeriesFiltersService, OnlineTvSeriesService, TvSeries } from '@features/tv-series';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
+import { WatchRoutingEnum } from '@pages/watch/enums';
 import { merge, Observable, skip, takeUntil } from 'rxjs';
 import { HeaderPortalContentComponent } from './header-portal-content';
 
@@ -50,7 +51,7 @@ export class OnlineComponent implements OnInit {
     }
 
     public onTvSeriesClick(data: TvSeries): void {
-        this.router.navigateByUrl(`${AppRouteEnum.WatchOnlineTvSeries}/${data.kinopoiskId}`);
+        this.router.navigateByUrl(`${AppRouteEnum.Watch}/${WatchRoutingEnum.OnlineTvSeries}/${data.kinopoiskId}`);
     }
 
     private updateTvSerieses(): void {

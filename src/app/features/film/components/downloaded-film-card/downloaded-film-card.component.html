@@ -4,8 +4,12 @@
     matRipple
     [title]="data.title">
     <div class="description">
-        <h2 class="item-row">{{ data.title }}</h2>
-        
+        <h2 class="item-row truncate-container">
+            <span class="text-truncate">
+                {{ data.title }}
+            </span>
+        </h2>
+
         <div class="info">
             <div class="item-row">
                 <app-icon class="icon">translate</app-icon>

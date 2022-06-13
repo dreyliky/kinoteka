@@ -23,26 +23,34 @@ import {
     IconModule,
     SearchModule,
     SmartCastButtonModule,
+    SubtitleModule,
     TitleModule,
     YearPickerModule
 } from './components';
+import { LoaderModule } from './components/loader';
+import { LetDirective } from './directives';
 import { MediaDurationPipe, SafePipe, TranslationsCountPipe } from './pipes';
 
 @NgModule({
     declarations: [
         SafePipe,
         MediaDurationPipe,
-        TranslationsCountPipe
+        TranslationsCountPipe,
+        LetDirective
     ],
     exports: [
         SafePipe,
         MediaDurationPipe,
         TranslationsCountPipe,
+        LetDirective,
+
         TitleModule,
+        SubtitleModule,
         SearchModule,
         IconModule,
         YearPickerModule,
         SmartCastButtonModule,
+        LoaderModule,
 
         CommonModule,
         RouterModule,

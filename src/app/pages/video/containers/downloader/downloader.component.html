@@ -1,0 +1,40 @@
+<app-video-search
+    class="search">
+</app-video-search>
+
+<ng-container *ngLet="(videoMetadata$ | async) as videoMetadata">
+    <video-card
+        *ngIf="videoMetadata.data"
+        class="video-card"
+        [data]="videoMetadata.data">
+        <div video-card-actions>
+            <button
+                *ngIf="(videoMetadata.status === downloadStatusEnum.Undownloaded)"
+                mat-flat-button
+                [color]="'accent'"
+                (click)="onDownloadButtonClick()">
+                Завантажити
+            </button>
+
+            <div
+                *ngIf="(videoMetadata.status === downloadStatusEnum.Downloading)"
+                class="text-downloading text-success">
+                <mat-spinner
+                    class="icon"
+                    [diameter]="20"
+                    [color]="'accent'">
+                </mat-spinner>
+
+                Завантаження...
+            </div>
+
+            <div
+                *ngIf="(videoMetadata.status === downloadStatusEnum.Downloaded)"
+                class="text-downloaded text-success">
+                <app-icon class="icon">check</app-icon>
+
+                Завантажений
+            </div>
+        </div>
+    </video-card>
+</ng-container>

@@ -5,4 +5,13 @@ import { DownloadedFilm } from '../interfaces';
 @Injectable({
     providedIn: 'root'
 })
-export class DownloadedFilmsState extends BaseState<DownloadedFilm[] | null> {}
+export class DownloadedFilmsState extends BaseState<DownloadedFilm[] | null> {
+    public deleteByKinopoiskId(kinopoiskId: string): void {
+        if (this.data) {
+            const filteredFilms = this.data
+                .filter((film) => (film.kinopoiskId !== kinopoiskId));
+            
+            this.set(filteredFilms);
+        }
+    }
+}

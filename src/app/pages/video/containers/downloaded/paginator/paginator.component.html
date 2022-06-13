@@ -1,0 +1,8 @@
+<mat-paginator
+    *ngIf="(filters$ | async) as filters"
+    [length]="(allDownloadedVideos$ | async)?.length"
+    [pageIndex]="currentPageIndex"
+    [pageSize]="filters.limit"
+    [pageSizeOptions]="[20, 25, 30, 35, 40, 45, 50]"
+    (page)="onPaginatorPageEvent($event)">
+</mat-paginator>

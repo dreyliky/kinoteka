@@ -1,0 +1,38 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #000;
+}
+
+.title {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toolbar {
+    background-color: black;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.action-button {
+    margin-left: 10px;
+}
+
+.player {
+    width: 100%;
+    height: calc(100% - 64px);
+    border: none;
+}
+
+button[loader-suffix] {
+    margin-top: 15px;
+}

@@ -1,5 +1,6 @@
 export enum CastTypeEnum {
     OnlineFilm,
     DownloadedFilm,
-    OnlineTvSeries
+    OnlineTvSeries,
+    DownloadedVideo
 }

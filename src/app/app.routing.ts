@@ -5,16 +5,8 @@ import { MainLayoutComponent } from '@layouts';
 
 const routes: Routes = [
     {
-        path: AppRouteEnum.WatchOnlineFilm,
-        loadChildren: () => import('./pages/online-film-details').then((m) => m.OnlineFilmDetailsModule)
-    },
-    {
-        path: AppRouteEnum.WatchDownloadedFilm,
-        loadChildren: () => import('./pages/downloaded-film-details').then((m) => m.DownloadedFilmDetailsModule)
-    },
-    {
-        path: AppRouteEnum.WatchOnlineTvSeries,
-        loadChildren: () => import('./pages/online-tv-series-details').then((m) => m.OnlineTvSeriesDetailsModule)
+        path: AppRouteEnum.Watch,
+        loadChildren: () => import('./pages/watch').then((m) => m.WatchModule)
     },
     {
         path: '',
@@ -35,6 +27,10 @@ const routes: Routes = [
             {
                 path: AppRouteEnum.Music,
                 loadChildren: () => import('./pages/music').then((m) => m.MusicModule)
+            },
+            {
+                path: AppRouteEnum.DownloadingMedia,
+                loadChildren: () => import('./pages/downloading-media').then((m) => m.DownloadingMediaModule)
             },
             {
                 path: AppRouteEnum.Settings,

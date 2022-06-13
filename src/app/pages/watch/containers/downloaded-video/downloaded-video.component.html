@@ -1,0 +1,50 @@
+<ng-container *ngIf="(video$ | async) as video; else loaderTemplate">
+    <mat-toolbar class="toolbar">
+        <div class="title">
+            {{ video.title }}
+        </div>
+
+        <span class="spacer"></span>
+
+        <button
+            mat-icon-button
+            class="action-button"
+            [color]="'warn'"
+            (click)="onDeleteButtonClick(video)">
+            <app-icon>delete</app-icon>
+        </button>
+
+        <smart-cast-button
+            class="action-button"
+            [data]="video.id"
+            [castType]="castType">
+        </smart-cast-button>
+
+        <button
+            mat-icon-button
+            class="action-button"
+            (click)="onCloseButtonClick()">
+            <app-icon>close</app-icon>
+        </button>
+    </mat-toolbar>
+
+    <video
+        class="player"
+        controls
+        autoplay>
+        <source [src]="videoUrl" type="video/mp4" />
+        Браузер не підтримує відображення mp4 відеороликів
+    </video>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <app-loader>
+        <button
+            loader-suffix
+            mat-button
+            [color]="'warn'"
+            (click)="onCloseButtonClick()">
+            Відмінити
+        </button>
+    </app-loader>
+</ng-template>

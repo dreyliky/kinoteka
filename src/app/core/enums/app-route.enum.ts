@@ -3,8 +3,7 @@ export enum AppRouteEnum {
     TvSeries = 'tv-series',
     Video = 'video',
     Music = 'music',
+    DownloadingMedia = 'downloading-media',
     Settings = 'settings',
-    WatchOnlineFilm = 'watch-film',
-    WatchDownloadedFilm = 'watch-downloaded-film',
-    WatchOnlineTvSeries = 'watch-tv-series'
+    Watch = 'watch'
 }

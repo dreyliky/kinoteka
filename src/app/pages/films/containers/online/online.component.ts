@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
 import { DestroyService } from '@core/services';
 import { Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
+import { WatchRoutingEnum } from '@pages/watch/enums';
 import { merge, Observable, skip, takeUntil } from 'rxjs';
 import { HeaderPortalContentComponent } from './header-portal-content';
 
@@ -18,7 +19,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
     ]
 })
 export class OnlineComponent implements OnInit {
-    public filmsResponse$!: Observable<VideoCdnResponse<Film> | null>;
+    public filmsResponse: VideoCdnResponse<Film> | null = null;
 
     private get viewDestroyedOrFiltersChanged$(): Observable<unknown> {
         return merge(
@@ -34,14 +35,13 @@ export class OnlineComponent implements OnInit {
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
         private readonly filmsService: OnlineFilmsService,
-        private readonly filmsFiltersService: OnlineFilmsFiltersService
+        private readonly filmsFiltersService: OnlineFilmsFiltersService,
+        private readonly changeDetector: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
-        this.filmsResponse$ = this.filmsService.filmsResponse$;
-
         this.headerService.setPortalComponent(HeaderPortalContentComponent);
-        this.updateFilmsIfAbsent();
+        this.updateFilms();
         this.initFilmsFiltersObserver();
     }
 
@@ -50,19 +50,18 @@ export class OnlineComponent implements OnInit {
     }
 
     public onFilmClick(film: Film): void {
-        this.router.navigateByUrl(`/${AppRouteEnum.WatchOnlineFilm}/${film.kinopoiskId}`);
+        this.router.navigateByUrl(`/${AppRouteEnum.Watch}/${WatchRoutingEnum.OnlineFilm}/${film.kinopoiskId}`);
     }
 
     private updateFilms(): void {
         this.filmsService.updateAllByFilters()
             .pipe(takeUntil(this.viewDestroyedOrFiltersChanged$))
-            .subscribe(() => this.contentZoneService.scrollTop());
-    }
+            .subscribe((data) => {
+                this.filmsResponse = data;
 
-    private updateFilmsIfAbsent(): void {
-        this.filmsService.updateAllByFiltersIfAbsent()
-            .pipe(takeUntil(this.viewDestroyed$))
-            .subscribe();
+                this.contentZoneService.scrollTop();
+                this.changeDetector.detectChanges();
+            });
     }
 
     private initFilmsFiltersObserver(): void {

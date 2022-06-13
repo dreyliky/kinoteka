@@ -1,0 +1,27 @@
+:host {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.search {
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+.video-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.text-downloaded, .text-downloading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+        margin-right: 10px;
+    }
+}

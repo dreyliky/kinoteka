@@ -1,0 +1,44 @@
+<ng-container *ngIf="(tvSeries$ | async) as tvSeries; else loaderTemplate">
+    <mat-toolbar class="toolbar">
+        <div class="title">
+            {{ tvSeries.title }}
+        </div>
+
+        <span class="spacer"></span>
+
+        <app-download-button
+            [tvSeries]="tvSeries">
+        </app-download-button>
+
+        <smart-cast-button
+            class="action-button"
+            [data]="tvSeries.kinopoiskId"
+            [castType]="castType">
+        </smart-cast-button>
+
+        <button
+            class="action-button"
+            mat-icon-button
+            (click)="onCloseButtonClick()">
+            <app-icon>close</app-icon>
+        </button>
+    </mat-toolbar>
+
+    <iframe
+        allowfullscreen
+        class="player"
+        [src]="tvSeries.iframeSrc | safe:'resourceUrl'">
+    </iframe>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <app-loader>
+        <button
+            loader-suffix
+            mat-button
+            [color]="'warn'"
+            (click)="onCloseButtonClick()">
+            Відмінити
+        </button>
+    </app-loader>
+</ng-template>

@@ -41,6 +41,9 @@ export class DownloadedFilmsService {
     }
 
     public delete(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.delete(`/downloaded-films/${kinopoiskId}`);
+        return this.apiService.delete(`/downloaded-films/${kinopoiskId}`)
+            .pipe(
+                tap(() => this.downloadedFilmsState.deleteByKinopoiskId(kinopoiskId))
+            );
     }
 }

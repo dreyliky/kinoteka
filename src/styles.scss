@@ -69,9 +69,23 @@ input {
     }
 }
 
-.text-truncate {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.text-success {
+    color: var(--bs-green);
+}
+
+.text-warn {
+    color: var(--bs-orange);
+}
+
+.truncate-container {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed !important;
+
+    .text-truncate {
+        display: table-cell;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 }

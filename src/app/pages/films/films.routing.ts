@@ -13,8 +13,8 @@ const routes: Routes = [
                 loadChildren: () => import('./containers/online').then((m) => m.OnlineModule)
             },
             {
-                path: FilmsRoutingEnum.Downloads,
-                loadChildren: () => import('./containers/downloads').then((m) => m.DownloadsModule)
+                path: FilmsRoutingEnum.Downloaded,
+                loadChildren: () => import('./containers/downloaded').then((m) => m.DownloadedModule)
             },
             {
                 path: FilmsRoutingEnum.Favorites,

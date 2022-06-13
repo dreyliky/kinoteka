@@ -45,6 +45,23 @@
     </mat-list-option>
 
     <mat-list-option
+        [routerLink]="appRouteEnum.DownloadingMedia"
+        [routerLinkActive]="'mat-list-single-selected-option'"
+        (click)="optionClick.emit($event)">
+        <div class="item-content">
+            <app-icon>file_download</app-icon>
+
+            Завантажуються
+
+            <div
+                *ngIf="(isDownloadingMediaCountBadgeVisible$ | async)"
+                class="downloading-count">
+                {{ (mediaCount$ | async) }}
+            </div>
+        </div>
+    </mat-list-option>
+
+    <mat-list-option
         [routerLink]="appRouteEnum.Settings"
         [routerLinkActive]="'mat-list-single-selected-option'"
         (click)="optionClick.emit($event)">

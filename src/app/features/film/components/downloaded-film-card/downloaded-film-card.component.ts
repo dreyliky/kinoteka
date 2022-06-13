@@ -14,7 +14,7 @@ export class DownloadedFilmCardComponent implements OnInit {
     @Input()
     public data!: DownloadedFilm;
 
-    public previewBgCss$!: Observable<unknown>;
+    public previewBgCss$!: Observable<string>;
 
     constructor(
         @Inject(DOWNLOADED_FILM_PREVIEW_LOADER)

@@ -1,5 +1,5 @@
 export enum FilmsRoutingEnum {
     Online = 'online',
-    Downloads = 'downloads',
+    Downloaded = 'downloaded',
     Favorites = 'favorites'
 }

@@ -1,0 +1,8 @@
+<ng-container *ngIf="(filters$ | async) as filters">
+    <app-search
+        [value]="filters.query"
+        class="search"
+        [placeholder]="'Пошук відео'"
+        (searchChange)="onSearchChange($event)">
+    </app-search>
+</ng-container>

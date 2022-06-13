@@ -25,10 +25,13 @@
     "paths": {
         "@core": ["./src/app/core"],
         "@core/*": ["./src/app/core/*"],
+        "@components": ["./src/app/components"],
         "@features": ["./src/app/features"],
         "@features/*": ["./src/app/features/*"],
         "@layouts": ["./src/app/layouts"],
         "@layouts/*": ["./src/app/layouts/*"],
+        "@pages": ["./src/app/pages"],
+        "@pages/*": ["./src/app/pages/*"],
         "@shared": ["./src/app/shared"],
         "@shared/*": ["./src/app/shared/*"]
     }

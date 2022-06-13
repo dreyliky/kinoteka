@@ -1,0 +1,29 @@
+<app-title>
+    Завантажуються
+</app-title>
+
+<ng-container *ngIf="mediaQueueArray; else loaderTemplate">
+    <div
+        *ngIf="mediaQueueArray.length; else emptyContentTemplate"
+        class="container">
+        <div class="row">
+            <div
+                *ngFor="let mediaInQueue of mediaQueueArray"
+                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                <app-downloading-media-card
+                    [mediaQueue]="mediaInQueue">
+                </app-downloading-media-card>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <app-loader></app-loader>
+</ng-template>
+
+<ng-template #emptyContentTemplate>
+    <app-subtitle>
+        Наразі ви не завантажуєте жодного медіа файлу.
+    </app-subtitle>
+</ng-template>

@@ -7,10 +7,7 @@
     </mat-chip>
 
     <mat-chip
-        [matBadge]="(filmsCount$ | async)"
-        [matBadgeHidden]="(isDownloadingFilmsCountBadgeHidden$ | async)"
-        [matBadgeColor]="'warn'"
-        [routerLink]="filmsRoutingEnum.Downloads"
+        [routerLink]="filmsRoutingEnum.Downloaded"
         [routerLinkActive]="'mat-accent mat-chip-selected'">
         <app-icon class="icon">file_download</app-icon>
         Завантажені

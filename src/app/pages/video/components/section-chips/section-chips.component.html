@@ -1,0 +1,15 @@
+<mat-chip-list class="chips">
+    <mat-chip
+        [routerLink]="videoRoutingEnum.Downloader"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">download</app-icon>
+        Downloader
+    </mat-chip>
+
+    <mat-chip
+        [routerLink]="videoRoutingEnum.Downloaded"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">file_download</app-icon>
+        Завантажені
+    </mat-chip>
+</mat-chip-list>

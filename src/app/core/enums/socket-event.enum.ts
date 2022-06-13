@@ -1,8 +1,8 @@
 export enum SocketEventEnum {
-    FilmProgress = 'f-p',
-    FilmDownloadStart = 'f-d-s',
-    FilmDownloadEnd = 'f-d-e',
-    FilmDownloadCancel = 'f-d-c',
-    DownloadingFilmsCount = 'd-f-c',
-    Cast = 'cast'
+    MediaProgress = '1',
+    MediaDownloadStart = '2',
+    MediaDownloadEnd = '3',
+    MediaDownloadCancel = '4',
+    DownloadingMediaCount = '5',
+    Cast = '6'
 }

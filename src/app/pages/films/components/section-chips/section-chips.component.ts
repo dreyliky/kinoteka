@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DownloadingFilmsCountSocketService } from '@features/film';
-import { map, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FilmsRoutingEnum } from '../../enums';
 
 @Component({
@@ -9,26 +7,6 @@ import { FilmsRoutingEnum } from '../../enums';
     styleUrls: ['./section-chips.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SectionChipsComponent implements OnInit {
+export class SectionChipsComponent {
     public readonly filmsRoutingEnum = FilmsRoutingEnum;
-
-    public filmsCount$!: Observable<number>;
-    public isDownloadingFilmsCountBadgeHidden$!: Observable<boolean>;
-
-    constructor(
-        private readonly downloadingFilmsCountSocketService: DownloadingFilmsCountSocketService
-    ) {}
-
-    public ngOnInit(): void {
-        this.filmsCount$ = this.downloadingFilmsCountSocketService.data$;
-
-        this.initDownloadingFilmsCountBadgeVisibleObservable();
-    }
-
-    private initDownloadingFilmsCountBadgeVisibleObservable(): void {
-        this.isDownloadingFilmsCountBadgeHidden$ = this.downloadingFilmsCountSocketService.data$
-            .pipe(
-                map((count) => (count === 0))
-            );
-    }
 }

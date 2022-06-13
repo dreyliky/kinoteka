@@ -1,9 +1,8 @@
-<ng-container
-    *ngIf="(filmsResponse$ | async) as response; else loaderTemplate">
+<ng-container *ngIf="filmsResponse; else loaderTemplate">
     <div class="container">
         <div class="row">
             <div
-                *ngFor="let film of response.data"
+                *ngFor="let film of filmsResponse.data"
                 class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
                 <film-card
                     class="film-card"
@@ -15,12 +14,10 @@
     </div>
 
     <app-paginator
-        [filmsResponse]="response">
+        [filmsResponse]="filmsResponse">
     </app-paginator>
 </ng-container>
 
 <ng-template #loaderTemplate>
-    <div class="loader">
-        <mat-spinner></mat-spinner>
-    </div>
+    <app-loader></app-loader>
 </ng-template>

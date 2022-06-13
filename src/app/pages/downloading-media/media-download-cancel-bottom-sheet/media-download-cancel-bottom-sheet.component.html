@@ -1,0 +1,21 @@
+<app-title>
+    Ви дійсно хочете відмінити завантаження цього медіа?
+</app-title>
+
+<mat-nav-list>
+    <a
+        mat-list-item
+        class="delete"
+        (click)="onDeleteButtonClick()">
+        <span
+            mat-line>
+            Відмінити завантаження
+        </span>
+    </a>
+
+    <a
+        mat-list-item
+        (click)="onCancelButtonClick()">
+        <span mat-line>Продовжити завантаження</span>
+    </a>
+</mat-nav-list>

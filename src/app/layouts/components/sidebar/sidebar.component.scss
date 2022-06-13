@@ -1,6 +1,10 @@
 :host {
     display: block;
-    width: 240px;
+    width: 255px;
+}
+
+mat-list-option::ng-deep .mat-list-text {
+    padding-right: 0px !important;
 }
 
 .item-content {
@@ -14,10 +18,12 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 1px;
+        padding: 3px;
         border-radius: 50%;
         background-color: var(--bs-danger);
         margin-left: auto;
+        font-size: 12px;
+        font-weight: bold;
     }
 
     app-icon {

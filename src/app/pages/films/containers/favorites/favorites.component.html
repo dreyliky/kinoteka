@@ -9,14 +9,17 @@
         </span>
     </app-title>
 
-    <div class="container">
+    <div
+        *ngIf="films?.length; else emptyContentTemplate"
+        class="container">
         <div class="row">
             <div
                 *ngFor="let film of films"
                 class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
                 <film-card
                     class="film-card"
-                    [data]="film">
+                    [data]="film"
+                    (click)="onFilmClick(film)">
                 </film-card>
             </div>
         </div>
@@ -24,7 +27,11 @@
 </ng-container>
 
 <ng-template #loaderTemplate>
-    <div class="loader">
-        <mat-spinner></mat-spinner>
-    </div>
+    <app-loader></app-loader>
+</ng-template>
+
+<ng-template #emptyContentTemplate>
+    <app-subtitle>
+        Ви поки що не додавали фільми в "Обране".
+    </app-subtitle>
 </ng-template>
