@@ -4,39 +4,35 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'mediaDuration'
 })
 export class MediaDurationPipe implements PipeTransform {
+    private static durationTextMap = new Map<number, string>()
+        .set(30, 'до тридцяти секунд')
+        .set(60, 'до однієї хвилини')
+        .set(300, `до п'яти хвилин`)
+        .set(600, 'до десяти хвилин')
+        .set(900, `до п'ятнадцяти хвилин`)
+        .set(1800, 'до тридцяти секунд')
+        .set(2700, 'до 45 хвилин')
+        .set(3600, 'до однієї години')
+        .set(5400, 'до півтори години')
+        .set(7200, 'до двох годин')
+        .set(9000, 'до двох з половиною годин')
+        .set(10800, 'до трьох годин')
+        .set(12600, 'до трьох з половиною годин')
+        .set(14400, 'до чотирьох годин')
+        .set(16200, 'до чотирьох з половиною годин')
+        .set(18000, `до п'яти годин`)
+        .set(18001, `більше п'яти годин`);
+
     public transform(seconds: number): string {
-        if (seconds <= 30) {
-            return 'до тридцяти секунд';
-        } else if (seconds <= 60) {
-            return 'до однієї хвилини';
-        } else if (seconds <= 300) {
-            return `до п'яти хвилин`;
-        } else if (seconds <= 600) {
-            return 'до десяти хвилин';
-        } else if (seconds <= 900) {
-            return `до п'ятнадцяти хвилин`;
-        } else if (seconds <= 1800) {
-            return 'до тридцяти хвилин';
-        } else if (seconds <= 2700) {
-            return 'до 45 хвилин';
-        } else if (seconds <= 3600) {
-            return 'до однієї години';
-        } else if (seconds <= 5400) {
-            return 'до півтори години';
-        } else if (seconds <= 7200) {
-            return 'до двох годин';
-        } else if (seconds <= 9000) {
-            return 'до двох з половиною годин';
-        } else if (seconds <= 10800) {
-            return 'до трьох годин';
-        } else if (seconds <= 12600) {
-            return 'до трьох з половиною годин';
-        } else if (seconds <= 14400) {
-            return 'до чотирьох годин';
-        } else if (seconds <= 16200) {
-            return 'до чотирьох з половиною годин';
+        const mapKeys = [...MediaDurationPipe.durationTextMap.keys()];
+        const lastMapKey = mapKeys[mapKeys.length - 1];
+        const closestKeyFromMap = mapKeys
+            .find((mapKey) => (seconds <= mapKey));
+
+        if (closestKeyFromMap) {
+            return MediaDurationPipe.durationTextMap.get(closestKeyFromMap) as string;
         }
 
-        return `більше п'яти годин`;
+        return MediaDurationPipe.durationTextMap.get(lastMapKey) as string;
     }
 }

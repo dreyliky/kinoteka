@@ -1,26 +1,31 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl } from '@angular/platform-browser';
+import { KeysOfType } from '@core/types';
+
+type SanitizerType = 'html' | 'style' | 'script' | 'url' | 'resourceUrl';
 
 @Pipe({
     name: 'safe'
 })
 export class SafePipe implements PipeTransform {
-    constructor(protected _sanitizer: DomSanitizer) {}
+    private static sanitizerBypassMap = new Map<SanitizerType, KeysOfType<DomSanitizer, Function>>()
+        .set('html', 'bypassSecurityTrustHtml')
+        .set('style', 'bypassSecurityTrustStyle')
+        .set('script', 'bypassSecurityTrustScript')
+        .set('url', 'bypassSecurityTrustUrl')
+        .set('resourceUrl', 'bypassSecurityTrustResourceUrl');
 
-    public transform(value: string, type: string): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
-        switch (type) {
-            case 'html':
-                return this._sanitizer.bypassSecurityTrustHtml(value);
-            case 'style':
-                return this._sanitizer.bypassSecurityTrustStyle(value);
-            case 'script':
-                return this._sanitizer.bypassSecurityTrustScript(value);
-            case 'url':
-                return this._sanitizer.bypassSecurityTrustUrl(value);
-            case 'resourceUrl':
-                return this._sanitizer.bypassSecurityTrustResourceUrl(value);
-            default:
-                return this._sanitizer.bypassSecurityTrustHtml(value);
+    constructor(
+        private readonly sanitizer: DomSanitizer
+    ) {}
+
+    public transform(value: string, type: SanitizerType): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
+        const targetMethodName = SafePipe.sanitizerBypassMap.get(type) as string;
+
+        if (targetMethodName) {
+            return (this.sanitizer as any)[targetMethodName](value);
         }
+
+        return this.sanitizer.bypassSecurityTrustHtml(value);
     }
 }

@@ -31,10 +31,8 @@ export class FilteredDownloadedVideosService {
         const sliceTo = (sliceFrom + limit);
 
         return videos
-            ?.slice(sliceFrom, sliceTo)
-            .filter((video) => (
-            this.filterFilmBySearch(searchString, video)
-        )) ?? [];
+            ?.filter((video) => this.filterFilmBySearch(searchString, video))
+            .slice(sliceFrom, sliceTo) ?? [];
     }
 
     private filterFilmBySearch(searchString: string, video: DownloadedVideo): boolean {
