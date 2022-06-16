@@ -11,6 +11,10 @@ export class DownloadedVideosFiltersService {
         return (this.state.data$ as Observable<VideoCdnFilters>);
     }
 
+    public get data(): VideoCdnFilters {
+        return (this.state.data as VideoCdnFilters);
+    }
+
     constructor(
         private readonly state: DownloadedVideosFiltersState
     ) {}

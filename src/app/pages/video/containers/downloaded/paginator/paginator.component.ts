@@ -24,6 +24,8 @@ export class PaginatorComponent implements OnInit {
     public ngOnInit(): void {
         this.allDownloadedVideos$ = this.downloadedVideosService.data$;
         this.filters$ = this.filtersService.data$;
+
+        this.initCurrentPageIndex();
     }
 
     public onPaginatorPageEvent(event: PageEvent): void {
@@ -31,5 +33,9 @@ export class PaginatorComponent implements OnInit {
             limit: event.pageSize.toString(),
             page: (event.pageIndex + 1).toString(),
         });
+    }
+
+    private initCurrentPageIndex(): void {
+        this.currentPageIndex = (+this.filtersService.data.page - 1);
     }
 }
