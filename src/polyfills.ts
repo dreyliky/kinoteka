@@ -42,10 +42,14 @@
  *
  */
 
+import 'classlist.js';
+import 'core-js/es6/reflect';
+import 'web-animations-js';
+
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI.
+import 'zone.js'; // Included with Angular CLI.
 
 
 /***************************************************************************************************
