@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { DestroyService } from '@core/services';
-import { Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
+import { BookmarkedFilmsService, Film, OnlineFilmsFiltersService, OnlineFilmsService } from '@features/film';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
 import { WatchRoutingEnum } from '@pages/watch/enums';
@@ -21,6 +22,8 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 export class OnlineComponent implements OnInit {
     public filmsResponse: VideoCdnResponse<Film> | null = null;
 
+    public bookmarkedFilmsDictionary$!: Observable<BookmarkedMediaDictionary | null>;
+
     private get viewDestroyedOrFiltersChanged$(): Observable<unknown> {
         return merge(
             this.viewDestroyed$,
@@ -36,10 +39,13 @@ export class OnlineComponent implements OnInit {
         private readonly headerService: HeaderService,
         private readonly filmsService: OnlineFilmsService,
         private readonly filmsFiltersService: OnlineFilmsFiltersService,
+        private readonly bookmarkedFilmsService: BookmarkedFilmsService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}
 
     public ngOnInit(): void {
+        this.bookmarkedFilmsDictionary$ = this.bookmarkedFilmsService.data$;
+
         this.headerService.setPortalComponent(HeaderPortalContentComponent);
         this.updateFilms();
         this.initFilmsFiltersObserver();

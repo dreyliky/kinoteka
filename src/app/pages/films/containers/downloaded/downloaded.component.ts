@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { DestroyService } from '@core/services';
-import { DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, FilteredDownloadedFilmsService } from '@features/film';
+import { BookmarkedFilmsService, DownloadedFilm, DownloadedFilmsService, DOWNLOADED_FILM_PREVIEW_LOADER, FilteredDownloadedFilmsService } from '@features/film';
 import { DownloadingMediaSocketService, MediaTypeEnum } from '@features/media';
 import { ContentZoneService, HeaderService } from '@layouts';
 import { WatchRoutingEnum } from '@pages/watch/enums';
@@ -26,6 +27,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 export class DownloadedComponent implements OnInit, OnDestroy {
     public filteredFilms$!: Observable<DownloadedFilm[]>;
     public allDownloadedFilms$!: Observable<DownloadedFilm[] | null>;
+    public bookmarkedFilmsDictionary$!: Observable<BookmarkedMediaDictionary | null>;
 
     constructor(
         @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
@@ -34,12 +36,14 @@ export class DownloadedComponent implements OnInit, OnDestroy {
         private readonly contentZoneService: ContentZoneService,
         private readonly downloadingMediaSocketService: DownloadingMediaSocketService,
         private readonly downloadedFilmsService: DownloadedFilmsService,
+        private readonly bookmarkedFilmsService: BookmarkedFilmsService,
         private readonly filteredDownloadedFilmsService: FilteredDownloadedFilmsService,
     ) {}
 
     public ngOnInit(): void {
         this.filteredFilms$ = this.filteredDownloadedFilmsService.data$;
         this.allDownloadedFilms$ = this.downloadedFilmsService.data$;
+        this.bookmarkedFilmsDictionary$ = this.bookmarkedFilmsService.data$;
 
         this.headerService.setPortalComponent(HeaderPortalContentComponent);
         this.updateFilmsIfAbsent();

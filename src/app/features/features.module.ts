@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BookmarkModule } from './bookmark';
 import { ClientModule } from './client';
 import { FilmModule } from './film';
 import { TvSeriesModule } from './tv-series';
@@ -9,7 +10,8 @@ import { VideoModule } from './video';
         FilmModule,
         TvSeriesModule,
         VideoModule,
-        ClientModule
+        ClientModule,
+        BookmarkModule
     ]
 })
 export class FeaturesModule {}

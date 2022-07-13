@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FeaturesModule } from '@features';
 import { SharedModule } from '@shared';
+import { FilmsSharedModule } from '../../shared';
 import { FavoritesComponent } from './favorites.component';
 import { FavoritesRouting } from './favorites.routing';
 
@@ -11,6 +12,7 @@ import { FavoritesRouting } from './favorites.routing';
     imports: [
         SharedModule,
         FeaturesModule,
+        FilmsSharedModule,
         FavoritesRouting
     ]
 })

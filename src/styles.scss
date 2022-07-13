@@ -43,10 +43,8 @@ input {
     color: white !important;
 }
 
-.film-details-pane {
-    .mat-dialog-container {
-        padding: 0px;
-    }
+.mat-menu-item .mat-icon-no-color, .mat-menu-submenu-icon {
+    color: inherit;
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {

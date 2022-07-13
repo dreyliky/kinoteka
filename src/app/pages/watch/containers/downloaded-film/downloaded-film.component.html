@@ -6,26 +6,29 @@
 
         <span class="spacer"></span>
 
-        <button
-            mat-icon-button
-            class="action-button"
-            [color]="'warn'"
-            (click)="onDeleteButtonClick(film)">
-            <app-icon>delete</app-icon>
-        </button>
+        <div class="action-buttons">
+            <app-bookmark-button
+                [film]="film">
+            </app-bookmark-button>
 
-        <smart-cast-button
-            class="action-button"
-            [data]="film.kinopoiskId"
-            [castType]="castType">
-        </smart-cast-button>
+            <button
+                mat-icon-button
+                [color]="'warn'"
+                (click)="onDeleteButtonClick(film)">
+                <app-icon>delete</app-icon>
+            </button>
 
-        <button
-            mat-icon-button
-            class="action-button"
-            (click)="onCloseButtonClick()">
-            <app-icon>close</app-icon>
-        </button>
+            <smart-cast-button
+                [data]="film.kinopoiskId"
+                [castType]="castType">
+            </smart-cast-button>
+
+            <button
+                mat-icon-button
+                (click)="onCloseButtonClick()">
+                <app-icon>close</app-icon>
+            </button>
+        </div>
     </mat-toolbar>
 
     <video

@@ -1,17 +1,19 @@
 <ng-container *ngIf="filmsResponse; else loaderTemplate">
-    <div class="container">
-        <div class="row">
-            <div
-                *ngFor="let film of filmsResponse.data"
-                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                <film-card
-                    class="film-card"
-                    [data]="film"
-                    (click)="onFilmClick(film)">
-                </film-card>
+    <ng-container *ngLet="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
+        <div class="container">
+            <div class="row">
+                <div
+                    *ngFor="let film of filmsResponse.data"
+                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                    <app-online-film-card
+                        [film]="film"
+                        [bookmarks]="bookmarkedFilmsDictionary[film.kinopoiskId]"
+                        (click)="onFilmClick(film)">
+                    </app-online-film-card>
+                </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 
     <app-paginator
         [filmsResponse]="filmsResponse">

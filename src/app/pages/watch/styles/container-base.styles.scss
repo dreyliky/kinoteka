@@ -23,8 +23,12 @@
     flex: 1 1 auto;
 }
 
-.action-button {
-    margin-left: 10px;
+.action-buttons {
+    display: flex;
+
+    > * {
+        margin-left: 10px;
+    }
 }
 
 .player {

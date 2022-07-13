@@ -10,18 +10,18 @@
             [tvSeries]="tvSeries">
         </app-download-button>
 
-        <smart-cast-button
-            class="action-button"
-            [data]="tvSeries.kinopoiskId"
-            [castType]="castType">
-        </smart-cast-button>
+        <div class="action-buttons">
+            <smart-cast-button
+                [data]="tvSeries.kinopoiskId"
+                [castType]="castType">
+            </smart-cast-button>
 
-        <button
-            class="action-button"
-            mat-icon-button
-            (click)="onCloseButtonClick()">
-            <app-icon>close</app-icon>
-        </button>
+            <button
+                mat-icon-button
+                (click)="onCloseButtonClick()">
+                <app-icon>close</app-icon>
+            </button>
+        </div>
     </mat-toolbar>
 
     <iframe

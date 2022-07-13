@@ -5,6 +5,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -55,6 +56,7 @@ import { MediaDurationPipe, SafePipe, TranslationsCountPipe } from './pipes';
         CommonModule,
         RouterModule,
         MatRippleModule,
+        MatCheckboxModule,
         MatMenuModule,
         MatSidenavModule,
         MatButtonModule,

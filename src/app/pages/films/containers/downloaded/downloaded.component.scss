@@ -7,15 +7,6 @@
     box-sizing: border-box;
 }
 
-.film-card {
-    margin: 5px;
-
-    &:hover {
-        opacity: .95;
-        cursor: pointer;
-    }
-}
-
 .emty-content {
     width: 100%;
     display: flex;

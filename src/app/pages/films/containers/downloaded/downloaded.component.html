@@ -8,22 +8,24 @@
         </span>
     </app-title>
 
-    <ng-container *ngIf="filteredFilms.length; else emptyContentTemplate">
-        <div class="container">
-            <div class="row">
-                <div
-                    *ngFor="let film of filteredFilms"
-                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                    <downloaded-film-card
-                        class="film-card"
-                        [data]="film"
-                        (click)="onFilmClick(film)">
-                    </downloaded-film-card>
+    <ng-container *ngLet="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
+        <ng-container *ngIf="filteredFilms.length; else emptyContentTemplate">
+            <div class="container">
+                <div class="row">
+                    <div
+                        *ngFor="let film of filteredFilms"
+                        class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                        <app-downloaded-film-card
+                            [film]="film"
+                            [bookmarks]="bookmarkedFilmsDictionary[film.kinopoiskId]"
+                            (click)="onFilmClick(film)">
+                        </app-downloaded-film-card>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <app-paginator></app-paginator>
+            <app-paginator></app-paginator>
+        </ng-container>
     </ng-container>
 </ng-container>
 

@@ -6,30 +6,32 @@
 
         <span class="spacer"></span>
 
-        <app-favorite-button
-            class="action-button"
-            [film]="film">
-        </app-favorite-button>
+        <div class="action-buttons">
+            <app-bookmark-button
+                [film]="film">
+            </app-bookmark-button>
 
-        <app-download-button
-            class="action-button"
-            [film]="film">
-        </app-download-button>
+            <app-favorite-button
+                [film]="film">
+            </app-favorite-button>
 
-        <smart-cast-button
-            class="action-button"
-            [data]="film.kinopoiskId"
-            [castType]="castType">
-        </smart-cast-button>
+            <app-download-button
+                [film]="film">
+            </app-download-button>
 
-        <button
-            class="action-button"
-            mat-icon-button
-            (click)="onCloseButtonClick()">
-            <app-icon>close</app-icon>
-        </button>
+            <smart-cast-button
+                [data]="film.kinopoiskId"
+                [castType]="castType">
+            </smart-cast-button>
+
+            <button
+                mat-icon-button
+                (click)="onCloseButtonClick()">
+                <app-icon>close</app-icon>
+            </button>
+        </div>
     </mat-toolbar>
-    
+
     <iframe
         allowfullscreen
         class="player"

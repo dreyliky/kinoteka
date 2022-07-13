@@ -1,4 +1,4 @@
-export enum Bookmark {
+export enum BookmarkEnum {
     Red,
     Green,
     Blue,

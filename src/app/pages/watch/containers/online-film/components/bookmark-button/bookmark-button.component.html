@@ -1,0 +1,6 @@
+<bookmark-dropdown
+    *ngIf="(bookmarks$ | async) as bookmarks"
+    [selectedBookmarks]="bookmarks"
+    (bookmarkSelected)="onBookmarkSelected($event)"
+    (bookmarkDeselected)="onBookmarkDeselected($event)">
+</bookmark-dropdown>

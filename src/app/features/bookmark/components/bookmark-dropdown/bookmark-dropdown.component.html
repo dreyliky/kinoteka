@@ -1,0 +1,21 @@
+<button
+    mat-icon-button
+    [matMenuTriggerFor]="menu">
+    <app-icon>bookmark</app-icon>
+</button>
+
+<mat-menu
+    #menu="matMenu"
+    [xPosition]="'before'">
+    <button
+        *ngFor="let bookmark of bookmarks"
+        mat-menu-item
+        class="menu-item"
+        [style.color]="bookmark.color"
+        [role]="'menuitemcheckbox'"
+        (click)="onMenuItemClick($event, bookmark)">
+        <mat-checkbox [checked]="selectedBookmarksMap.get(bookmark.type)">
+            <app-icon>bookmark</app-icon>
+        </mat-checkbox>
+    </button>
+</mat-menu>
