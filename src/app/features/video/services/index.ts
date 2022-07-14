@@ -1,3 +1,4 @@
+export * from './bookmarked-videos.service';
 export * from './downloaded-videos-filters.service';
 export * from './downloaded-videos.service';
 export * from './filtered-downloaded-videos.service';

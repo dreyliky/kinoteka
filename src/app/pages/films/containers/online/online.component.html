@@ -1,5 +1,5 @@
 <ng-container *ngIf="filmsResponse; else loaderTemplate">
-    <ng-container *ngLet="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
+    <ng-container *ngIf="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
         <div class="container">
             <div class="row">
                 <div

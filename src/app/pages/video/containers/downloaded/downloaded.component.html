@@ -8,22 +8,25 @@
         </span>
     </app-title>
 
-    <ng-container *ngIf="filteredVideos.length; else emptyContentTemplate">
-        <div class="container">
-            <div class="row">
-                <div
-                    *ngFor="let video of filteredVideos"
-                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                    <downloaded-video-card
-                        class="video-card"
-                        [data]="video"
-                        (click)="onVideoClick(video)">
-                    </downloaded-video-card>
+    <ng-container *ngIf="(bookmarkedVideosDictionary$ | async) as bookmarkedVideosDictionary">
+        <ng-container *ngIf="filteredVideos.length; else emptyContentTemplate">
+            <div class="container">
+                <div class="row">
+                    <div
+                        *ngFor="let video of filteredVideos"
+                        class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                        <app-downloaded-video-card
+                            class="video-card"
+                            [video]="video"
+                            [bookmarks]="bookmarkedVideosDictionary[video.id]"
+                            (click)="onVideoClick(video)">
+                        </app-downloaded-video-card>
+                    </div>
                 </div>
             </div>
-        </div>
-    
-        <app-paginator></app-paginator>
+
+            <app-paginator></app-paginator>
+        </ng-container>
     </ng-container>
 </ng-container>
 

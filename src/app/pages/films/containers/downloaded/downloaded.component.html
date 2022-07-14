@@ -8,7 +8,7 @@
         </span>
     </app-title>
 
-    <ng-container *ngLet="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
+    <ng-container *ngIf="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
         <ng-container *ngIf="filteredFilms.length; else emptyContentTemplate">
             <div class="container">
                 <div class="row">

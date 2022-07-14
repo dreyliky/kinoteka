@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { DestroyService } from '@core/services';
 import { DownloadingMediaSocketService, MediaTypeEnum } from '@features/media';
-import { DownloadedVideo, DownloadedVideosService, DOWNLOADED_VIDEO_PREVIEW_LOADER, FilteredDownloadedVideosService } from '@features/video';
+import { BookmarkedVideosService, DownloadedVideo, DownloadedVideosService, DOWNLOADED_VIDEO_PREVIEW_LOADER, FilteredDownloadedVideosService } from '@features/video';
 import { ContentZoneService, HeaderService } from '@layouts';
 import { WatchRoutingEnum } from '@pages/watch/enums';
 import { filter, merge, Observable, switchMap, takeUntil } from 'rxjs';
@@ -26,6 +27,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 export class DownloadedComponent implements OnInit {
     public filteredVideos$!: Observable<DownloadedVideo[]>;
     public allDownloadedVideos$!: Observable<DownloadedVideo[] | null>;
+    public bookmarkedVideosDictionary$!: Observable<BookmarkedMediaDictionary | null>;
 
     constructor(
         @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
@@ -34,12 +36,14 @@ export class DownloadedComponent implements OnInit {
         private readonly contentZoneService: ContentZoneService,
         private readonly downloadingMediaSocketService: DownloadingMediaSocketService,
         private readonly downloadedVideosService: DownloadedVideosService,
+        private readonly bookmarkedVideosService: BookmarkedVideosService,
         private readonly filteredDownloadedVideosService: FilteredDownloadedVideosService
     ) {}
 
     public ngOnInit(): void {
         this.filteredVideos$ = this.filteredDownloadedVideosService.data$;
         this.allDownloadedVideos$ = this.downloadedVideosService.data$;
+        this.bookmarkedVideosDictionary$ = this.bookmarkedVideosService.data$;
 
         this.headerService.setPortalComponent(HeaderPortalContentComponent);
         this.updateVideosIfAbsent();

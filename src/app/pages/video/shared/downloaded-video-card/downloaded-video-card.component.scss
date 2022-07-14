@@ -1,0 +1,19 @@
+:host {
+    display: block;
+}
+
+.video-card {
+    margin: 5px;
+    position: relative;
+
+    &:hover {
+        opacity: .95;
+        cursor: pointer;
+    }
+}
+
+.bookmarkes-row {
+    top: 2px;
+    right: 11px;
+    position: absolute;
+}

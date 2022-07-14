@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { BaseState } from '@core/states';
-import { BookmarkEnum } from '@features/bookmark';
+import { BookmarkEnum } from '../../bookmark';
 
 @Injectable({
     providedIn: 'root'
