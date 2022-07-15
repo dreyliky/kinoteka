@@ -3,6 +3,8 @@
     class="card"
     matRipple
     [title]="data.title">
+    <ng-content select="[film-card-header]"></ng-content>
+
     <div class="description">
         <h2 class="item-row">{{ data.title }}</h2>
 

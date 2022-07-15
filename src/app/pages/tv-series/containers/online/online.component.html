@@ -1,22 +1,24 @@
-<ng-container
-    *ngIf="(tvSeriesResponse$ | async) as response; else loaderTemplate">
-    <div class="container">
-        <div class="row">
-            <div
-                *ngFor="let tvSeries of response.data"
-                class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
-                <tv-series-card
-                    class="tv-series-card"
-                    [data]="tvSeries"
-                    (click)="onTvSeriesClick(tvSeries)">
-                </tv-series-card>
+<ng-container *ngIf="(tvSeriesResponse$ | async) as response; else loaderTemplate">
+    <ng-container *ngIf="(bookmarkedTvSeriesesDictionary$ | async) as bookmarkedTvSeriesesDictionary">
+        <div class="container">
+            <div class="row">
+                <div
+                    *ngFor="let tvSeries of response.data"
+                    class="col-xs-12 col-sm-6 col-sm-6 col-xxl-4">
+                    <app-tv-series-card
+                        class="tv-series-card"
+                        [tvSeries]="tvSeries"
+                        [bookmarks]="bookmarkedTvSeriesesDictionary[tvSeries.kinopoiskId]"
+                        (click)="onTvSeriesClick(tvSeries)">
+                    </app-tv-series-card>
+                </div>
             </div>
         </div>
-    </div>
-
-    <app-paginator
-        [tvSeriesResponse]="response">
-    </app-paginator>
+    
+        <app-paginator
+            [tvSeriesResponse]="response">
+        </app-paginator>
+    </ng-container>
 </ng-container>
 
 <ng-template #loaderTemplate>

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRouteEnum } from '@core/enums';
+import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { DestroyService } from '@core/services';
-import { OnlineTvSeriesFiltersService, OnlineTvSeriesService, TvSeries } from '@features/tv-series';
+import { BookmarkedTvSeriesesService, OnlineTvSeriesFiltersService, OnlineTvSeriesService, TvSeries } from '@features/tv-series';
 import { VideoCdnResponse } from '@features/video-cdn';
 import { ContentZoneService, HeaderService } from '@layouts';
 import { WatchRoutingEnum } from '@pages/watch/enums';
@@ -20,6 +21,7 @@ import { HeaderPortalContentComponent } from './header-portal-content';
 })
 export class OnlineComponent implements OnInit {
     public tvSeriesResponse$!: Observable<VideoCdnResponse<TvSeries> | null>;
+    public bookmarkedTvSeriesesDictionary$!: Observable<BookmarkedMediaDictionary | null>;
 
     private get viewDestroyedOrFiltersChanged$(): Observable<unknown> {
         return merge(
@@ -35,11 +37,13 @@ export class OnlineComponent implements OnInit {
         private readonly contentZoneService: ContentZoneService,
         private readonly headerService: HeaderService,
         private readonly tvSeriesService: OnlineTvSeriesService,
-        private readonly tvSeriesFiltersService: OnlineTvSeriesFiltersService
+        private readonly tvSeriesFiltersService: OnlineTvSeriesFiltersService,
+        private readonly bookmarkedTvSeriesesService: BookmarkedTvSeriesesService
     ) {}
 
     public ngOnInit(): void {
         this.tvSeriesResponse$ = this.tvSeriesService.tvSeriesResponse$;
+        this.bookmarkedTvSeriesesDictionary$ = this.bookmarkedTvSeriesesService.data$;
 
         this.headerService.setPortalComponent(HeaderPortalContentComponent);
         this.updateTvSeriesIfAbsent();
