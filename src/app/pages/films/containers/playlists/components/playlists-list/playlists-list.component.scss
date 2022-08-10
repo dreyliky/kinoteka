@@ -1,0 +1,9 @@
+.playlist {
+    height: 64px;
+    margin: 20px 25px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+    }
+}

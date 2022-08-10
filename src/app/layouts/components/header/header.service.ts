@@ -1,5 +1,5 @@
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -12,9 +12,12 @@ export class HeaderService {
 
     private _portalComponent$ = new BehaviorSubject<ComponentPortal<unknown> | null>(null);
     
-    public setPortalComponent(component: ComponentType<unknown>): void {
+    public setPortalComponent(
+        component: ComponentType<unknown>,
+        parentInjector: Injector | null = null
+    ): void {
         this._portalComponent$.next(
-            new ComponentPortal(component)
+            new ComponentPortal(component, null, parentInjector)
         );
     }
 

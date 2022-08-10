@@ -1,0 +1,17 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.playlist {
+    height: 75%;
+}
+
+.category-chip {
+    &.active {
+        background: radial-gradient(96.72% 187.09% at 0 100.29%,#ff5c00 5.21%,#ea507c 25.52%,#b941ef 48.44%,#5b61ff 70.83%,#21bee7 93.75%)
+    }
+}

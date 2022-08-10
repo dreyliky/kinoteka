@@ -1,0 +1,20 @@
+<ng-container *ngIf="(playlistsOfSelectedCategory$ | async) as playlists; else loaderTemplate">
+    <ng-container *ngIf="playlists.length; else emptyContentTemplate">
+        <playlist
+            *ngFor="let playlist of playlists"
+            class="playlist"
+            [data]="playlist"
+            (click)="onPlaylistClick(playlist)">
+        </playlist>
+    </ng-container>
+</ng-container>
+
+<ng-template #loaderTemplate>
+    <app-loader></app-loader>
+</ng-template>
+
+<ng-template #emptyContentTemplate>
+    <app-subtitle>
+        Наразі не існує плейлистів, або сталася помилка.
+    </app-subtitle>
+</ng-template>

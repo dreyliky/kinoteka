@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BookmarkModule } from './bookmark';
 import { ClientModule } from './client';
 import { FilmModule } from './film';
+import { PlaylistModule } from './playlist';
 import { TvSeriesModule } from './tv-series';
 import { VideoModule } from './video';
 
@@ -11,7 +12,8 @@ import { VideoModule } from './video';
         TvSeriesModule,
         VideoModule,
         ClientModule,
-        BookmarkModule
+        BookmarkModule,
+        PlaylistModule
     ]
 })
 export class FeaturesModule {}

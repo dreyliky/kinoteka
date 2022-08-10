@@ -1,0 +1,13 @@
+<ng-container *ngIf="(selectedCategory$ | async) as selectedCategory">
+    <mat-chip-list
+        *ngIf="(categories$ | async) as categories"
+        class="chips">
+        <mat-chip
+            *ngFor="let category of categories"
+            class="category-chip"
+            [class.active]="(category.id === selectedCategory)"
+            (click)="onCategoryClick(category)">
+            {{ category.name }}
+        </mat-chip>
+    </mat-chip-list>
+</ng-container>

@@ -31,7 +31,14 @@
                 *ngIf="!!data.media.length"
                 class="item-row">
                 <app-icon class="icon">schedule</app-icon>
-                {{ data.media[0].duration | mediaDuration }}
+
+                <span *ngIf="data.media[0].duration">
+                    {{ data.media[0].duration | mediaDuration }}
+                </span>
+
+                <span *ngIf="!data.media[0].duration">
+                    Невідомо
+                </span>
             </div>
 
             <div class="item-row">

@@ -1,5 +1,12 @@
 <mat-chip-list class="chips">
     <mat-chip
+        [routerLink]="filmsRoutingEnum.Downloaded"
+        [routerLinkActive]="'mat-accent mat-chip-selected'">
+        <app-icon class="icon">file_download</app-icon>
+        Завантажені
+    </mat-chip>
+
+    <mat-chip
         [routerLink]="filmsRoutingEnum.Online"
         [routerLinkActive]="'mat-accent mat-chip-selected'">
         <app-icon class="icon">smart_display</app-icon>
@@ -7,10 +14,10 @@
     </mat-chip>
 
     <mat-chip
-        [routerLink]="filmsRoutingEnum.Downloaded"
+        [routerLink]="filmsRoutingEnum.Playlists"
         [routerLinkActive]="'mat-accent mat-chip-selected'">
-        <app-icon class="icon">file_download</app-icon>
-        Завантажені
+        <app-icon class="icon">web_stories</app-icon>
+        Плейлисти
     </mat-chip>
 
     <mat-chip

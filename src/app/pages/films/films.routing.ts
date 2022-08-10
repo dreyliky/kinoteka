@@ -9,20 +9,28 @@ const routes: Routes = [
         component: FilmsComponent,
         children: [
             {
+                path: FilmsRoutingEnum.Downloaded,
+                loadChildren: () => import('./containers/downloaded').then((m) => m.DownloadedModule)
+            },
+            {
                 path: FilmsRoutingEnum.Online,
                 loadChildren: () => import('./containers/online').then((m) => m.OnlineModule)
             },
             {
-                path: FilmsRoutingEnum.Downloaded,
-                loadChildren: () => import('./containers/downloaded').then((m) => m.DownloadedModule)
+                path: FilmsRoutingEnum.Playlists,
+                loadChildren: () => import('./containers/playlists').then((m) => m.PlaylistsModule)
             },
             {
                 path: FilmsRoutingEnum.Favorites,
                 loadChildren: () => import('./containers/favorites').then((m) => m.FavoritesModule)
             },
             {
+                path: FilmsRoutingEnum.Playlist,
+                loadChildren: () => import('./containers/playlist-films').then((m) => m.PlaylistFilmsModule)
+            },
+            {
                 path: '**',
-                redirectTo: FilmsRoutingEnum.Online,
+                redirectTo: FilmsRoutingEnum.Downloaded,
                 pathMatch: 'full'
             }
         ]

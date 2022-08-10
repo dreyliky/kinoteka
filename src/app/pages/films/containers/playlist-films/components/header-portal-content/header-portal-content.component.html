@@ -1,0 +1,6 @@
+<ng-container *ngIf="(openedPlaylist$ | async) as playlist">
+    <playlist
+        class="playlist"
+        [data]="playlist">
+    </playlist>
+</ng-container>
