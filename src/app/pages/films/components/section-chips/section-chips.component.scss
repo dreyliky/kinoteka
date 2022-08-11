@@ -38,6 +38,10 @@
     }
 }
 
+.chips.mobile::ng-deep .mat-chip-list-wrapper {
+    justify-content: flex-start;
+}
+
 .icon {
     margin-right: 3px;
 }

@@ -1,5 +1,7 @@
 <ng-container *ngIf="(films$ | async) as films; else loaderTemplate">
     <ng-container *ngIf="(bookmarkedFilmsDictionary$ | async) as bookmarkedFilmsDictionary">
+        <app-title class="title">{{ films.length }} медіа</app-title>
+
         <div class="container">
             <div class="row">
                 <div

@@ -1,4 +1,6 @@
-<mat-chip-list class="chips">
+<mat-chip-list
+    class="chips"
+    [class.mobile]="isMobile">
     <mat-chip
         [routerLink]="filmsRoutingEnum.Downloaded"
         [routerLinkActive]="'mat-accent mat-chip-selected'">
