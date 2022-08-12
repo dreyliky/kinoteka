@@ -12,7 +12,6 @@ import { SelectedPlaylistCategory } from './states';
     styleUrls: ['./playlists.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        SelectedPlaylistCategory,
         DestroyService
     ]
 })

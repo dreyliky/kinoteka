@@ -1,3 +1,3 @@
 export enum OnlineFilmDetailsRouteParamEnum {
-    KinopoiskId = 'kinopoiskId'
+    KinopoiskId = 'kinopoiskId',
 }

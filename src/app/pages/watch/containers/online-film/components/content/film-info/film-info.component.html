@@ -1,0 +1,88 @@
+<div
+    class="backdrop"
+    [style.backgroundImage]="backdropBackgroundCss">
+</div>
+
+<div
+    class="play-icon-wrapper"
+    (click)="watchButtonClick.emit($event)">
+    <app-icon
+        class="play-icon"
+        [sizeInPx]="128">
+        play_circle
+    </app-icon>
+</div>
+
+<div class="container info">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="section-title">
+                Опис
+            </div>
+        
+            <div class="description">
+                {{ film.description }}
+            </div>
+
+            <div class="section-title">
+                Рейтинг
+            </div>
+        
+            <div class="rating-content">
+                <div class="rating-block">
+                    <div class="rating-source">Kinopoisk</div>
+        
+                    <div class="rating">
+                        &nbsp;{{ film.kinopoiskRating }}
+                    </div>
+                </div>
+                
+                <div class="rating-block imdb">
+                    <div class="rating-source">IMDB</div>
+        
+                    <div class="rating">
+                        &nbsp;{{ film.imdbRating }}
+                    </div>
+                </div>
+            </div>
+        
+            <div class="section-title">
+                Жанр
+            </div>
+        
+            <mat-chip-list class="genres">
+                <mat-chip *ngFor="let genre of film.genres">{{ genre }}</mat-chip>
+            </mat-chip-list>
+        
+            <div class="section-title">
+                Країна
+            </div>
+        
+            <mat-chip-list class="countries">
+                <mat-chip *ngFor="let country of film.countries">{{ country }}</mat-chip>
+            </mat-chip-list>
+        
+            <div class="section-title">
+                Віковий рейтинг
+            </div>
+        
+            <div class="age-rating">
+                {{ film.ageRating }}
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="section-title">
+                Постер
+            </div>
+
+            <div
+                class="poster-wrapper"
+                [class.mobile]="isMobile">
+                <img
+                    class="poster"
+                    [src]="film.posterUrl" />
+            </div>
+        </div>
+    </div>
+</div>

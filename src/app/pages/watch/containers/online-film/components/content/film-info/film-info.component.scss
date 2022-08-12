@@ -1,0 +1,110 @@
+$backdrop-height: 35vh;
+
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+
+.info {
+    width: 100vw;
+    height: fit-content;
+    margin-top: 30vh;
+    background-color: #000;
+    z-index: 3;
+
+    .film-name {
+        font-size: 36px;
+        line-height: 36px;
+        color: var(--bs-gray-100);
+    }
+
+    .section-title {
+        margin-top: 20px;
+        margin-bottom: 8px;
+        color: var(--bs-gray-100);
+        font-size: 14px;
+        border-bottom: solid 1px var(--bs-gray-900);
+    }
+
+    .rating-content {
+        display: flex;
+        flex-direction: column;
+        font-size: 56px;
+        line-height: 70px;
+        color: var(--bs-gray-200);
+
+        .rating-block {
+            width: 100%;
+            display: flex;
+
+            .rating {
+                margin-left: auto;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .description {
+        font-size: 18px;
+        color: var(--bs-gray-400);
+    }
+
+    .age-rating {
+        font-size: 48px;
+        line-height: 56px;
+        color: var(--bs-gray-100);
+    }
+
+    .poster-wrapper {
+        display: flex;
+
+        &.mobile {
+            justify-content: center;
+        }
+        
+        .poster {
+            max-width: 356px;
+        }
+    }
+}
+
+.backdrop {
+    width: 100%;
+    height: $backdrop-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: .2;
+    z-index: 0;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, transparent 35%, #000 100%);
+    }
+}
+
+.play-icon-wrapper {
+    width: 100%;
+    height: $backdrop-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+
+    .play-icon {
+        color: var(--bs-teal)
+    }
+}

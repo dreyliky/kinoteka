@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
@@ -10,4 +10,12 @@ import { ThemePalette } from '@angular/material/core';
 export class IconComponent {
     @Input()
     public color: ThemePalette;
+
+    @Input()
+    public sizeInPx: number = 24;
+
+    @HostBinding('style.--icon-size')
+    public get sizeCssVariable(): string {
+        return `${this.sizeInPx}px`;
+    }
 }

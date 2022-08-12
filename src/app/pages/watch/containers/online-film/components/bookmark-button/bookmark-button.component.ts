@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { BookmarkedMediaDictionary } from '@core/interfaces';
 import { DestroyService } from '@core/services';
 import { Bookmark, BookmarkEnum } from '@features/bookmark';
-import { BookmarkedFilmsService, Film } from '@features/film';
+import { BookmarkedFilmsService } from '@features/film';
 import { Observable } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
+import { OpenedFilmState } from '../../states';
 
 @Component({
     selector: 'app-bookmark-button',
@@ -16,13 +17,11 @@ import { filter, map, takeUntil } from 'rxjs/operators';
     ]
 })
 export class BookmarkButtonComponent implements OnInit {
-    @Input()
-    public film!: Film;
-
     public bookmarks$!: Observable<BookmarkEnum[]>;
 
     constructor(
         @Inject(DestroyService) private readonly viewDestroyed$: Observable<boolean>,
+        private readonly openedFilmState: OpenedFilmState,
         private readonly bookmarkedFilmsService: BookmarkedFilmsService
     ) {}
 
@@ -32,13 +31,13 @@ export class BookmarkButtonComponent implements OnInit {
     }
 
     public onBookmarkSelected(bookmark: Bookmark): void {
-        this.bookmarkedFilmsService.add(this.film.kinopoiskId, bookmark.type)
+        this.bookmarkedFilmsService.add(this.openedFilmState.data!.kinopoiskId, bookmark.type)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
 
     public onBookmarkDeselected(bookmark: Bookmark): void {
-        this.bookmarkedFilmsService.remove(this.film.kinopoiskId, bookmark.type)
+        this.bookmarkedFilmsService.remove(this.openedFilmState.data!.kinopoiskId, bookmark.type)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
@@ -53,7 +52,7 @@ export class BookmarkButtonComponent implements OnInit {
         this.bookmarks$ = this.bookmarkedFilmsService.data$
             .pipe(
                 filter((data): data is BookmarkedMediaDictionary => !!data),
-                map((dictionary) => (dictionary[this.film.kinopoiskId] ?? []))
+                map((dictionary) => (dictionary[this.openedFilmState.data!.kinopoiskId] ?? []))
             );
     }
 }

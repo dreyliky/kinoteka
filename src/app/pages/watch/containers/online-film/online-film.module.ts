@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { FeaturesModule } from '@features';
 import { SharedModule } from '@shared';
 import {
-    BookmarkButtonComponent,
-    DownloadButtonComponent,
+    BookmarkButtonComponent, ContentModule, DownloadButtonComponent,
     FavoriteButtonComponent,
     FilmDownloadProgressComponent
 } from './components';
@@ -21,7 +20,9 @@ import { OnlineFilmRouting } from './online-film.routing';
     imports: [
         SharedModule,
         FeaturesModule,
-        OnlineFilmRouting
+        OnlineFilmRouting,
+
+        ContentModule
     ]
 })
 export class OnlineFilmModule {}

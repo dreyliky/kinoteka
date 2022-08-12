@@ -1,5 +1,13 @@
 :host {
+    width: var(--icon-size);
+    height: var(--icon-size);
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &::ng-deep .mat-icon {
+        width: var(--icon-size);
+        height: var(--icon-size);
+        font-size: var(--icon-size) !important;
+    }
 }

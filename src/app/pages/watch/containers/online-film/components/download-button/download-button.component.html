@@ -23,7 +23,6 @@
     <ng-container [ngSwitch]="filmDownloadState">
         <app-film-download-progress
             *ngSwitchCase="filmDownloadStateEnum.Downloading"
-            [film]="film"
             (downloadEnd)="onDownloadEnd()">
         </app-film-download-progress>
 

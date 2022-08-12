@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services';
 import { Observable } from 'rxjs';
 import { VideoCdnResponse } from '../../video-cdn';
-import { Film } from '../interfaces';
+import { DetailedFilmInfo, Film } from '../interfaces';
 import { OnlineFilmsFiltersState } from '../states';
 
 @Injectable({
@@ -16,6 +16,10 @@ export class OnlineFilmsService {
 
     public get(kinopoiskId: string): Observable<Film> {
         return this.apiService.get<Film>(`/films/${kinopoiskId}`);
+    }
+
+    public getDetailedInfo(kinopoiskId: string): Observable<DetailedFilmInfo> {
+        return this.apiService.get<DetailedFilmInfo>(`/films/${kinopoiskId}/detailed`);
     }
 
     public updateAllByFilters(): Observable<VideoCdnResponse<Film>> {

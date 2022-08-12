@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { DestroyService } from '@core/services';
 import { Film, FilmDownloadStateEnum, FilmDownloadStatusService, FilmMedia, OnlineFilmsService } from '@features/film';
 import { Observable, takeUntil } from 'rxjs';
+import { OpenedFilmState } from '../../states';
 
 @Component({
     selector: 'app-download-button',
@@ -13,11 +14,12 @@ import { Observable, takeUntil } from 'rxjs';
     ]
 })
 export class DownloadButtonComponent {
-    @Input()
-    public film!: Film;
-    
     public readonly filmDownloadStateEnum = FilmDownloadStateEnum;
     public filmDownloadState: FilmDownloadStateEnum | null = null;
+
+    public get film(): Film {
+        return this.openedFilmState.data as Film;
+    }
 
     public get isDownloadButtonVisible(): boolean {
         return (this.filmDownloadState !== null);
@@ -34,6 +36,7 @@ export class DownloadButtonComponent {
     constructor(
         @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
         private readonly filmsService: OnlineFilmsService,
+        private readonly openedFilmState: OpenedFilmState,
         private readonly filmDownloadStatusService: FilmDownloadStatusService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}
@@ -45,7 +48,7 @@ export class DownloadButtonComponent {
     public onDownloadButtonClick(media: FilmMedia): void {
         this.filmDownloadState = FilmDownloadStateEnum.Downloading;
 
-        this.filmsService.download(this.film.kinopoiskId, media.translationId)
+        this.filmsService.download(this.openedFilmState.data!.kinopoiskId, media.translationId)
             .subscribe();
     }
 
@@ -54,7 +57,7 @@ export class DownloadButtonComponent {
     }
 
     private initFilmDownloadState(): void {
-        this.filmDownloadStatusService.check(this.film.kinopoiskId)
+        this.filmDownloadStatusService.check(this.openedFilmState.data!.kinopoiskId)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe((state) => {
                 this.filmDownloadState = state;

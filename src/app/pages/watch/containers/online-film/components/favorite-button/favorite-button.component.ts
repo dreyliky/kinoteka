@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { DestroyService } from '@core/services';
-import { FavoriteFilmsService, Film } from '@features/film';
+import { FavoriteFilmsService } from '@features/film';
 import { Observable, takeUntil } from 'rxjs';
+import { OpenedFilmState } from '../../states';
 
 @Component({
     selector: 'app-favorite-button',
@@ -13,13 +14,11 @@ import { Observable, takeUntil } from 'rxjs';
     ]
 })
 export class FavoriteButtonComponent implements OnInit {
-    @Input()
-    public film!: Film;
-
     public isFilmFavorite: boolean = false;
 
     constructor(
         @Inject(DestroyService) private readonly viewDestroyed$: Observable<void>,
+        private readonly openedFilmState: OpenedFilmState,
         private readonly favoriteFilmsService: FavoriteFilmsService,
         private readonly changeDetector: ChangeDetectorRef
     ) {}
@@ -39,19 +38,19 @@ export class FavoriteButtonComponent implements OnInit {
     }
 
     private addToFavorites(): void {
-        this.favoriteFilmsService.add(this.film.kinopoiskId)
+        this.favoriteFilmsService.add(this.openedFilmState.data!.kinopoiskId)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
 
     private removeFromFavorites(): void {
-        this.favoriteFilmsService.remove(this.film.kinopoiskId)
+        this.favoriteFilmsService.remove(this.openedFilmState.data!.kinopoiskId)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe();
     }
 
     private initIsFilmFavorite(): void {
-        this.favoriteFilmsService.getState(this.film.kinopoiskId)
+        this.favoriteFilmsService.getState(this.openedFilmState.data!.kinopoiskId)
             .pipe(takeUntil(this.viewDestroyed$))
             .subscribe((state) => {
                 this.isFilmFavorite = state;

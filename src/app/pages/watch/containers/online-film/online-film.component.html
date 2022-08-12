@@ -7,16 +7,13 @@
         <span class="spacer"></span>
 
         <div class="action-buttons">
-            <app-bookmark-button
-                [film]="film">
+            <app-bookmark-button>
             </app-bookmark-button>
 
-            <app-favorite-button
-                [film]="film">
+            <app-favorite-button>
             </app-favorite-button>
 
-            <app-download-button
-                [film]="film">
+            <app-download-button>
             </app-download-button>
 
             <smart-cast-button
@@ -32,11 +29,9 @@
         </div>
     </mat-toolbar>
 
-    <iframe
-        allowfullscreen
-        class="player"
-        [src]="film.iframeSrc | safe:'resourceUrl'">
-    </iframe>
+    <app-content
+        class="content">
+    </app-content>
 </ng-container>
 
 <ng-template #loaderTemplate>

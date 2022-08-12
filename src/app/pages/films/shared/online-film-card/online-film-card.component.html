@@ -2,6 +2,7 @@
     class="film-card"
     [data]="film">
     <bookmarks-row
+        *ngIf="bookmarks?.length"
         film-card-header
         class="bookmarkes-row"
         [bookmarks]="bookmarks">

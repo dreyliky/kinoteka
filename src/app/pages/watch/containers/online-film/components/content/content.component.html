@@ -1,0 +1,10 @@
+<ng-container [ngSwitch]="(openedSection$ | async)">
+    <app-film-info
+        *ngSwitchCase="sectionEnum.Info"
+        (watchButtonClick)="openSection(sectionEnum.Player)">
+    </app-film-info>
+
+    <app-film-player
+        *ngSwitchCase="sectionEnum.Player">
+    </app-film-player>
+</ng-container>
