@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BaseState } from '@core/states';
+import { ArrayState } from 'ngx-base-state';
 import { DownloadedFilm } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DownloadedFilmsState extends BaseState<DownloadedFilm[] | null> {
-    public deleteByKinopoiskId(kinopoiskId: string): void {
-        if (this.data) {
-            const filteredFilms = this.data
-                .filter((film) => (film.kinopoiskId !== kinopoiskId));
-            
-            this.set(filteredFilms);
-        }
+export class DownloadedFilmsState extends ArrayState<DownloadedFilm> {
+    protected override getItemId(film: DownloadedFilm): string {
+        return film.kinopoiskId;
     }
 }

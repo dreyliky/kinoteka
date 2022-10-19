@@ -7,17 +7,13 @@ import { OnlineTvSeriesFiltersState } from '../states';
     providedIn: 'root'
 })
 export class OnlineTvSeriesFiltersService {
-    public get data$(): Observable<VideoCdnFilters> {
-        return (this.state.data$ as Observable<VideoCdnFilters>);
-    }
+    public readonly data$ = (this.state.data$ as Observable<VideoCdnFilters>);
 
     constructor(
         private readonly state: OnlineTvSeriesFiltersState
     ) {}
 
-    public update(data: Partial<VideoCdnFilters>): void {
-        const currentState = (this.state.data as VideoCdnFilters);
-
-        this.state.set({ ...currentState, ...data });
+    public update(filters: Partial<VideoCdnFilters>): void {
+        this.state.updateWithPartial(filters);
     }
 }

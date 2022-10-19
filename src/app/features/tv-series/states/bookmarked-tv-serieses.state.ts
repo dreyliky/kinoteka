@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BookmarkedMediaDictionary } from '@core/interfaces';
-import { BaseState } from '@core/states';
+import { ObjectState } from 'ngx-base-state';
 import { BookmarkEnum } from '../../bookmark';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BookmarkedTvSeriesesState extends BaseState<BookmarkedMediaDictionary> {
+export class BookmarkedTvSeriesesState extends ObjectState<BookmarkedMediaDictionary> {
     public add(kinopoiskId: string, bookmark: BookmarkEnum): void {
-        let bookmarks = this.data?.[kinopoiskId] ?? [];
+        let bookmarks = this.getBookmarks(kinopoiskId);
         bookmarks = [...bookmarks, bookmark];
 
-        this.set({ ...this.data, [kinopoiskId]: bookmarks });
+        this.updateWithPartial({ [kinopoiskId]: bookmarks });
     }
 
     public remove(kinopoiskId: string, bookmark: BookmarkEnum): void {
-        let bookmarks = this.data?.[kinopoiskId] ?? [];
+        let bookmarks = this.getBookmarks(kinopoiskId);
         bookmarks = bookmarks.filter((currBookmark) => (currBookmark !== bookmark))
 
-        this.set({ ...this.data, [kinopoiskId]: bookmarks });
+        this.updateWithPartial({ [kinopoiskId]: bookmarks });
+    }
+
+    private getBookmarks(kinopoiskId: string): BookmarkEnum[] {
+        return (this.data?.[kinopoiskId] ?? []);
     }
 }

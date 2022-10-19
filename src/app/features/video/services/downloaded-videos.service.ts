@@ -8,9 +8,7 @@ import { DownloadedVideosState } from '../states';
     providedIn: 'root'
 })
 export class DownloadedVideosService {
-    public get data$(): Observable<DownloadedVideo[] | null> {
-        return this.downloadedVideosState.data$;
-    }
+    public readonly data$ = this.downloadedVideosState.data$;
 
     constructor(
         private readonly apiService: ApiService,
@@ -43,7 +41,7 @@ export class DownloadedVideosService {
     public delete(id: string): Observable<unknown> {
         return this.apiService.delete(`/downloaded-videos/${id}`)
             .pipe(
-                tap(() => this.downloadedVideosState.deleteById(id))
+                tap(() => this.downloadedVideosState.removeItemById(id))
             );
     }
 }

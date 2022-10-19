@@ -24,10 +24,10 @@ export class DownloadingMediaSocketService {
         return this._onMediaDownloadCancel$.asObservable();
     }
 
-    private _progress$ = new Subject<MediaDownloadProgress>();
-    private _onMediaDownloadStart$ = new Subject<MediaQueue>();
-    private _onMediaDownloadEnd$ = new Subject<MediaQueue>();
-    private _onMediaDownloadCancel$ = new Subject<MediaQueue>();
+    private readonly _progress$ = new Subject<MediaDownloadProgress>();
+    private readonly _onMediaDownloadStart$ = new Subject<MediaQueue>();
+    private readonly _onMediaDownloadEnd$ = new Subject<MediaQueue>();
+    private readonly _onMediaDownloadCancel$ = new Subject<MediaQueue>();
 
     constructor(
         private readonly socketService: SocketService

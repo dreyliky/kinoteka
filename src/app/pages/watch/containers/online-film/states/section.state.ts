@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BaseState } from '@core/states';
+import { PrimitiveState } from 'ngx-base-state';
 import { SectionEnum } from '../enums';
 
 @Injectable()
-export class SectionState extends BaseState<SectionEnum> {
+export class SectionState extends PrimitiveState<SectionEnum> {
     constructor() {
         super(SectionEnum.Info);
     }

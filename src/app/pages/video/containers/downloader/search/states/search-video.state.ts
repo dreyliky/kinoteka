@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BaseState } from '@core/states';
 import { Video } from '@features/video';
+import { ObjectState } from 'ngx-base-state';
 
 @Injectable()
-export class SearchVideoState extends BaseState<Video> {}
+export class SearchVideoState extends ObjectState<Video> {}

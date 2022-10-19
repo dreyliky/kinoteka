@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BaseState } from '@core/states';
+import { PrimitiveState } from 'ngx-base-state';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SelectedPlaylistCategory extends BaseState<number> {}
+export class SelectedPlaylistCategory extends PrimitiveState<number> {}

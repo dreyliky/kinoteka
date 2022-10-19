@@ -9,13 +9,8 @@ import { BookmarkedVideosState } from '../states';
     providedIn: 'root'
 })
 export class BookmarkedVideosService {
-    public get data(): BookmarkedMediaDictionary | null {
-        return this.bookmarkedVideosState.data;
-    }
-
-    public get data$(): Observable<BookmarkedMediaDictionary | null> {
-        return this.bookmarkedVideosState.data$;
-    }
+    public readonly data$ = this.bookmarkedVideosState.data$;
+    public readonly data = this.bookmarkedVideosState.data;
 
     constructor(
         private readonly apiService: ApiService,

@@ -9,9 +9,7 @@ import { OnlineTvSeriesFiltersState, OnlineTvSeriesResponseState } from '../stat
     providedIn: 'root'
 })
 export class OnlineTvSeriesService {
-    public get tvSeriesResponse$(): Observable<VideoCdnResponse<TvSeries> | null> {
-        return this.tvSeriesResponseState.data$;
-    }
+    public readonly tvSeriesResponse$ = this.tvSeriesResponseState.data$;
 
     constructor(
         private readonly apiService: ApiService,
@@ -32,7 +30,7 @@ export class OnlineTvSeriesService {
     }
 
     public updateAllByFilters(): Observable<VideoCdnResponse<TvSeries>> {
-        this.tvSeriesResponseState.set(null);
+        this.tvSeriesResponseState.clear();
 
         return this.apiService.get<VideoCdnResponse<TvSeries>>(
             `/tv-serieses`,

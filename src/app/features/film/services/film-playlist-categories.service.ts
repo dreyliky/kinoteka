@@ -8,13 +8,8 @@ import { PlaylistCategoriesState } from '../states';
     providedIn: 'root'
 })
 export class FilmPlaylistCategoriesService {
-    public get data(): PlaylistCategory[] | null {
-        return this.categoriesState.data;
-    }
-
-    public get data$(): Observable<PlaylistCategory[] | null> {
-        return this.categoriesState.data$;
-    }
+    public readonly data$ = this.categoriesState.data$;
+    public readonly data = this.categoriesState.data;
 
     constructor(
         private readonly apiService: ApiService,

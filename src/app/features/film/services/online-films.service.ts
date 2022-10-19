@@ -25,7 +25,7 @@ export class OnlineFilmsService {
     public updateAllByFilters(): Observable<VideoCdnResponse<Film>> {
         return this.apiService.get<VideoCdnResponse<Film>>(
             `/films`,
-            { params: this.filtersState.data as any }
+            { params: (this.filtersState.data as any) }
         );
     }
 

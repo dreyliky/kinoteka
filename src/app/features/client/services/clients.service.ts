@@ -22,6 +22,6 @@ export class ClientsService {
                 mergeMap((clients) => clients),
                 filter((client) => (client.socketId !== this.socketService.socket.id)),
                 toArray()
-            )
+            );
     }
 }

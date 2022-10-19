@@ -11,7 +11,7 @@ export class DownloadingMediaCountSocketService {
         return this._data$.asObservable();
     }
 
-    private _data$ = new BehaviorSubject<number>(0);
+    private readonly _data$ = new BehaviorSubject<number>(0);
 
     constructor(
         private readonly socketService: SocketService

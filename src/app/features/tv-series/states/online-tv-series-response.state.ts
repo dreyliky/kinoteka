@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BaseState } from '@core/states';
+import { ObjectState } from 'ngx-base-state';
 import { VideoCdnResponse } from '../../video-cdn';
 import { TvSeries } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
-export class OnlineTvSeriesResponseState extends BaseState<VideoCdnResponse<TvSeries> | null> {}
+export class OnlineTvSeriesResponseState extends ObjectState<VideoCdnResponse<TvSeries>> {}

@@ -12,7 +12,7 @@ export class ClientCastSocketService {
         return this._onCast$.asObservable();
     }
 
-    private _onCast$ = new Subject<CastDto>();
+    private readonly _onCast$ = new Subject<CastDto>();
 
     constructor(
         private readonly socketService: SocketService

@@ -7,21 +7,14 @@ import { DownloadedFilmsFiltersState } from '../states';
     providedIn: 'root'
 })
 export class DownloadedFilmsFiltersService {
-    public get data$(): Observable<VideoCdnFilters> {
-        return (this.state.data$ as Observable<VideoCdnFilters>);
-    }
-
-    public get data(): VideoCdnFilters {
-        return (this.state.data as VideoCdnFilters);
-    }
+    public readonly data$ = (this.state.data$ as Observable<VideoCdnFilters>);
+    public readonly data = (this.state.data as VideoCdnFilters);
 
     constructor(
         private readonly state: DownloadedFilmsFiltersState
     ) {}
 
-    public update(data: Partial<VideoCdnFilters>): void {
-        const currentState = (this.state.data as VideoCdnFilters);
-
-        this.state.set({ ...currentState, ...data });
+    public update(filters: Partial<VideoCdnFilters>): void {
+        this.state.updateWithPartial(filters);
     }
 }
