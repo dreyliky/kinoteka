@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BookmarkedMediaDictionary } from '@core/interfaces';
-import { ObjectState } from 'ngx-base-state';
+import { NgxState, ObjectState } from 'ngx-base-state';
 import { BookmarkEnum } from '../../bookmark';
 
+@NgxState()
 @Injectable({
     providedIn: 'root'
 })

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PrimitiveState } from 'ngx-base-state';
+import { NgxState, PrimitiveState } from 'ngx-base-state';
 
+@NgxState()
 @Injectable()
 export class SearchStringState extends PrimitiveState<string> {}

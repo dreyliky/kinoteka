@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ArrayState } from 'ngx-base-state';
+import { ArrayState, NgxState } from 'ngx-base-state';
 import { PlaylistCategory } from '../../playlist';
 
+@NgxState()
 @Injectable({
     providedIn: 'root'
 })

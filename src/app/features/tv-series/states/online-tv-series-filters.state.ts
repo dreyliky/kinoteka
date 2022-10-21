@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ObjectState } from 'ngx-base-state';
+import { NgxState, ObjectState } from 'ngx-base-state';
 import { VideoCdnFilters } from '../../video-cdn';
 
+@NgxState()
 @Injectable({
     providedIn: 'root'
 })
