@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services';
 import { MediaQueue } from '@features/media';
 import { Observable } from 'rxjs';
-import { DownloadingMediaApi } from '../api';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DownloadingMediaService {
+export class DownloadingMediaApi {
     constructor(
-        private readonly downloadingMediaApi: DownloadingMediaApi
+        private readonly apiService: ApiService
     ) {}
 
     public getAll(): Observable<MediaQueue[]> {
-        return this.downloadingMediaApi.getAll();
+        return this.apiService.get<MediaQueue[]>(`/downloading-media`);
     }
 
     public cancel(kinopoiskId: string): Observable<unknown> {
-        return this.downloadingMediaApi.cancel(kinopoiskId);
+        return this.apiService.delete(`/downloading-media/${kinopoiskId}`);
     }
 }

@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services';
 import { Playlist } from '@features/playlist';
 import { Observable } from 'rxjs';
-import { FilmPlaylistsApi } from '../api';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FilmPlaylistsService {
+export class FilmPlaylistsApi {
     constructor(
-        private readonly filmPlaylistsApi: FilmPlaylistsApi,
+        private readonly apiService: ApiService,
     ) {}
 
     public getAll(playlistCategoryId: number): Observable<Playlist[]> {
-        return this.filmPlaylistsApi.getAll(playlistCategoryId);
+        return this.apiService.get(`/film-playlists/category/${playlistCategoryId}`);
     }
 
     public getById(id: number): Observable<Playlist> {
-        return this.filmPlaylistsApi.getById(id);
+        return this.apiService.get(`/film-playlists/${id}`);
     }
 }

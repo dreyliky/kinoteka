@@ -3,5 +3,4 @@ export * from './enums';
 export * from './film.module';
 export * from './interfaces';
 export * from './services';
-export * from './states';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@core/services';
 import { Observable, tap } from 'rxjs';
+import { DownloadedVideosApi } from '../api';
 import { DownloadedVideo } from '../interfaces';
 import { DownloadedVideosState } from '../states';
 
@@ -11,16 +11,16 @@ export class DownloadedVideosService {
     public readonly data$ = this.downloadedVideosState.data$;
 
     constructor(
-        private readonly apiService: ApiService,
+        private readonly downloadedVideosApi: DownloadedVideosApi,
         private readonly downloadedVideosState: DownloadedVideosState
     ) {}
 
     public get(id: string): Observable<DownloadedVideo> {
-        return this.apiService.get<DownloadedVideo>(`/downloaded-videos/${id}`);
+        return this.downloadedVideosApi.get(id);
     }
 
     public getMediaUrl(id: string): string {
-        return `${this.apiService.hostUrl}/downloaded-videos/${id}/media`;
+        return this.downloadedVideosApi.getMediaUrl(id);
     }
 
     public updateAllIfAbsent(): Observable<DownloadedVideo[] | null> {
@@ -32,14 +32,14 @@ export class DownloadedVideosService {
     }
 
     public updateAll(): Observable<DownloadedVideo[]> {
-        return this.apiService.get<DownloadedVideo[]>(`/downloaded-videos`)
+        return this.downloadedVideosApi.getAll()
             .pipe(
                 tap((data) => this.downloadedVideosState.set(data))
             );
     }
 
     public delete(id: string): Observable<unknown> {
-        return this.apiService.delete(`/downloaded-videos/${id}`)
+        return this.downloadedVideosApi.delete(id)
             .pipe(
                 tap(() => this.downloadedVideosState.removeItemById(id))
             );

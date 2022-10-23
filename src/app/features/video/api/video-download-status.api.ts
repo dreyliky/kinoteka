@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services';
 import { Observable } from 'rxjs';
-import { VideoDownloadStatusApi } from '../api';
 import { VideoDownloadStatusEnum } from '../enums';
 
 @Injectable({
     providedIn: 'root'
 })
-export class VideoDownloadStatusService {
+export class VideoDownloadStatusApi {
     constructor(
-        private readonly videoDownloadStatusApi: VideoDownloadStatusApi
+        private readonly apiService: ApiService
     ) {}
 
     public check(id: string): Observable<VideoDownloadStatusEnum> {
-        return this.videoDownloadStatusApi.check(id);
+        return this.apiService.get<VideoDownloadStatusEnum>(`/videos/${id}/status`);
     }
 }

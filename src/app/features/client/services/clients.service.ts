@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService, SocketService } from '@core/services';
+import { SocketService } from '@core/services';
 import { filter, mergeMap, Observable, toArray } from 'rxjs';
+import { ClientsApi } from '../api';
 import { Client } from '../interfaces';
 
 @Injectable({
@@ -8,12 +9,12 @@ import { Client } from '../interfaces';
 })
 export class ClientsService {
     constructor(
-        private readonly apiService: ApiService,
+        private readonly clientsApi: ClientsApi,
         private readonly socketService: SocketService
     ) {}
 
     public getAll(): Observable<Client[]> {
-        return this.apiService.get<Client[]>(`/clients`);
+        return this.clientsApi.getAll();
     }
 
     public getAllExceptMe(): Observable<Client[]> {

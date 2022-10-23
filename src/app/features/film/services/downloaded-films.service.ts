@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@core/services';
 import { Observable, tap } from 'rxjs';
+import { DownloadedFilmsApi } from '../api';
 import { DownloadedFilm } from '../interfaces';
 import { DownloadedFilmsState } from '../states';
 
@@ -11,16 +11,16 @@ export class DownloadedFilmsService {
     public readonly data$ = this.downloadedFilmsState.data$;
 
     constructor(
-        private readonly apiService: ApiService,
+        private readonly downloadedFilmsApi: DownloadedFilmsApi,
         private readonly downloadedFilmsState: DownloadedFilmsState
     ) {}
 
     public get(kinopoiskId: string): Observable<DownloadedFilm> {
-        return this.apiService.get<DownloadedFilm>(`/downloaded-films/${kinopoiskId}`);
+        return this.downloadedFilmsApi.get(kinopoiskId);
     }
 
     public getMediaUrl(kinopoiskId: string): string {
-        return `${this.apiService.hostUrl}/downloaded-films/${kinopoiskId}/media`;
+        return this.downloadedFilmsApi.getMediaUrl(kinopoiskId);
     }
 
     public updateAllIfAbsent(): Observable<DownloadedFilm[] | null> {
@@ -32,14 +32,14 @@ export class DownloadedFilmsService {
     }
 
     public updateAll(): Observable<DownloadedFilm[]> {
-        return this.apiService.get<DownloadedFilm[]>(`/downloaded-films`)
+        return this.downloadedFilmsApi.getAll()
             .pipe(
                 tap((data) => this.downloadedFilmsState.set(data))
             );
     }
 
     public delete(kinopoiskId: string): Observable<unknown> {
-        return this.apiService.delete(`/downloaded-films/${kinopoiskId}`)
+        return this.downloadedFilmsApi.delete(kinopoiskId)
             .pipe(
                 tap(() => this.downloadedFilmsState.removeItemById(kinopoiskId))
             );

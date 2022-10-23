@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BookmarkedMediaDictionary } from '@core/interfaces';
-import { ApiService } from '@core/services';
 import { Observable, tap } from 'rxjs';
 import { BookmarkEnum } from '../../bookmark';
+import { BookmarkedVideosApi } from '../api';
 import { BookmarkedVideosState } from '../states';
 
 @Injectable({
@@ -13,12 +13,12 @@ export class BookmarkedVideosService {
     public readonly data = this.bookmarkedVideosState.data;
 
     constructor(
-        private readonly apiService: ApiService,
+        private readonly bookmarkedVideosApi: BookmarkedVideosApi,
         private readonly bookmarkedVideosState: BookmarkedVideosState
     ) {}
 
     public updateDictionary(): Observable<BookmarkedMediaDictionary> {
-        return this.apiService.get<BookmarkedMediaDictionary>(`/bookmarked-videos/dictionary`)
+        return this.bookmarkedVideosApi.getAsDictionary()
             .pipe(
                 tap((data) => this.bookmarkedVideosState.set(data))
             );
@@ -33,14 +33,14 @@ export class BookmarkedVideosService {
     }
 
     public add(videoId: string, bookmarkId: BookmarkEnum): Observable<unknown> {
-        return this.apiService.post(`/bookmarked-videos/${videoId}`, { data: bookmarkId })
+        return this.bookmarkedVideosApi.add(videoId, bookmarkId)
             .pipe(
                 tap(() => this.bookmarkedVideosState.add(videoId, bookmarkId))
             );
     }
 
     public remove(videoId: string, bookmarkId: BookmarkEnum): Observable<unknown> {
-        return this.apiService.delete(`/bookmarked-videos/${videoId}/${bookmarkId}`)
+        return this.bookmarkedVideosApi.remove(videoId, bookmarkId)
             .pipe(
                 tap(() => this.bookmarkedVideosState.remove(videoId, bookmarkId))
             );

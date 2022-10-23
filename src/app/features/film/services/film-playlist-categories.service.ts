@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@core/services';
 import { PlaylistCategory } from '@features/playlist';
 import { Observable, tap } from 'rxjs';
+import { FilmPlaylistCategoriesApi } from '../api';
 import { PlaylistCategoriesState } from '../states';
 
 @Injectable({
@@ -12,12 +12,12 @@ export class FilmPlaylistCategoriesService {
     public readonly data = this.categoriesState.data;
 
     constructor(
-        private readonly apiService: ApiService,
+        private readonly filmPlaylistCategoriesApi: FilmPlaylistCategoriesApi,
         private readonly categoriesState: PlaylistCategoriesState
     ) {}
 
     public updateAll(): Observable<PlaylistCategory[]> {
-        return this.apiService.get<PlaylistCategory[]>(`/film-playlist-categories`)
+        return this.filmPlaylistCategoriesApi.getAll()
             .pipe(
                 tap((data) => this.categoriesState.set(data))
             );
@@ -28,6 +28,6 @@ export class FilmPlaylistCategoriesService {
             return this.updateAll();
         }
 
-        return this.data$ as Observable<PlaylistCategory[]>;
+        return (this.data$ as Observable<PlaylistCategory[]>);
     }
 }

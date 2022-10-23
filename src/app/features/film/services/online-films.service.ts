@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '@core/services';
 import { Observable } from 'rxjs';
 import { VideoCdnResponse } from '../../video-cdn';
+import { OnlineFilmsApi } from '../api';
 import { DetailedFilmInfo, Film } from '../interfaces';
 import { OnlineFilmsFiltersState } from '../states';
 
@@ -10,26 +10,23 @@ import { OnlineFilmsFiltersState } from '../states';
 })
 export class OnlineFilmsService {
     constructor(
-        private readonly apiService: ApiService,
+        private readonly onlineFilmsApi: OnlineFilmsApi,
         private readonly filtersState: OnlineFilmsFiltersState
     ) {}
 
     public get(kinopoiskId: string): Observable<Film> {
-        return this.apiService.get<Film>(`/films/${kinopoiskId}`);
+        return this.onlineFilmsApi.get(kinopoiskId);
     }
 
     public getDetailedInfo(kinopoiskId: string): Observable<DetailedFilmInfo> {
-        return this.apiService.get<DetailedFilmInfo>(`/films/${kinopoiskId}/detailed`);
+        return this.onlineFilmsApi.getDetailedInfo(kinopoiskId);
     }
 
     public updateAllByFilters(): Observable<VideoCdnResponse<Film>> {
-        return this.apiService.get<VideoCdnResponse<Film>>(
-            `/films`,
-            { params: (this.filtersState.data as any) }
-        );
+        return this.onlineFilmsApi.getAllByFilters(this.filtersState.data!);
     }
 
     public download(kinopoiskId: string, mediaId: number): Observable<unknown> {
-        return this.apiService.post(`/films/${kinopoiskId}/download/${mediaId}`, {});
+        return this.onlineFilmsApi.download(kinopoiskId, mediaId);
     }
 }

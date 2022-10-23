@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services';
 import { FilmDownloadStateEnum } from '@features/film';
 import { Observable } from 'rxjs';
-import { FilmDownloadStatusApi } from '../api';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FilmDownloadStatusService {
+export class FilmDownloadStatusApi {
     constructor(
-        private readonly filmDownloadStatusApi: FilmDownloadStatusApi
+        private readonly apiService: ApiService
     ) {}
 
     public check(kinopoiskId: string): Observable<FilmDownloadStateEnum> {
-        return this.filmDownloadStatusApi.check(kinopoiskId);
+        return this.apiService.get<FilmDownloadStateEnum>(`/films/${kinopoiskId}/status`);
     }
 }

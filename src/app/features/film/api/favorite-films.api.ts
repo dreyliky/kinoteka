@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services';
 import { Observable } from 'rxjs';
-import { FavoriteFilmsApi } from '../api';
 import { Film } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FavoriteFilmsService {
+export class FavoriteFilmsApi {
     constructor(
-        private readonly favoriteFilmsApi: FavoriteFilmsApi
+        private readonly apiService: ApiService
     ) {}
 
     public getAll(): Observable<Film[]> {
-        return this.favoriteFilmsApi.getAll();
+        return this.apiService.get<Film[]>(`/favorites-films`);
     }
 
     public getState(kinopoiskId: string): Observable<boolean> {
-        return this.favoriteFilmsApi.getState(kinopoiskId);
+        return this.apiService.get<boolean>(`/favorites-films/${kinopoiskId}/state`);
     }
 
     public add(kinopoiskId: string): Observable<unknown> {
-        return this.favoriteFilmsApi.add(kinopoiskId);
+        return this.apiService.post(`/favorites-films/${kinopoiskId}`, {});
     }
 
     public remove(kinopoiskId: string): Observable<unknown> {
-        return this.favoriteFilmsApi.remove(kinopoiskId);
+        return this.apiService.delete(`/favorites-films/${kinopoiskId}`);
     }
 }
