@@ -10,7 +10,10 @@ import { BookmarkedVideosState } from '../states';
 })
 export class BookmarkedVideosService {
     public readonly data$ = this.bookmarkedVideosState.data$;
-    public readonly data = this.bookmarkedVideosState.data;
+
+    public get data(): BookmarkedMediaDictionary | null {
+        return this.bookmarkedVideosState.data;
+    }
 
     constructor(
         private readonly bookmarkedVideosApi: BookmarkedVideosApi,

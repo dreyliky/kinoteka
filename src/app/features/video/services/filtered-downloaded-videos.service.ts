@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { VideoCdnFilters } from '@features/video-cdn';
-import { combineLatest, map, Observable, shareReplay } from 'rxjs';
+import { combineLatest, map, shareReplay } from 'rxjs';
 import { DownloadedVideo } from '../interfaces';
 import { DownloadedVideosFiltersState, DownloadedVideosState } from '../states';
 
@@ -8,16 +8,14 @@ import { DownloadedVideosFiltersState, DownloadedVideosState } from '../states';
     providedIn: 'root'
 })
 export class FilteredDownloadedVideosService {
-    public get data$(): Observable<DownloadedVideo[]> {
-        return combineLatest([
-            this.downloadedVideosFiltersState.data$,
-            this.downloadedVideosState.data$
-        ])
-            .pipe(
-                map(([filters, videos]) => this.filterFilms(filters as VideoCdnFilters, videos)),
-                shareReplay(1)
-            );
-    }
+    public data$ = combineLatest([
+        this.downloadedVideosFiltersState.data$,
+        this.downloadedVideosState.data$
+    ])
+        .pipe(
+            map(([filters, videos]) => this.filterFilms(filters as VideoCdnFilters, videos)),
+            shareReplay(1)
+        );
 
     constructor(
         private readonly downloadedVideosFiltersState: DownloadedVideosFiltersState,

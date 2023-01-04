@@ -8,7 +8,10 @@ import { DownloadedFilmsFiltersState } from '../states';
 })
 export class DownloadedFilmsFiltersService {
     public readonly data$ = (this.state.data$ as Observable<VideoCdnFilters>);
-    public readonly data = (this.state.data as VideoCdnFilters);
+
+    public get data(): VideoCdnFilters {
+        return (this.state.data as VideoCdnFilters);
+    }
 
     constructor(
         private readonly state: DownloadedFilmsFiltersState

@@ -9,7 +9,10 @@ import { PlaylistCategoriesState } from '../states';
 })
 export class FilmPlaylistCategoriesService {
     public readonly data$ = this.categoriesState.data$;
-    public readonly data = this.categoriesState.data;
+
+    public get data(): PlaylistCategory[] | null {
+        return this.categoriesState.data;
+    }
 
     constructor(
         private readonly filmPlaylistCategoriesApi: FilmPlaylistCategoriesApi,
