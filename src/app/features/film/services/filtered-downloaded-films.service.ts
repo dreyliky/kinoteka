@@ -8,7 +8,7 @@ import { DownloadedFilmsFiltersState, DownloadedFilmsState } from '../states';
     providedIn: 'root'
 })
 export class FilteredDownloadedFilmsService {
-    public data$ = combineLatest([
+    public readonly data$ = combineLatest([
         this.downloadedFilmsFiltersState.data$,
         this.downloadedFilmsState.data$
     ])
